@@ -8,7 +8,7 @@ const Menu: React.FC<MenuProps> = ({ open }) => {
   const activo =
     "absolute top-14 w-screen left-0 py-2 bg-[#FD7B03] transition-opacity duration-200";
   const inactivo =
-    "absolute top-14 w-screen left-0  py-2 bg-[#FD7B03] opacity-0 transition-opacity duration-200";
+    "absolute top-14 w-screen left-0  py-2 bg-[#FD7B03] opacity-0 transition-opacity duration-200 -z-50";
   return (
     <div className={open ? activo : inactivo}>
       <ul className="flex flex-col mb-2 text-[14px] font-medium">
