@@ -1,8 +1,11 @@
+import Portada from "@/components/Portada/Portada";
+
 import CarouselCard from "@/components/Carousel/CarouselCard";
 
 export default function Home() {
   return (
     <main className="flex h-screen flex-col overflow-x-auto">
+      <Portada></Portada>
       <div className="flex flex-row justify-between">
         <div className="pl-8">
           <h3
