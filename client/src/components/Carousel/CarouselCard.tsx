@@ -7,7 +7,7 @@ type Place = {
   name: string;
   image: string;
   location: string;
-  rating: number; // Aquí defines el tipo de rating como un número
+  rating: number;
 };
 
 const places: Place[] = [
@@ -49,7 +49,7 @@ const places: Place[] = [
 ];
 const CarouselCard = () => {
   const renderStars = (rating: number) => {
-    const maxRating = 5; // Puedes cambiar esto si la calificación máxima es diferente.
+    const maxRating = 5;
     const stars = [];
 
     for (let i = 1; i <= maxRating; i++) {
@@ -61,7 +61,7 @@ const CarouselCard = () => {
   };
 
   return (
-    <div className="carousel my-12 mx-auto px-8 flex">
+    <div className="carousel my-4 mx-auto px-8 flex">
       <div className="carousel-container relative flex gap-2 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0">
         {places.map((place, index) => (
           <div
