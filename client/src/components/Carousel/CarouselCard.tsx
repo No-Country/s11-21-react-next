@@ -62,7 +62,7 @@ const CarouselCard = () => {
 
   return (
     <div className="carousel my-4 mx-auto px-8 flex">
-      <div className="carousel-container relative flex gap-2 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0">
+      <div className="carousel-container relative flex gap-2  scroll-smooth snap-x snap-mandatory touch-pan-x z-0">
         {places.map((place, index) => (
           <div
             key={index}
