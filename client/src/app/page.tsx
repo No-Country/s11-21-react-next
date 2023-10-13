@@ -9,6 +9,10 @@ export default function Home() {
       <SearchResultCard />
       <SearchResultCard />
       <SearchResultCard />
+      <SearchResultCard />
+      <SearchResultCard />
+      <SearchResultCard />
+      <SearchResultCard />
     </main>
   );
 }
