@@ -8,7 +8,7 @@ const krona = Krona_One({ weight: "400", subsets: ["latin"] });
 export default function Portada() {
   return (
     <>
-      <div className="relative h-[260px] flex justify-center items-center -z-10 w-2/4 max-md:w-full -mt-6">
+      <div className="border-2 m-auto relative h-[260px] flex justify-center items-center -z-10 w-2/4 max-md:w-full -mt-6">
         <Image
           src="/Portada.jpg"
           alt="image-front-page"
