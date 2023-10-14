@@ -4,7 +4,7 @@ import SearchResultCard from "@/components/card/SearchResultCard"
 
 function SearchresultPage() {
   return (
-    <div className="flex h-auto items-center flex-col">
+    <div className="flex h-auto items-center flex-col mt-12">
       <SearchInput />
       <Map />
       <SearchResultCard />   
