@@ -51,9 +51,12 @@ const OpinionCard = () => {
     );
   };
   return (
-    <div className="px-5 my-8">
+    <div className="px-8 my-8">
       {opinions.map((opinion, index) => (
-        <div key={index} className="mb-4 flex flex-col">
+        <div
+          key={index}
+          className="my-4 flex flex-col border-t-2 pt-4 border-[#FFF4E0]"
+        >
           <div className="flex flex-row mb-2">
             <div>{renderAvatar(opinion.name)}</div>
             <div className="ml-4">
@@ -63,9 +66,11 @@ const OpinionCard = () => {
               <h4 className="text-[#FFCF91] text-xs">{opinion.date}</h4>
             </div>
           </div>
-          <div className="flex flex-row">{renderStars(opinion.rating)}</div>
+          <div className="flex flex-row mb-3">
+            {renderStars(opinion.rating)}
+          </div>
           <div>
-            <h4 className="text-xs text-justify leading-5">
+            <h4 className="text-xs text-justify leading-5 tracking-wide">
               {opinion.explanation}
             </h4>
           </div>
