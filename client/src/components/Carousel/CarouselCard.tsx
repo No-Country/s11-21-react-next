@@ -53,7 +53,7 @@ const CarouselCard = () => {
     const stars = [];
 
     for (let i = 1; i <= maxRating; i++) {
-      const starClass = rating >= i ? "text-[#FD7B03]" : "text-[#FFF4E0]";
+      const starClass = rating >= i ? "text-[#FD7B03]" : "text-[#FFCF91]";
       stars.push(<RiStarSFill className={starClass} key={i} />);
     }
 
