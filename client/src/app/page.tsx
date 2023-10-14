@@ -4,6 +4,7 @@ import Populars from "@/components/Carousel/Headers/Populars";
 import BestRated from "@/components/Carousel/Headers/BestRated";
 import SearchResultCard from "@/components/card/SearchResultCard";
 import Recently from "@/components/Carousel/Headers/Recently";
+import Formulario from "@/components/AlFormulario/AlFormulario";
 
 export default function Home() {
   return (
@@ -21,14 +22,7 @@ export default function Home() {
       <div className="flex overflow-x-auto overflow-hidden">
         <CarouselCard />
       </div>
-      <SearchResultCard />
-      <SearchResultCard />
-      <SearchResultCard />
-      <SearchResultCard />
-      <SearchResultCard />
-      <SearchResultCard />
-      <SearchResultCard />
-      <SearchResultCard />
+      <Formulario />
     </main>
   );
 }
