@@ -11,7 +11,7 @@ const Recently = () => {
           Vistos recientemente
         </h3>
       </div>
-      <button className="text-[#FD7B03] flex pr-6">Ver más</button>
+      <button className="text-[#FD7B03] text-[12px] flex pr-6">Ver más</button>
     </div>
   );
 };
