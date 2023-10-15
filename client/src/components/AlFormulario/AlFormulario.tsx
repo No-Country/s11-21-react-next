@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function Formulario() {
@@ -10,9 +11,12 @@ export default function Formulario() {
         ¡Comparte tu descubrimiento! Ayuda a otros viajeros a encontrar joyas
         ocultas alrededor del mundo.
       </p>
-      <button className="bg-[#FD7B03] text-white my-2 w-full md:w-[287px] h-[40px] md:h-[40px] p-2 md:p-[9px 97px 9px 97px] rounded-[5px] hover:opacity-90">
-        Llenar formulario
-      </button>
+      <Link href={"/form"}>
+        <button className="bg-[#FD7B03] text-white my-2 w-full md:w-[287px] h-[40px] md:h-[40px] p-2 md:p-[9px 97px 9px 97px] rounded-[5px] hover:opacity-90">
+          Llenar formulario
+        </button>
+      </Link>
+
     </div>
   );
 }
