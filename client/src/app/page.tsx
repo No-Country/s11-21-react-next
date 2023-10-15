@@ -4,6 +4,7 @@ import Populars from "@/components/Carousel/Headers/Populars";
 import BestRated from "@/components/Carousel/Headers/BestRated";
 import SearchResultCard from "@/components/card/SearchResultCard";
 import Recently from "@/components/Carousel/Headers/Recently";
+import AlFormulario from "@/components/AlFormulario/AlFormulario";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
       <SearchResultCard />
       <SearchResultCard />
       <SearchResultCard />
+      <AlFormulario></AlFormulario>
     </main>
   );
 }
