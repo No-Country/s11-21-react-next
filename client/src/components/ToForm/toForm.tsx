@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Formulario(){
+export default function ToForm(){
 
     return (
         <div className="w-[361px] h-[300px] top-[1258px] left-[-1px] bg-[#FFF4E0] p-4 lg:p-8 flex flex-col items-center">
