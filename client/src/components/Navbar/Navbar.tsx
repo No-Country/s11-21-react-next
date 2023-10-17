@@ -14,7 +14,7 @@ const Navbar = () => {
     setOpen(!open);
   };
   return (
-    <nav className="bg-[#FD7B03] w-screen text-neutral-200 h-14 flex items-center justify-between p-6">
+    <nav className="bg-[#FD7B03] w-full text-neutral-200 h-14 flex items-center justify-between p-6">
       {/* <Image src="/LOGO_NT-01 1.png" alt="logo" width={50} height={50} /> */}
       <h1 className={`${krona.className} text-[18px] text-white`}>
         NearByTour
