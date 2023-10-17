@@ -1,5 +1,6 @@
 import Portada from "@/components/Portada/Portada";
 import SearchResultCard from "@/components/card/SearchResultCard";
+import Formulario from "@/components/AlFormulario/AlFormulario"
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <SearchResultCard />
       <SearchResultCard />
       <SearchResultCard />
+      <Formulario></Formulario>
     </main>
   );
 }
