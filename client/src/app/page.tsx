@@ -5,10 +5,11 @@ import BestRated from "@/components/Carousel/Headers/BestRated";
 import Recently from "@/components/Carousel/Headers/Recently";
 import Formulario from "@/components/AlFormulario/AlFormulario";
 
+
 export default function Home() {
   return (
     <main className="flex flex-col h-auto overflow-y-scroll">
-      <Portada />
+      <Portada /> 
       <Populars />
       <div className="flex overflow-x-auto overflow-hidden">
         <CarouselCard />

@@ -41,7 +41,7 @@ const SearchResultCard = () => {
             <div className="flex gap-2 items-center">
               <Image src={MapIconImage} alt="Map-icon image" className="h-[12px]" />
               <Link href="https://www.google.com/maps/place/Iglesia+del+Sagrado+Coraz%C3%B3n+de+Jes%C3%BAs+(Iglesia+de+los+Capuchinos)/@-31.4245554,-64.188475,17z/data=!3m1!4b1!4m6!3m5!1s0x9432a28f9b82eb4f:0x5fa116c0073e51e2!8m2!3d-31.42456!4d-64.1859001!16s%2Fg%2F1225dx4w?entry=ttu">
-                <p className='text-blue-600 hover:text-base hover:font-semibold'>Como llegar</p>
+                <p className='text-blue-500 hover:font-semibold'>Como llegar</p>
               </Link>
             </div>
 
@@ -67,7 +67,7 @@ const SearchResultCard = () => {
             </div>
           </div>
           {isHovered && (
-            <div className="absolute top-0 left-0 w-full h-full bg-white p-1 z-10 border-[2px] rounded-lg">
+            <div className="absolute top-0 left-0 w-full h-full bg-white p-1 z-50 border rounded-lg bg-opacity-100">
               <p className="text-left text-[12px]">Iglesia Jesuitica Los Capuchinos. Ciudad de Córdoba. </p>
             </div>
           )}
@@ -75,7 +75,7 @@ const SearchResultCard = () => {
 
         <div className="w-[22px] h-[84px] mt-[7px] flex flex-col">
           <div className="h-[25px] grid items-center justify-left">
-            <Image src={HeartImage} alt="Heart image" width={14.5} />
+            <Image src={HeartImage} alt="Heart image" className='w-[14px] h-[13px]' width={14} height={13} />
           </div>
         </div>
       </div>

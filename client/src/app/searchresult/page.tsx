@@ -1,6 +1,6 @@
 import Map from "@/components/Map/Map"
 import SearchInput from "@/components/Searcher/searchInput"
-import SearchResultCard from "@/components/card/SearchResultCard"
+import SearchResultCard from "@/components/SearchResultCard/SearchResultCard"
 
 function SearchresultPage() {
   return (
