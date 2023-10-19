@@ -5,6 +5,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import Menu from "./Menu";
 import Image from "next/image";
 import { Krona_One } from "next/font/google";
+import MenuH from "./MenuH";
 
 const krona = Krona_One({ weight: "400", subsets: ["latin"] });
 
@@ -19,11 +20,14 @@ const Navbar = () => {
       <h1 className={`${krona.className} text-[18px] text-white`}>
         NearByTour
       </h1>
-      {!open ? (
-        <GiHamburgerMenu size={25} color="white" onClick={openMenu} />
-      ) : (
-        <AiOutlineClose size={25} color="white" onClick={openMenu} />
-      )}
+      <MenuH />
+      <div className="xl:absolute xl:-top-16">
+        {!open ? (
+          <GiHamburgerMenu size={25} color="white" onClick={openMenu} />
+        ) : (
+          <AiOutlineClose size={25} color="white" onClick={openMenu} />
+        )}
+      </div>
       <Menu open={open} />
     </nav>
   );
