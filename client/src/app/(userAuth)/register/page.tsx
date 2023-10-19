@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { Krona_One } from "next/font/google";
 import Image from "next/image";
@@ -6,7 +5,6 @@ import { FaArrowLeft } from 'react-icons/fa';
 import Link from 'next/link';
 
 const krona = Krona_One({ weight: "400", subsets: ["latin"] });
-
 
 export default function Register() {
 
@@ -31,7 +29,6 @@ export default function Register() {
           <input className=' w-full border-2 max-md:w-auto h-10 border-[#FFCF91] rounded-lg bg-transparent px-2 text-[#000] outline-none my-1' type="password"/>
           <button type='submit' className='text-[#fff] w-full  max-md:w-auto rounded-lg my-8 bg-[#FD7B03] h-10 hover:scale-110 duration-300 transition-all'>Registrarse</button>
         </form>
-
       </main>
     )
 }
