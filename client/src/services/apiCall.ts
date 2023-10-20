@@ -1,14 +1,19 @@
 import axios from "axios";
 
-export async function createUser() {
+export async function createUser(
+  name: string,
+  email: string,
+  phone: string,
+  password: string
+) {
   try {
     const response = await axios.post(
-      "https://nearby-back.vercel.app/user/createUser" ,
+      "https://nearby-back.vercel.app/api/user/createUser",
       {
-        name:"firulais3",
-        email:"firulais3@gmail.com",
-        phone:"+5422346639",
-        password:"123"
+        name,
+        email,
+        phone,
+        password,
       },
       {
         headers: {
