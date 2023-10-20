@@ -1,16 +1,22 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import DropDown from "../DropdownMenu";
 
-const MenuH = () => {
-  const user = false;
+interface MenuHProps {
+  user: boolean;
+  setUser: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const MenuH: React.FC<MenuHProps> = ({ user, setUser }) => {
   return (
     <div className="absolute -top-20 xl:relative xl:top-0">
       <ul className="flex mb-2 text-[14px] font-medium items-center">
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] py-2 px-8">
-          Inicio
+          <Link href={"/home"}>Inicio</Link>
         </li>
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
-          Búsqueda
+          <Link href={"/searchresult"}>Búsqueda</Link>
         </li>
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
           Favoritos
@@ -20,15 +26,19 @@ const MenuH = () => {
             <Link href={"/login"}>Iniciar sesión</Link>
           </li>
         ) : (
-          <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-6 py-1 flex items-center group">
-            <p className="bg-[#FFCF91] w-8 h-8 flex items-center justify-center rounded-full text-[#fff]">
-              A
-            </p>
-            <span className="text-sm pl-2 hover:bg-[#FFCF91] group-hover:text-[#FD7B03]">
-              <p className="text-white text-sm font-medium hover:bg-[#FFCF91] group-hover:text-[#FD7B03]">
-                Angelica Martinez
-              </p>
-            </span>
+          <li>
+            <DropDown user={user} setUser={setUser}>
+              <>
+                <p className="bg-[#FFCF91] w-8 h-8 flex items-center justify-center rounded-full text-[#fff]">
+                  A
+                </p>
+                <span className="text-sm pl-2 hover:bg-[#FFCF91] group-hover:text-[#FD7B03]">
+                  <p className="text-white text-sm font-medium hover:bg-[#FFCF91] group-hover:text-[#FD7B03]">
+                    Angelica Martinez
+                  </p>
+                </span>
+              </>
+            </DropDown>
           </li>
         )}
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">

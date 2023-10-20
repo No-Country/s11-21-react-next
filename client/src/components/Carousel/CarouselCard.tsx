@@ -68,12 +68,13 @@ const CarouselCard = () => {
             key={index}
             className="carousel-item text-start relative snap-start w-36 h-56 z-10"
           >
-            <div className="">
+            <div className="relative h-56">
               <Image
                 src={`${place.image}`}
                 alt="place"
-                fill={true}
                 className="rounded-xl -z-10 object-cover"
+                fill
+                sizes="144px"
               />
               <div
                 className="absolute top-0 left-0 w-full h-full rounded-xl"

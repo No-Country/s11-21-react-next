@@ -14,6 +14,7 @@ export default function Portada() {
           alt="image-front-page"
           className="brightness-75 object-cover"
           fill
+          priority
         />
         <span className="absolute bottom-16 left-10 md:left-0 md:w-full">
           <h1

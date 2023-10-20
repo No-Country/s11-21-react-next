@@ -4,10 +4,11 @@ import { AiOutlineBell } from "react-icons/ai";
 
 interface MenuProps {
   open: boolean;
+  user: boolean;
+  setUser: (user: boolean) => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ open }) => {
-  const user = false;
+const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
   const activo =
     "absolute top-14 w-full left-0 py-2 bg-[#FD7B03] z-10 transition-opacity duration-200";
   const inactivo =
@@ -53,7 +54,10 @@ const Menu: React.FC<MenuProps> = ({ open }) => {
             <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
               Configuración
             </li>
-            <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
+            <li
+              className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2"
+              onClick={() => setUser(user)}
+            >
               Cerrar sesión
             </li>
           </>
