@@ -12,19 +12,27 @@ type Opinion = {
 const opinions: Opinion[] = [
   {
     id: 1,
-    name: "Angelica Martinez",
-    date: "05 de Octubre, 2023",
+    name: "Sara Ulloa",
+    date: "02 de Septiembre, 2023",
     rating: 5,
     explanation:
-      "Coincido al 100%, esta cafetería es una joyita oculta. Vivo 'relativamente' cerca y no sabía que existía, se pierde entre la ciudad pero cuando llegas el olor a café te atrapa completamente. La gente que atiende te hace sentir como en casa, recomiendo a ojos cerrados el chocolate caliente.",
+      "Visitar el jardín Japonés en Buenos Aires fue una experiencia verdaderamente encantadora.",
   },
   {
     id: 2,
-    name: "Emanuel Navarrete",
-    date: "18 de Mayo, 2023",
+    name: "Luis Ossandón",
+    date: "27 de Julio, 2023",
     rating: 5,
     explanation:
-      "Mi nuevo lugar favorito para ir a desayunar, la vibra que da este lugar es mágica, excelentes precios/calidad.",
+      "La tranquilidad que se siente al caminar por los senderos junto a los estantes llenos de peces koi es incomparable. A cierta hora se llena el lugar.",
+  },
+  {
+    id: 3,
+    name: "Úrsula Vial",
+    date: "8 de Junio, 2023",
+    rating: 5,
+    explanation:
+      "Los jardines cuidadosamente diseñados, repletos de vegetación exuberante y elegantes elementos arquitectónicos, transportan a los visitantes a un rincón de Japón en plena Argentina.",
   },
 ];
 
