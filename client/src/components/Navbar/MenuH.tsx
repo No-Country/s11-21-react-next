@@ -1,18 +1,10 @@
 import Link from "next/link";
 import React from "react";
 
-interface MenuProps {
-  open: boolean;
-}
-
-const Menu: React.FC<MenuProps> = ({ open }) => {
-  const activo =
-    "absolute top-14 w-full left-0 py-2 bg-[#FD7B03] z-10 transition-opacity duration-200";
-  const inactivo =
-    "absolute top-14 w-full left-0  py-2 bg-[#FD7B03] opacity-0 transition-opacity duration-200 -z-50";
+const MenuH = () => {
   return (
-    <div className={open ? activo : inactivo}>
-      <ul className="flex flex-col mb-2 text-[14px] font-medium">
+    <div className="absolute -top-20 xl:relative xl:top-0">
+      <ul className="flex mb-2 text-[14px] font-medium items-center">
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] py-2 px-8">
           Inicio
         </li>
@@ -25,12 +17,9 @@ const Menu: React.FC<MenuProps> = ({ open }) => {
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
           <Link href={"/login"}>Iniciar sesión</Link>
         </li>
-      </ul>
-      <hr />
-      <ul className="flex flex-col text-[14px] font-medium">
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
-          <select className="bg-[#FD7B03] py-2 w-full rounded-md text-white">
-            <option>Español</option>
+          <select className="bg-[#FD7B03] w-full rounded-md text-white outline-none">
+            <option className="hover:bg-[#FFCF91]">Español</option>
           </select>
         </li>
       </ul>
@@ -38,4 +27,4 @@ const Menu: React.FC<MenuProps> = ({ open }) => {
   );
 };
 
-export default Menu;
+export default MenuH;
