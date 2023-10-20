@@ -1,6 +1,7 @@
 import Map from "@/components/Map/Map"
 import SearchInput from "@/components/Searcher/searchInput"
 import SearchResultCard from "@/components/SearchResultCard/SearchResultCard"
+import ToForm from "@/components/ToForm/toForm"
 
 function SearchresultPage() {
   return (
@@ -10,7 +11,7 @@ function SearchresultPage() {
       <SearchResultCard />   
       <SearchResultCard />   
       <SearchResultCard />      
-    
+    <ToForm></ToForm>
     </div>
   )
 }
