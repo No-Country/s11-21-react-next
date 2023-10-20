@@ -1,18 +1,19 @@
-import Map from "@/components/Map/Map"
-import SearchInput from "@/components/Searcher/searchInput"
-import SearchResultCard from "@/components/SearchResultCard/SearchResultCard"
+import Map from "@/components/Map/Map";
+import { SearchButtons } from "@/components/SearchButtons/SearchButtons";
+import SearchInput from "@/components/Searcher/searchInput";
+import SearchResultCard from "@/components/SearchResultCard/SearchResultCard";
 
 function SearchresultPage() {
   return (
-    <div className="flex h-auto items-center flex-col mt-12">
+    <div className="flex flex-col h-auto items-center ">
+      <SearchButtons />
       <SearchInput />
       <Map />
-      <SearchResultCard />   
-      <SearchResultCard />   
-      <SearchResultCard />      
-    
+      <SearchResultCard />
+      <SearchResultCard />
+      <SearchResultCard />
     </div>
-  )
+  );
 }
 
-export default SearchresultPage
+export default SearchresultPage;
