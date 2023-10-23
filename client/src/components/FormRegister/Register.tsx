@@ -56,7 +56,7 @@ export default function FormRegister() {
 
   return (
     <div className="h-auto">
-      <form className='grid grid-cols-2  max-lg:w-96 gap-4 max-lg:grid-cols-1 m-auto max-md:w-full' onSubmit={registerUser}>
+      <form className='grid grid-cols-2  max-lg:w-96 gap-2 max-lg:grid-cols-1 m-auto max-md:w-full' onSubmit={registerUser}>
       <Input
           label="Nombre"
           placeholder=""
@@ -95,7 +95,7 @@ export default function FormRegister() {
       />
       <button type="submit" className='w-80 my-2 col-span-2 max-lg:col-span-1 m-auto h-10 bg-[#FD7B03] text-[#fff] rounded-lg max-md:w-full'>Registrase</button>
     </form>
-    <p className="text-center mt-1 text-red-700 font-semibold">{error}</p>
+    <p className="text-center mb-2 text-red-700 font-semibold">{error}</p>
     </div>
 
   )
