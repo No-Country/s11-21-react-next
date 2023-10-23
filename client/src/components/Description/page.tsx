@@ -2,12 +2,12 @@ import React from 'react';
 
 export default function Description() {
   return (
-    <div className="grid my-3">
-      <div className="w-full md:w-[80%] justify-self-center text-[14px] flex justify-between mb-3 md:mx-auto md:text-center">
+    <div className="grid my-3 w-4/5">
+      <div className="w-full justify-self-center text-[14px] flex justify-between mb-3 md:mx-auto md:text-center">
         <div className="py-4 text-left">
           <h2 className="text-xl font-bold text-#000 mb-2">Descripción</h2>
 
-          <p className="text-sm text-gray-700 flex items-center justify-center rounded-full text-[#fff]">
+          <p className="text-sm text-gray-700 flex items-center justify-center rounded-full">
             El Jardín Japonés en Buenos Aires es una auténtica joya que merece ser explorada en detalle. Con una impresionante fusión de la estética japonesa y la naturaleza exuberante, este lugar ofrece un retiro tranquilo y cautivador en medio de la ciudad. ¡No te lo pierdas!
           </p>
           <br />
