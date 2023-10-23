@@ -15,33 +15,35 @@ export default function Footer() {
   return (
     <footer className="relative h-auto w-full  bg-[#FD7B03] p-7">
       <Link href="#">
-        <FaChevronUp className=" absolute -top-5 right-5 cursor-pointer hover:scale-110 transition-all duration-300 text-[#FD7B03] shadow-lg shadow-zinc-700/50 w-10 h-10 rounded-full p-2 bg-[#FFCF91]"></FaChevronUp>
+        <FaChevronUp className=" absolute -top-5 md:right-32 right-5 cursor-pointer hover:scale-110 transition-all duration-300 text-[#FD7B03] shadow-lg shadow-zinc-700/50 w-12 h-12 rounded-full p-2 bg-[#FFCF91]"></FaChevronUp>
       </Link>
-      <div className=" leading-7">
-        <h1 className="text-[#fff] text-lg font-semibold">NearByTour</h1>
-        <p className="text-[#fff] text-justify">
-          Comparte y descubre lugares únicos en todo el mundo. Contribuye a la
-          comunidad de viajeros compartiendo tus tesoros ocultos y experiencias
-          de viaje.
-        </p>
-      </div>
-      <div className="my-4">
-        <h2 className="text-[#fff] text-lg leading-7">Contáctanos</h2>
-        <p className="text-[#fff] flex items-center text-sm">
-          <AiOutlineMail className=" text-2xl mr-2"></AiOutlineMail>Escribénos
-          un mensaje
-        </p>
-        <p className="text-[#fff] flex items-center text-sm">
-          <AiOutlineQuestionCircle className=" text-2xl mr-2"></AiOutlineQuestionCircle>
-          Consulta nuestras preguntas frecuentes
-        </p>
-      </div>
-      <div className="mb-4">
-        <p className="text-[#fff] text-lg">Síguenos</p>
-        <p className="text-[#fff] flex items-center text-sm">
-          <AiOutlineInstagram className=" text-2xl mr-2"></AiOutlineInstagram>
-          @nearbytour
-        </p>
+      <div className="md:grid md:grid-cols-3 md:gap-20 md:my-5 md:mx-auto md:w-[80%]">
+        <div className=" leading-7">
+          <h1 className="text-[#fff] text-lg font-semibold">NearByTour</h1>
+          <p className="text-[#fff] text-justify text-sm">
+            Comparte y descubre lugares únicos en todo el mundo. Contribuye a la
+            comunidad de viajeros compartiendo tus tesoros ocultos y
+            experiencias de viaje.
+          </p>
+        </div>
+        <div className="my-4">
+          <h2 className="text-[#fff] text-lg leading-7">Contáctanos</h2>
+          <p className="text-[#fff] flex items-center text-sm">
+            <AiOutlineMail className=" text-2xl mr-2"></AiOutlineMail>Escríbenos
+            un mensaje
+          </p>
+          <p className="text-[#fff] flex items-center text-sm">
+            <AiOutlineQuestionCircle className=" text-2xl mr-2"></AiOutlineQuestionCircle>
+            Consulta nuestras preguntas frecuentes
+          </p>
+        </div>
+        <div className="mb-4">
+          <p className="text-[#fff] text-lg">Síguenos</p>
+          <p className="text-[#fff] flex items-center text-sm">
+            <AiOutlineInstagram className=" text-2xl mr-2"></AiOutlineInstagram>
+            @nearbytour
+          </p>
+        </div>
       </div>
       <hr />
       <div className="flex mt-2 justify-center items-center cursor-pointer  transition-all duration-300 hover:scale-110">
