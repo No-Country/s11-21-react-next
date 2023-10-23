@@ -1,26 +1,27 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { firestoreDB } from "./firestore"; // Asegúrate de importar la instancia de Firestore desde un archivo separado
+import { firestoreDB } from "@/lib/firebaseConnection";
+import { hashPassword, generateToken } from "@/tools";
 
 export class AuthModel {
   constructor(email, password) {
     this.email = email;
     this.password = password;
   }
+  //Metodo que nos va a permitir en el futuro crear un auth en la base de datoss
+  static async createAuth(email, password) {
+    const hashedPassword = await hashPassword(password);
+    const newAuth = new AuthModel(email, hashedPassword);
 
-  async createAuth() {
     try {
-      const hashedPassword = await bcrypt.hash(this.password, 10);
-      const newAuth = new AuthModel(this.email, hashedPassword);
-      const docRef = firestoreDB.collection("auth").doc();
-      await docRef.set({
+      // la referencia a la coleccion que queremos modificar
+      const docRef = await firestoreDB.collection("auth").add({
         email: newAuth.email,
         password: newAuth.password,
       });
-      return true;
+
+      return { newAuth, id: docRef.id };
     } catch (error) {
-      console.error("Error creating authentication:", error);
-      return false;
+      console.error("Error creating auth:", error);
+      throw error;
     }
   }
 
@@ -31,42 +32,55 @@ export class AuthModel {
         .where("email", "==", email)
         .get();
 
-      if (!querySnapshot.empty) {
-        const userRef = querySnapshot.docs[0].ref;
-        await userRef.delete();
-        return true;
-      } else {
+      if (querySnapshot.empty) {
+        console.log(
+          "No se encontraron usuarios con el correo electrónico proporcionado."
+        );
         return false;
       }
+
+      const deletedAuth = await querySnapshot.docs[0].ref.delete();
+
+      return deletedAuth;
     } catch (error) {
-      console.error("Error deleting user:", error);
-      return false;
+      console.error("Error Delete auth:", error);
+      throw error;
     }
   }
 
-  static async createToken(email, password) {
+  static async updateAuth(idAuth, updateData) {
     try {
-      const secret = process.env.SECRET_KEY;
+      const refData = firestoreDB.collection("auth").doc(idAuth);
+      const updateUser = await refData.update(updateData);
 
+      return updateUser;
+    } catch (error) {
+      console.error("Error Update auth:", error);
+      throw error;
+    }
+  }
+
+  static async checkAuthExists(email) {
+    try {
       const querySnapshot = await firestoreDB
         .collection("auth")
         .where("email", "==", email)
         .get();
 
-      if (querySnapshot.empty) return { error: "Invalid email or password" };
+      return !querySnapshot.empty;
+    } catch (error) {
+      console.error("Error al verificar la existencia de auth:", error);
+      throw error;
+    }
+  }
 
-      const doc = querySnapshot.docs[0];
-      const savedPassword = doc.data().password;
-
-      const passwordMatch = await bcrypt.compare(password, savedPassword);
-
-      if (!passwordMatch) return { error: "Invalid email or password" };
-
-      const token = jwt.sign({ email }, secret);
+  static generateAuthToken(object) {
+    try {
+      const token = generateToken(object);
       return token;
     } catch (error) {
-      console.error("Error creating token:", error);
-      return { error: "Method Not Allowed" };
+      console.error("Error Update token:", error);
+      throw error;
     }
   }
 }
