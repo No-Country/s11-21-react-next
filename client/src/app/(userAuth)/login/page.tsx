@@ -36,12 +36,14 @@ const Page = () => {
             label="Email"
             placeholder="rafaric@yahoo.com.ar"
             type="email"
+            name="email"
           />
           <Input
             label="Contraseña"
             placeholder="********"
             type="password"
             extra="¿Olvidaste tu contraseña?"
+            name="password"
           />
           <button className="w-full bg-[#FD7B03] text-white mt-3 h-10 rounded-md">
             Iniciar sesión
