@@ -10,9 +10,14 @@ import MenuH from "./MenuH";
 const krona = Krona_One({ weight: "400", subsets: ["latin"] });
 
 const Navbar = () => {
+  const [user, setUser] = useState(false);
   const [open, setOpen] = useState(false);
   const openMenu = () => {
     setOpen(!open);
+  };
+  const toggleUser = () => {
+    setUser(!user);
+    console.log(user);
   };
   return (
     <nav className="bg-[#FD7B03] w-full text-neutral-200 h-14 flex items-center justify-between p-6">
@@ -20,7 +25,7 @@ const Navbar = () => {
       <h1 className={`${krona.className} text-[18px] text-white`}>
         NearByTour
       </h1>
-      <MenuH />
+      <MenuH user={user} setUser={toggleUser} />
       <div className="xl:absolute xl:-top-16">
         {!open ? (
           <GiHamburgerMenu size={25} color="white" onClick={openMenu} />
@@ -28,7 +33,7 @@ const Navbar = () => {
           <AiOutlineClose size={25} color="white" onClick={openMenu} />
         )}
       </div>
-      <Menu open={open} />
+      <Menu open={open} user={user} setUser={toggleUser} />
     </nav>
   );
 };
