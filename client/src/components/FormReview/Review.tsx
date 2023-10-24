@@ -40,8 +40,8 @@ export default function Review() {
       ))}
       </span>
       <p className='font-semibold'>Escribe tu opinión</p>
-      <textarea className=' border-2 border-[#777] p-4 w-full h-32 rounded-lg mt-2  max-h-60' ></textarea>
-      <button className='bg-[#FD7B03] w-full h-12 mt-2 rounded-lg text-[#fff] font-semibold'>Enviar opinión</button>
+      <textarea className=' border-2 border-[#777] p-4 w-full h-32 rounded-lg my-2  max-h-60' ></textarea>
+      <button className='bg-[#FD7B03] flex text-center justify-center items-center w-80 h-12 rounded-lg text-[#fff] font-semibold m-auto max-md:w-full'>Enviar opinión</button>
     </div>
   )
 }

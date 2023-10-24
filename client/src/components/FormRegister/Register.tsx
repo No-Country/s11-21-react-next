@@ -4,38 +4,44 @@ import Input from '../InputAuth/Input';
 import { User, createUser } from '@/services/apiCall';
 
 export default function FormRegister() {
-  const [error, setError] = useState<String>()
-
+  const [error, setError] = useState<String>('')
   const [formUser, setFormUser] = useState<User>({
     name: "",
+    lastName: "",
     email: "",
     phone: "",
     password: "",
     repeatPassword: "",
   })
 
-
   const registerUser = async (e:React.FormEvent) =>{
     e.preventDefault()
-    setError("")
-    if(formUser.password === formUser.repeatPassword){
-      const response = await createUser(formUser)
-      if(typeof(response) === "object"){
-        console.log("create")
-        setTimeout(() => {
-          window.location.replace('/login')
-        }, 3000);
-      }else{
-        setError(response)
-      }
+    if(formUser.name == "" || formUser.email == "" || formUser.password == "" || formUser.repeatPassword == "" || formUser.phone == ""){
+      setError("Completar todos los campos")
     }else{
-      setError("Verificar la coincidencia de contraseña")
+      if(formUser.password === formUser.repeatPassword){
+        const response = await createUser(formUser)
+        if(typeof(response) === "object"){
+          console.log("create")
+          setError("")
+          setTimeout(() => {
+            window.location.replace('/login')
+          }, 2000);
+        }else{
+          setError(response)
+        }
+      }else{
+        setError("Verificar la coincidencia de contraseña")
+      }
     }
     
   }
-
   const updateName = (value: string): void => {
     setFormUser({ ...formUser, name: value });
+  }
+
+  const updateLastName = (value: string): void => {
+    setFormUser({ ...formUser, lastName: value });
   }
 
   const updateEmail = (value: string): void => {
@@ -60,9 +66,17 @@ export default function FormRegister() {
       <Input
           label="Nombre"
           placeholder=""
-          type="name"
+          type="text"
           name="name"
           onChange={updateName}
+          minLength={3}
+        />
+      <Input
+          label="Apellido"
+          placeholder=""
+          type="text"
+          name="lastName"
+          onChange={updateLastName}
           minLength={3}
         />
       <Input
