@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Formulario() {
   return (
-    <div className="w-screen top-[1258px] left-[-1px] bg-[#FFF4E0] p-[10%] lg:p-8 flex flex-col items-center">
+    <div className="w-full top-[1258px] left-[-1px] bg-[#FFF4E0] p-[10%] lg:p-8 flex flex-col items-center">
       <h1 className="text-2xl md:text-2xl lg:text-3xl font-bold mb-4">
         Te gustaría agregar una atracción?
       </h1>

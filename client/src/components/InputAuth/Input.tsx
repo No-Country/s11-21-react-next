@@ -32,7 +32,7 @@ const Input: React.FC<InputProps> = ({
         {extra}
       </span>
       <input
-        className="border border-[#FD7B03] rounded-md text-sm h-10 px-3"
+        className="border border-[#FD7B03] rounded-md text-sm h-10 px-3 outline-none"
         type={type}
         name={name}
         placeholder={placeholder}

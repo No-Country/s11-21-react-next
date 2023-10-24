@@ -79,10 +79,10 @@ const TouristPlaceCard = () => {
   };
 
   return (
-    <div className="w-screen grid my-3">
+    <div className="w-4/5 grid my-3">
       <div className="w-full justify-self-center flex justify-between mb-3 px-6">
         <div className="text-left text-base font-bold flex flex-col gap-2">
-          <div className="">
+          <div className="w-full">
             <p className="">Jardín Japonés</p>
           </div>
 

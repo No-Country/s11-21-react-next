@@ -59,7 +59,7 @@ const OpinionCard = () => {
     );
   };
   return (
-    <div className="px-8 my-8">
+    <div className="w-4/5 my-8">
       {opinions.map((opinion, index) => (
         <div
           key={index}
