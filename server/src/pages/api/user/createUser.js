@@ -14,10 +14,10 @@ export default async function handler(req, res) {
       return res.status(405).end();
     }
 
-    const { name, email, phone, password } = req.body; //? Obtener el nombre, email de "req" con el body
+    const { name, lastname, email, phone, password } = req.body; //? Obtener el nombre, email de "req" con el body
 
     //? Para poder crear un usuario, el nombre y el email, son obligatorios asi que se verifican primero
-    if (!name || !email || !password || !phone) {
+    if (!name || !lastname || !email || !password || !phone) {
       return res.status(400).json({ error: "Faltan datos obligatorios." });
     }
 
@@ -25,9 +25,11 @@ export default async function handler(req, res) {
     const userCreated = await UserController.createUser(
       email,
       name,
+      lastname,
       phone,
       password
     );
+
     if (userCreated) {
       return res.status(200).json({ userCreated });
     } else {
