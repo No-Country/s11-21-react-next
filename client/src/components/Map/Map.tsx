@@ -7,9 +7,15 @@ import MockupMapImage from "../../../public/random-map.png";
 
 const Map = () => {
   return (
-    <div className="grid my-5">
-      <div className="w-[290px] h-[300px] justify-self-center rounded-lg overflow-hidden shadow-md">
-        <Image src={MockupMapImage} alt="Mockup Map" width={290} height={300} />
+    <div className="flex my-5 justify-center">
+      <div className="w-4/5 h-auto md:w-[80vw] md:h-auto lg:w-[75vw] xl:w-[60vw] rounded-lg overflow-hidden shadow-md">
+        <Image
+          src={MockupMapImage}
+          alt="Mockup Map"
+          width={0}
+          height={0}
+          className="w-full h-auto"
+        />
       </div>
     </div>
   );
