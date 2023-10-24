@@ -2,7 +2,6 @@ import Map from "@/components/Map/Map";
 import { SearchButtons } from "@/components/SearchButtons/SearchButtons";
 import SearchInput from "@/components/Searcher/searchInput";
 import SearchResultCard from "@/components/SearchResultCard/SearchResultCard";
-import ToForm from "@/components/ToForm/toForm";
 
 function SearchresultPage() {
   return (
@@ -16,7 +15,6 @@ function SearchresultPage() {
         <SearchResultCard />
         <SearchResultCard />
       </div>
-      <ToForm></ToForm>
     </div>
   );
 }
