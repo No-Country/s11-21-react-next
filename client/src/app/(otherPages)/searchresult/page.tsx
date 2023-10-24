@@ -1,19 +1,24 @@
-import Map from "@/components/Map/Map"
-import SearchInput from "@/components/Searcher/searchInput"
-import SearchResultCard from "@/components/SearchResultCard/SearchResultCard"
-import ToForm from "@/components/ToForm/toForm"
+import Map from "@/components/Map/Map";
+import { SearchButtons } from "@/components/SearchButtons/SearchButtons";
+import SearchInput from "@/components/Searcher/searchInput";
+import SearchResultCard from "@/components/SearchResultCard/SearchResultCard";
+import ToForm from "@/components/ToForm/toForm";
 
 function SearchresultPage() {
   return (
-    <div className="flex h-auto items-center flex-col mt-12">
+    <div className="flex flex-col h-auto justify-center items-center mt-12">
+      <SearchButtons />
       <SearchInput />
       <Map />
-      <SearchResultCard />   
-      <SearchResultCard />   
-      <SearchResultCard />      
-    <ToForm></ToForm>
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-2 lg:gap-3">
+        <SearchResultCard />
+        <SearchResultCard />
+        <SearchResultCard />
+        <SearchResultCard />
+      </div>
+      <ToForm></ToForm>
     </div>
-  )
+  );
 }
 
-export default SearchresultPage
+export default SearchresultPage;
