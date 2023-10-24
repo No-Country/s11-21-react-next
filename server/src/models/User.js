@@ -1,13 +1,14 @@
 import { firestoreDB } from "@/lib/firebaseConnection";
 export class UserModel {
-  constructor(email, name, phone) {
+  constructor(email, name, phone, lastname) {
     this.email = email;
     this.name = name;
     this.phone = phone;
+    this.lastname = lastname;
   }
   //Metodo que nos va a permitir en el futuro crear un auth en la base de datoss
-  static async createUser(email, name, phone) {
-    const newUser = new UserModel(email, name, phone);
+  static async createUser(email, name, lastname, phone) {
+    const newUser = new UserModel(email, name, lastname, phone);
 
     try {
       // la referencia a la coleccion que queremos modificar
@@ -15,13 +16,15 @@ export class UserModel {
         email: newUser.email,
         name: newUser.name,
         phone: newUser.phone,
+        lastname: newUser.lastname,
       });
 
       const userId = docRef.id;
       const userCreated = new UserModel(
         newUser.email,
         newUser.name,
-        newUser.phone
+        newUser.phone,
+        newUser.lastname
       );
 
       const response = {

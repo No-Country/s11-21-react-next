@@ -2,17 +2,17 @@ import { AuthModel } from "@/models/Auth";
 import { UserModel } from "@/models/User";
 export class UserController {
   //Metodo que nos va a permitir en el futuro crear un auth en la base de datoss
-  static async createUser(email, name, phone, password) {
+  static async createUser(email, name, phone, password, lastname) {
     try {
       // la referencia a la coleccion que queremos modificar
       const userExists = await this.checkUserExists(email);
       if (userExists) {
         return false;
       } else {
-        const user = await UserModel.createUser(email, name, phone);
+        const user = await UserModel.createUser(email, name, phone, lastname);
         const auth = await AuthModel.createAuth(email, password);
         const userCreated = user && auth;
-        return { userCreated };
+        if (userCreated) return { userCreated: true, userID: user.userId };
       }
     } catch (error) {
       console.error("Error creating user:", error);
