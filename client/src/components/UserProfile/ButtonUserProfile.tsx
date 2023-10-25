@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useContext, useEffect } from 'react';
-import { Context } from './UserContext';
+import { Context } from '../../context/Context';
 
 
 
