@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
+import AddressModal from './AddressModal';
 
 const AttractionsForm = () => {
   const [formData, setFormData] = useState({
@@ -165,6 +166,7 @@ const AttractionsForm = () => {
                   <button type="submit" className="bg-primary text-white w-44 h-8 rounded-md">
                       Continuar
                   </button>
+                  <AddressModal isOpen={showAddressPopup} onClose={toggleAddressPopup} />
                 </div>
       </form>
         </div>
