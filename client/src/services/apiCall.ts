@@ -39,7 +39,9 @@ export async function createUser(data: User): Promise<User | string> {
   return response.data;
 }
 
-export async function login(data: UserLogin): Promise<User | string> {
+export async function login(
+  data: UserLogin
+): Promise<{ userId: string; userLoged: boolean } | { error: string }> {
   const response = await axios
     .post("https://nearby-back.vercel.app/api/auth", {
       email: data.email,
@@ -48,11 +50,6 @@ export async function login(data: UserLogin): Promise<User | string> {
     .then((response) => {
       if (response.status === 200) {
         return response.data;
-      }
-    })
-    .catch((error) => {
-      if (error.response.status === 400) {
-        console.log("error");
       }
     });
   return response;

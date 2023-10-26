@@ -4,8 +4,8 @@ import { AiOutlineBell } from "react-icons/ai";
 
 interface MenuProps {
   open: boolean;
-  user: boolean;
-  setUser: (user: boolean) => void;
+  user: string | null;
+  setUser: () => void;
 }
 
 const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
@@ -17,15 +17,15 @@ const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
     <div className={open ? activo : inactivo}>
       <ul className="flex flex-col mb-2 text-[14px] font-medium">
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] py-2 px-8">
-          Inicio
+          <Link href={"/"}>Inicio</Link>
         </li>
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
-          Búsqueda
+          <Link href={"/searchresult"}>Búsqueda</Link>
         </li>
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
           Favoritos
         </li>
-        {user ? (
+        {user === null ? (
           <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
             <Link href={"/login"}>Iniciar sesión</Link>
           </li>
@@ -56,20 +56,12 @@ const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
             </li>
             <li
               className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2"
-              onClick={() => setUser(user)}
+              onClick={setUser}
             >
               Cerrar sesión
             </li>
           </>
         )}
-      </ul>
-      <hr className="w-[90%] mx-auto" />
-      <ul className="flex flex-col text-[14px] font-medium">
-        <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
-          <select className="bg-[#FD7B03] py-2 w-full rounded-md text-white">
-            <option>Español</option>
-          </select>
-        </li>
       </ul>
     </div>
   );
