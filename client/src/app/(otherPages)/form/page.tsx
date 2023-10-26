@@ -6,7 +6,6 @@ export default function page() {
   return (
     <InfoForm>
       <AttractionsForm />
-      {/* INGRESAR COMPONENTE FORMULARIO */}
     </InfoForm>
   );
 }

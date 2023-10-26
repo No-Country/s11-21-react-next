@@ -5,6 +5,7 @@ export interface User {
   email: string;
   phone: string;
   password: string;
+  lastname: string;
   repeatPassword?: string;
 }
 export interface UserLogin {
@@ -18,6 +19,7 @@ export async function createUser(data: User): Promise<User | string> {
       "https://nearby-back.vercel.app/api/user/createUser",
       {
         name: data.name,
+        lastname: data.lastname,
         email: data.email,
         phone: data.phone,
         password: data.password,
