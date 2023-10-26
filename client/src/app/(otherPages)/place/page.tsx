@@ -7,7 +7,7 @@ import Description from "@/components/Description/Description";
 
 const Place = () => {
   return (
-    <div className="flex flex-col items-center h-auto overflow-y-scroll w-full">
+    <div className="flex flex-col items-center h-auto w-full">
       <TouristPlaceCard />
       <Description />
       <Review />
