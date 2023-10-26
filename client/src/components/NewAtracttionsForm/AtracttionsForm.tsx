@@ -1,7 +1,9 @@
 "use client";
-import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
+import AddressModal from './AddressModal';
+
 
 const AttractionsForm = () => {
   const [formData, setFormData] = useState({
@@ -201,9 +203,41 @@ const AttractionsForm = () => {
                 <p className="mt-2 text-sm">Agrega las fotos de la atracción</p>
               </div>
             </div>
-          </div>
+                    </div>
 
-          {/* TODO: Implementar los demás campos según tus especificaciones */}
+                    {/* TODO: Implementar los demás campos según tus especificaciones */}
+                </div>
+
+                {/* Redes sociales de la atracción */}
+                <div className="flex flex-col items-center mb-6 bg-secondary w-full p-5 rounded-lg">
+                <div className="flex flex-col w-64 mb-4"> 
+                    <h3 className="text-lg font-medium text-primary mb-2">Redes sociales de la atracción</h3>
+
+                    {/* Facebook */}
+                    <label className="block text-primary mb-2 text-sm" htmlFor="facebook">Facebook (opcional)</label>
+                    <input type="text" id="facebook" name="facebook" className="w-64 p-2 border border-FD7B03 rounded-lg mb-4" />
+
+                    {/* Instagram */}
+                    <label className="block text-primary mb-2 text-sm" htmlFor="instagram">Instagram (opcional)</label>
+                    <input type="text" id="instagram" name="instagram" className="w-64 p-2 border border-FD7B03 rounded-lg mb-4" />
+
+                    {/* Otra red social */}
+                    <label className="block text-primary mb-2 text-sm" htmlFor="otherSocial">Agrega otra red social (opcional)</label>
+                    <input type="text" id="otherSocial" name="otherSocial" className="w-64 p-2 border border-FD7B03 rounded-lg mb-4" />
+                    </div>
+                </div>
+
+                {/* Información sobre evaluación */}
+                <p className="text-black mb-6 text-justify text-sm">
+                    Te informaremos cuando tu solicitud ha sido evaluada y cumpla con los requisitos de la comunidad viajera.
+                </p>
+                <div className="flex justify-center mt-4">
+                  <button type="submit" className="bg-primary text-white w-44 h-8 rounded-md">
+                      Continuar
+                  </button>
+                  <AddressModal isOpen={showAddressPopup} onClose={toggleAddressPopup} />
+                </div>
+      </form>
         </div>
 
         {/* Redes sociales de la atracción */}

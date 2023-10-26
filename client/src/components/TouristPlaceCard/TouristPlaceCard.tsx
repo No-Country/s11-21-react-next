@@ -6,10 +6,12 @@ import CardImage2 from "../../../public/jardin_japones_2.jpg";
 import CardImage3 from "../../../public/jardin_japones_3.jpg";
 import { LiaCameraSolid } from "react-icons/lia";
 import { SiMacys } from "react-icons/si";
-import HeartImage from "../../../public/heart-image.png";
+import { AiOutlineHeart } from "react-icons/ai";
 import { TiTree } from "react-icons/ti";
 import MapIconImage from "../../../public/map-icon.png";
 import Link from "next/link";
+import { HiOutlineChevronLeft } from "react-icons/hi2";
+import { GrMapLocation } from "react-icons/gr";
 
 const TouristPlaceCard = () => {
   const [bgColor1, setBgColor1] = useState("bg-[#FD7B03]");
@@ -79,37 +81,42 @@ const TouristPlaceCard = () => {
   };
 
   return (
-    <div className="w-4/5 grid my-3">
-      <div className="w-full justify-self-center flex justify-between mb-3 px-6">
-        <div className="text-left text-base font-bold flex flex-col gap-2">
+    <div className="w-11/12 xl:w-auto flex flex-col my-3 justify-center">
+      <div className="w-full justify-self-center flex justify-start mt-4 mb-6 px-6">
+        <Link
+          href={"/searchresult"}
+          className="flex flex-row items-center gap-2 font-semibold hover:text-[#FD7B03] text-xs lg:text-sm"
+        >
+          <HiOutlineChevronLeft />
+          <span>Buscador</span>
+        </Link>
+      </div>
+      <div className="flex flex-row mb-3 px-6 justify-between">
+        <div className="text-left font-bold flex flex-col gap-2">
           <div className="w-full">
-            <p className="">Jardín Japonés</p>
+            <p className="text-base lg:text-lg">Jardín Japonés</p>
           </div>
 
           <div className="flex gap-2 items-center">
-            <Image
-              src={MapIconImage}
-              alt="Map-icon image"
-              className="h-[12px]"
-            />
+            <GrMapLocation className="text-base xl:text-lg" />
             <Link href="https://www.google.com/maps/place/Jard%C3%ADn+Japon%C3%A9s+de+Escobar,+B1625+Bel%C3%A9n+de+Escobar,+Provincia+de+Buenos+Aires/@-34.3524909,-58.79789,16z/data=!4m6!3m5!1s0x95bb61b90c949f8d:0x957ce105f51ea2dd!8m2!3d-34.3524909!4d-58.79789!16s%2Fg%2F1hc8ms9lw">
-              <p className="text-blue-500 text-xs hover:font-semibold">
-                Buenos Aires. Argentina
+              <p className="text-black text-xs lg:text-sm font-medium hover:text-blue-500">
+                Buenos Aires, Argentina
               </p>
             </Link>
           </div>
 
-          <div className="flex gap-1 items-center h-[21px] text-xs">
-            <span className="text-[#FFCF91]">
+          <div className="flex gap-1 items-center h-[21px] text-xs lg:text-sm">
+            <span className="text-[#FD7B03]">
               <SiMacys />
             </span>
-            <span className="text-[#FFCF91]">
+            <span className="text-[#FD7B03]">
               <SiMacys />
             </span>
-            <span className="text-[#FFCF91]">
+            <span className="text-[#FD7B03]">
               <SiMacys />
             </span>
-            <span className="text-[#FFCF91]">
+            <span className="text-[#FD7B03]">
               <SiMacys />
             </span>
             <span className="text-[#FFCF91]">
@@ -123,13 +130,7 @@ const TouristPlaceCard = () => {
 
         <div className="w-[115px] flex flex-col justify-between">
           <div className="w-[115px] h-[21px] grid items-center justify-end">
-            <Image
-              src={HeartImage}
-              alt="Heart image"
-              className="w-[14px] h-[13px]"
-              width={14}
-              height={13}
-            />
+            <AiOutlineHeart className="text-base xl:text-lg" />
           </div>
 
           <div className="w-full">
@@ -138,14 +139,14 @@ const TouristPlaceCard = () => {
                 <TiTree />
               </span>
               <div className="">
-                <p className="text-xs">Parque</p>
+                <p className="text-xs lg:text-sm">Parques</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="w-full justify-self-center relative grid px-6">
+      <div className="w-full justify-self-center relative grid xl:flex px-6">
         {renderImage()}
 
         <div className="absolute bg-[#FD7B03] rounded-lg bottom-3 left-10 z-10 flex items-center gap-1 px-2 py-1">
