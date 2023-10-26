@@ -38,12 +38,20 @@ export async function createUser(data: User): Promise<User | string> {
 }
 
 export async function login(data: UserLogin): Promise<User | string> {
-  const response = await axios.post("https://nearby-back.vercel.app/api/auth", {
-    email: data.email,
-    password: data.password,
-  });
-  if (response.status === 200) {
-    return response.data;
-  }
-  return "Error";
+  const response = await axios
+    .post("https://nearby-back.vercel.app/api/auth", {
+      email: data.email,
+      password: data.password,
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        return response.data;
+      }
+    })
+    .catch((error) => {
+      if (error.response.status === 400) {
+        console.log("error");
+      }
+    });
+  return response;
 }
