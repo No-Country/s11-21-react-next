@@ -7,7 +7,7 @@ export default function FormRegister() {
   const [error, setError] = useState<String>('')
   const [formUser, setFormUser] = useState<User>({
     name: "",
-    lastName: "",
+    lastname: "",
     email: "",
     phone: "",
     password: "",
@@ -41,7 +41,7 @@ export default function FormRegister() {
   }
 
   const updateLastName = (value: string): void => {
-    setFormUser({ ...formUser, lastName: value });
+    setFormUser({ ...formUser, lastname: value });
   }
 
   const updateEmail = (value: string): void => {

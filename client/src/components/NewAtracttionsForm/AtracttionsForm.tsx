@@ -1,7 +1,8 @@
-'use client'
+"use client";
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
+import AddressModal from './AddressModal';
 
 const AttractionsForm = () => {
   const [formData, setFormData] = useState({
@@ -20,12 +21,16 @@ const AttractionsForm = () => {
 
   const [showAddressPopup, setShowAddressPopup] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({ ...prevState, [name]: value }));
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Aquí puedes enviar formData a una API o hacer lo que necesites con los datos.
     console.log(formData);
@@ -166,6 +171,7 @@ const AttractionsForm = () => {
                   <button type="submit" className="bg-primary text-white w-44 h-8 rounded-md">
                       Continuar
                   </button>
+                  <AddressModal isOpen={showAddressPopup} onClose={toggleAddressPopup} />
                 </div>
       </form>
         </div>

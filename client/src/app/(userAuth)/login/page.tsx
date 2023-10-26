@@ -1,9 +1,9 @@
-import Input from "@/components/InputAuth/Input";
 import { Krona_One } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import LoginForm from "./form";
 
 const krona = Krona_One({ weight: "400", subsets: ["latin"] });
 const Page = () => {
@@ -31,24 +31,7 @@ const Page = () => {
         <p className="font-semibold text-2xl text-center text-[#FD7B03]">
           Iniciar sesión
         </p>
-        <form className="w-[80%] md:max-w-[50%] flex flex-col items-center mx-auto">
-          <Input
-            label="Email"
-            placeholder="rafaric@yahoo.com.ar"
-            type="email"
-            name="email"
-          />
-          <Input
-            label="Contraseña"
-            placeholder="********"
-            type="password"
-            extra="¿Olvidaste tu contraseña?"
-            name="password"
-          />
-          <button className="w-full bg-[#FD7B03] text-white mt-3 h-10 rounded-md">
-            Iniciar sesión
-          </button>
-        </form>
+        <LoginForm />
         <p className="text-center my-5 text-sm font-medium">
           ¿No eres miembro?{" "}
           <span className="text-[#fc7b03]">
