@@ -25,8 +25,8 @@ export default async function handler(req, res) {
     const userCreated = await UserController.createUser(
       email,
       name,
-      lastname,
       phone,
+      lastname,
       password
     );
 

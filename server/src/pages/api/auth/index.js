@@ -25,13 +25,23 @@ export default async function handler(req, res) {
         .get();
       const passwordBD = authRef.docs[0].data().password;
       const passwordsAreEquals = await comparePasswords(password, passwordBD);
-      const userId = (
-        await firestoreDB.collection("users").where("email", "==", email).get()
-      ).docs[0].id;
+      console.log(passwordsAreEquals);
+      if (passwordsAreEquals) {
+        const userId = (
+          await firestoreDB
+            .collection("users")
+            .where("email", "==", email)
+            .get()
+        ).docs[0].id;
 
-      return res.json({ userLoged: passwordsAreEquals, userId });
+        return res.status(200).json({ userLoged: passwordsAreEquals, userId });
+      } else {
+        return res.json({ error: "Contraseña incorrecta" });
+      }
     } else {
-      return res.status(400).json({ error: "Usuario no encontrado" });
+      return res
+        .status(200)
+        .json({ error: "Usuario no encontrado o contraseña incorrecta" });
     }
   } catch (error) {
     console.error("Error en el manejador:", error);
