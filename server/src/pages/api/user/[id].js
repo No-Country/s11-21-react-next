@@ -5,7 +5,7 @@ import NextCors from "nextjs-cors";
 export default async function handler(req, res) {
   try {
     await NextCors(req, res, {
-      methods: ["PUT", "DELETE"],
+      methods: ["GET", "PUT", "DELETE"],
       origin: "*", // Asegúrate de configurar esto adecuadamente para tu aplicación en producción
       optionsSuccessStatus: 200,
     });
@@ -18,6 +18,14 @@ export default async function handler(req, res) {
     }
 
     switch (req.method) {
+      case "GET":
+        //? Lógica para actualizar con el parametro id
+        const getUserData = await UserModel.getUserMe(id);
+        if (!getUserData) {
+          return res.status(404).json({ error: "Usuario no encontrado." });
+        }
+
+        return res.status(200).json({ userData: getUserData });
       case "PUT":
         //? Lógica para actualizar con el parametro id
         const updateUser = await UserModel.updateUser(id, updateData);

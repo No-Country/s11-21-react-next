@@ -2,7 +2,7 @@ import { AuthModel } from "@/models/Auth";
 import { UserModel } from "@/models/User";
 export class UserController {
   //Metodo que nos va a permitir en el futuro crear un auth en la base de datoss
-  static async createUser(email, name, phone, password, lastname) {
+  static async createUser(email, name, phone, lastname, password) {
     try {
       // la referencia a la coleccion que queremos modificar
       const userExists = await this.checkUserExists(email);

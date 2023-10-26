@@ -7,8 +7,8 @@ export class UserModel {
     this.lastname = lastname;
   }
   //Metodo que nos va a permitir en el futuro crear un auth en la base de datoss
-  static async createUser(email, name, lastname, phone) {
-    const newUser = new UserModel(email, name, lastname, phone);
+  static async createUser(email, name, phone, lastname) {
+    const newUser = new UserModel(email, name, phone, lastname);
 
     try {
       // la referencia a la coleccion que queremos modificar
@@ -85,6 +85,21 @@ export class UserModel {
       console.log(docSnapshot.data());
       // Devolver el correo electrónico asociado al ID
       return docSnapshot.data().email;
+    } catch (error) {
+      console.error("Error al verificar la existencia de auth:", error);
+      throw error;
+    }
+  }
+
+  static async getUserMe(id) {
+    try {
+      const docSnapshot = await firestoreDB.collection("users").doc(id).get();
+      // Verificar si el documento con el ID dado existe
+      if (!docSnapshot.exists) {
+        console.log(`No se encontró ningún documento con el ID ${id}`);
+        return null;
+      }
+      return docSnapshot.data();
     } catch (error) {
       console.error("Error al verificar la existencia de auth:", error);
       throw error;
