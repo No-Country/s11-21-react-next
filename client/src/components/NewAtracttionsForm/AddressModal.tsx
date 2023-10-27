@@ -2,7 +2,12 @@ import React from "react";
 import MockupMapImage from "../../../public/random-map.png";
 import Image from "next/image";
 
-const AddressModal = ({ isOpen, onClose }) => {
+interface AddressModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const AddressModal: React.FC<AddressModalProps> = ({ isOpen, onClose }) => {
   return (
     <div
       className={`fixed z-10 inset-0 overflow-y-auto ${isOpen ? "" : "hidden"}`}

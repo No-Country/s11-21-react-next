@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
 interface DropdownMenuProps {
@@ -8,12 +9,15 @@ interface DropdownMenuProps {
 
 const DropDown: React.FC<DropdownMenuProps> = ({ children, user, setUser }) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
-
+  const navigate = useRouter();
   const showMenuHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setShowMenu(true);
   };
-
+  const handleSession = () => {
+    setUser();
+    navigate.push("/");
+  };
   const closeMenuHandler = () => {
     setShowMenu(false);
   };
@@ -34,7 +38,7 @@ const DropDown: React.FC<DropdownMenuProps> = ({ children, user, setUser }) => {
   return (
     <div className="relative">
       <button
-        className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-1 flex items-center group relative"
+        className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-10 py-1 flex items-center group relative gap-2"
         onClick={showMenuHandler}
       >
         {children}
@@ -50,7 +54,7 @@ const DropDown: React.FC<DropdownMenuProps> = ({ children, user, setUser }) => {
           </li>
           <li
             className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-4 py-2"
-            onClick={setUser}
+            onClick={handleSession}
           >
             Cerrar sesión
           </li>
