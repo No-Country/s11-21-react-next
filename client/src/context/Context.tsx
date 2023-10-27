@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { createContext, useState, ReactNode } from "react";
 
 interface ContextProps {
@@ -13,24 +13,35 @@ interface ContextProps {
 }
 
 export const Context = createContext<ContextProps>({
-    showIconEdit: "hidden",
-    setShowIconEdit: () => {},
-    showInformation: "block",
-    setShowInformation: () => {},
-    textButton: "Editar perfil",
-    setTextButton: () => {},
-    userId: "",
-    setUserId: () => {},
+  showIconEdit: "hidden",
+  setShowIconEdit: () => {},
+  showInformation: "block",
+  setShowInformation: () => {},
+  textButton: "Editar perfil",
+  setTextButton: () => {},
+  userId: "UxLXxN103vZwCOPIWNmD",
+  setUserId: () => {},
 });
 
 export default function ContextProvider({ children }: { children: ReactNode }) {
   const [showIconEdit, setShowIconEdit] = useState<string>("hidden");
   const [showInformation, setShowInformation] = useState<string>("block");
   const [textButton, setTextButton] = useState<string>("Editar perfil");
-  const [userId, setUserId] = useState<string>("");
+  const [userId, setUserId] = useState<string>("UxLXxN103vZwCOPIWNmD");
 
   return (
-    <Context.Provider value={{ showIconEdit, setShowIconEdit, showInformation, setShowInformation, textButton, setTextButton, userId, setUserId}}>
+    <Context.Provider
+      value={{
+        showIconEdit,
+        setShowIconEdit,
+        showInformation,
+        setShowInformation,
+        textButton,
+        setTextButton,
+        userId,
+        setUserId,
+      }}
+    >
       {children}
     </Context.Provider>
   );

@@ -1,25 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import Menu from "./Menu";
 import { Krona_One } from "next/font/google";
 import MenuH from "./MenuH";
 import Link from "next/link";
+import { Context } from "@/context/Context";
 
 const krona = Krona_One({ weight: "400", subsets: ["latin"] });
 
 const Navbar = () => {
   const [userLoged, setUserLoged] = useState<string | null>("");
-  if (typeof window !== undefined) {
-    setUserLoged(localStorage.getItem("token"));
-  }
+  const contexto = useContext(Context);
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    setUserLoged(contexto?.userId);
+  }, [contexto.userId]);
+
   const openMenu = () => {
     setOpen(!open);
   };
   const toggleUser = () => {
-    localStorage.removeItem("token");
+    setUserLoged(null);
     setOpen(false);
   };
   return (

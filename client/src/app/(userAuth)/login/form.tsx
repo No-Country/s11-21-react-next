@@ -20,7 +20,6 @@ const LoginForm = () => {
       if ("error" in response) {
         setError(response.error);
       } else {
-        localStorage.setItem("token", JSON.stringify(response));
         navigation.push("/home");
       }
     });
