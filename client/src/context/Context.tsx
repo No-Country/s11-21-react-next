@@ -19,7 +19,7 @@ export const Context = createContext<ContextProps>({
   setShowInformation: () => {},
   textButton: "Editar perfil",
   setTextButton: () => {},
-  userId: "UxLXxN103vZwCOPIWNmD",
+  userId: "",
   setUserId: () => {},
 });
 
@@ -27,7 +27,7 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
   const [showIconEdit, setShowIconEdit] = useState<string>("hidden");
   const [showInformation, setShowInformation] = useState<string>("block");
   const [textButton, setTextButton] = useState<string>("Editar perfil");
-  const [userId, setUserId] = useState<string>("UxLXxN103vZwCOPIWNmD");
+  const [userId, setUserId] = useState<string>("");
 
   return (
     <Context.Provider

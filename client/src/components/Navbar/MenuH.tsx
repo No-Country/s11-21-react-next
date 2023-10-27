@@ -17,6 +17,10 @@ const MenuH: React.FC<MenuHProps> = ({ user, setUser }) => {
   useEffect(() => {
     if (user !== null) {
       getUser(user).then((response) => setUsuario(response));
+    } else {
+      setUsuario({
+        userData: { id: "", name: "", email: "" },
+      });
     }
   }, [user]);
   return (

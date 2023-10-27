@@ -23,6 +23,7 @@ const Navbar = () => {
   };
   const toggleUser = () => {
     setUserLoged(null);
+    contexto.setUserId("");
     setOpen(false);
   };
   return (

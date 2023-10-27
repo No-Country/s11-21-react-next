@@ -1,14 +1,15 @@
 "use client";
 import Input from "@/components/InputAuth/Input";
 import { login } from "@/services/apiCall";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Context } from "@/context/Context";
 
 const LoginForm = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [error, setError] = useState<string | undefined>(undefined);
   const navigation = useRouter();
-
+  const contexto = useContext(Context);
   const handleChange = (valor: string, name: string) => {
     setUser({ ...user, [name]: valor });
   };
@@ -20,6 +21,7 @@ const LoginForm = () => {
       if ("error" in response) {
         setError(response.error);
       } else {
+        contexto.setUserId(response.userId);
         navigation.push("/home");
       }
     });

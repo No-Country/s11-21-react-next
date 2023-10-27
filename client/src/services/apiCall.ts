@@ -56,7 +56,7 @@ export async function login(
 }
 
 export async function getUser(userId: string) {
-  if (!userId) return null;
+  if (!userId || userId === "") return null;
 
   const response = await axios.get(
     `https://nearby-back.vercel.app/api/user/${userId}`
