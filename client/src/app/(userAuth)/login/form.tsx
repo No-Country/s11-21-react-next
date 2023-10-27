@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const [user, setUser] = useState({ email: "", password: "" });
+  const [error, setError] = useState<string | undefined>(undefined);
   const navigation = useRouter();
 
   const handleChange = (valor: string, name: string) => {
@@ -16,9 +17,10 @@ const LoginForm = () => {
     e.preventDefault();
 
     login(user).then((response) => {
-      if (typeof response === "string") {
-        alert(response);
+      if ("error" in response) {
+        setError(response.error);
       } else {
+        localStorage.setItem("token", JSON.stringify(response));
         navigation.push("/home");
       }
     });
@@ -44,6 +46,7 @@ const LoginForm = () => {
         name="password"
         onChange={handleChange}
       />
+      {error && <p className="text-red-800 py-3">{error}</p>}
       <button
         className="w-full bg-[#FD7B03] text-white mt-3 h-10 rounded-md"
         type="submit"

@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import DropDown from "../DropdownMenu";
 
 interface MenuHProps {
-  user: boolean;
-  setUser: React.Dispatch<React.SetStateAction<boolean>>;
+  user: string | null;
+  setUser: () => void;
 }
 
 const MenuH: React.FC<MenuHProps> = ({ user, setUser }) => {
@@ -21,7 +21,7 @@ const MenuH: React.FC<MenuHProps> = ({ user, setUser }) => {
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
           Favoritos
         </li>
-        {user ? (
+        {user === null ? (
           <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
             <Link href={"/login"}>Iniciar sesión</Link>
           </li>
@@ -34,18 +34,13 @@ const MenuH: React.FC<MenuHProps> = ({ user, setUser }) => {
                 </p>
                 <span className="text-sm pl-2 hover:bg-[#FFCF91] group-hover:text-[#FD7B03]">
                   <p className="text-white text-sm font-medium hover:bg-[#FFCF91] group-hover:text-[#FD7B03]">
-                    Angelica Martinez
+                    Angelica
                   </p>
                 </span>
               </>
             </DropDown>
           </li>
         )}
-        <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
-          <select className="bg-[#FD7B03] w-full rounded-md text-white outline-none">
-            <option className="hover:bg-[#FFCF91]">Español</option>
-          </select>
-        </li>
       </ul>
     </div>
   );
