@@ -34,14 +34,14 @@ export default async function handler(req, res) {
     // Procesar y subir los archivos a Cloudinary, obteniendo las rutas de las imágenes
     const transformedImages = [];
 
-    // for (const file in imagesUrl) {
-    //   const result = await cloudinary.uploader.upload(file, {
-    //     resource_type: "image",
-    //     discard_original_filename: true,
-    //     width: 1000,
-    //   });
-    //   transformedImages.push(result.secure_url);
-    // }
+    //for (const file in imagesUrl) {
+    const result = await cloudinary.uploader.upload(imagesUrl, {
+      resource_type: "image",
+      discard_original_filename: true,
+      width: 1000,
+    });
+    transformedImages.push(result.secure_url);
+    //}
 
     const finalCategory = category ? category : "otro";
     const finalWebsite = website ? website : "";
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
       createdBy,
       comments: [],
       description,
-      imagesUrl,
+      imagesUrl: transformedImages,
       latitude,
       longitude,
       placeName,
@@ -68,7 +68,7 @@ export default async function handler(req, res) {
       createdBy,
       comments: [],
       description,
-      imagesUrl,
+      imagesUrl: transformedImages,
       latitude,
       longitude,
       placeName,
