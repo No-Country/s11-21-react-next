@@ -49,7 +49,7 @@ const SelectUserProfile = () => {
                 <OpinionCard /> {/* Muestro esto hasta que este conectado al Backend  */}
             </div>
 
-            <div className={`${showLine2} mt-7`}>       
+            <div className={`${showLine2} mt-7 flex justify-center`}>       
                 <TouristPlaceCard /> {/* Muestro esto hasta que este conectado al Backend  */}      
             </div>
         </div>
