@@ -15,19 +15,31 @@ export default async function handler(req, res) {
       });
     }
 
+    // Obtiene una referencia a la colección "places"
+    const placesRef = firestoreDB.collection("places");
     const results = [];
 
-    const placesSnapshot = await firestoreDB.collection("places").get();
-
-    placesSnapshot.forEach((doc) => {
-      // Agrega los datos de cada lugar a la matriz 'results'
-      results.push({ placeId: doc.id, data: doc.data() });
-    });
-
-    // Obtenemos 5 resultados aleatorios
-    const randomResults = getRandomResults(results, 5);
-
-    return res.status(200).json({ results: randomResults });
+    // Realiza la consulta para ordenar los lugares por el atributo "stars" de mayor a menor
+    placesRef
+      .orderBy("stars", "desc")
+      .limit(10)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          // Agrega cada lugar al arreglo de resultados
+          results.push(doc.data());
+        });
+        // comentario
+        // Devuelve el arreglo completo como respuesta JSON
+        return res.status(200).json({ results });
+      })
+      .catch((error) => {
+        console.error("Error al obtener los lugares:", error);
+        return res.status(500).json({
+          error: "Ocurrió un error en el servidor.",
+          details: error.message,
+        });
+      });
   } catch (error) {
     console.error("Error en el manejador:", error);
     return res.status(500).json({
@@ -35,13 +47,4 @@ export default async function handler(req, res) {
       details: error.message,
     });
   }
-}
-
-function getRandomResults(results, count) {
-  if (count >= results.length) {
-    return results;
-  }
-
-  const shuffled = results.sort(() => 0.5 - Math.random()); // Mezcla aleatoriamente el arreglo
-  return shuffled.slice(0, count); // Devuelve los primeros 'count' elementos
 }

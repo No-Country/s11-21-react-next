@@ -23,6 +23,8 @@ export default async function handler(req, res) {
     const placeDoc = await refPlace.get();
     const placeData = placeDoc.data();
     const newPlaceComments = [];
+    let starAverage = 0;
+    let divider = 0;
 
     placeData.comments.forEach((element) => {
       if (element.id != commentId) {
@@ -57,6 +59,16 @@ export default async function handler(req, res) {
       comments: updatedComments,
       objectID: placeId,
     });
+
+    if (placeData.comments.length != 0) {
+      placeData.comments.forEach(element => {
+        starAverage += element.stars;
+        divider++;
+      });
+  
+      placeData.stars = Math.floor( starAverage/divider ) ;
+      await refPlace.update(placeData);
+    }
 
     return res.json({
       commentDeleted: true,
