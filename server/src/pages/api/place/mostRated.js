@@ -29,7 +29,7 @@ export default async function handler(req, res) {
           // Agrega cada lugar al arreglo de resultados
           results.push(doc.data());
         });
-
+        // comentario
         // Devuelve el arreglo completo como respuesta JSON
         return res.status(200).json({ results });
       })
