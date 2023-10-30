@@ -9,10 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "bcrypt": "^5.1.1",
     "eslint": "8.51.0",
     "eslint-config-next": "13.5.4",
     "firebase-admin": "^11.11.0",
+=======
+    "algoliasearch": "^4.20.0",
+    "bcrypt": "^5.1.1",
+    "cloudinary": "^1.41.0",
+    "eslint": "8.51.0",
+    "eslint-config-next": "13.5.4",
+    "firebase-admin": "^11.11.0",
+    "formidable": "^3.5.1",
+>>>>>>> d60e8ecbcc5fee3b3df9fd0259ad5e7333f14fe8
     "jsonwebtoken": "^9.0.2",
     "next": "^13.4.1",
     "next-cors": "^1.0.0",

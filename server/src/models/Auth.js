@@ -8,6 +8,10 @@ export class AuthModel {
   }
   //Metodo que nos va a permitir en el futuro crear un auth en la base de datoss
   static async createAuth(email, password) {
+<<<<<<< HEAD
+=======
+    //a revisar
+>>>>>>> d60e8ecbcc5fee3b3df9fd0259ad5e7333f14fe8
     const hashedPassword = await hashPassword(password);
     const newAuth = new AuthModel(email, hashedPassword);
 
