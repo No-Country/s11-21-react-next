@@ -1,5 +1,6 @@
+import { getUser } from "@/services/apiCall";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineBell } from "react-icons/ai";
 
 interface MenuProps {
@@ -9,10 +10,18 @@ interface MenuProps {
 }
 
 const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
+  const [usuario, setUsuario] = useState({
+    userData: { id: "", name: "", email: "" },
+  });
   const activo =
     "absolute top-14 w-full left-0 py-2 bg-[#FD7B03] z-10 transition-opacity duration-200";
   const inactivo =
     "absolute top-14 w-full left-0  py-2 bg-[#FD7B03] opacity-0 transition-opacity duration-200 -z-50";
+  useEffect(() => {
+    if (user !== null) {
+      getUser(user).then((response) => setUsuario(response));
+    }
+  }, [user]);
   return (
     <div className={open ? activo : inactivo}>
       <ul className="flex flex-col mb-2 text-[14px] font-medium">
@@ -38,10 +47,10 @@ const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
               </p>
               <span className="text-sm pl-2">
                 <p className="text-white text-sm font-medium">
-                  Angelica Martinez
+                  {usuario?.userData.name}
                 </p>
                 <p className="text-white text-xs font-normal">
-                  angeMar@gmail.com
+                  {usuario?.userData.email}
                 </p>
               </span>
               <div className="absolute right-6">

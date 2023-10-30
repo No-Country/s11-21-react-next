@@ -54,3 +54,12 @@ export async function login(
     });
   return response;
 }
+
+export async function getUser(userId: string) {
+  if (!userId || userId === "") return null;
+
+  const response = await axios.get(
+    `https://nearby-back.vercel.app/api/user/${userId}`
+  );
+  return response.data;
+}
