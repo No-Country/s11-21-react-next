@@ -33,6 +33,7 @@ export default async function handler(req, res) {
             .where("email", "==", email)
             .get()
         ).docs[0].id;
+
         return res.status(200).json({ userLoged: passwordsAreEquals, userId });
       } else {
         return res.json({ error: "Contraseña incorrecta" });

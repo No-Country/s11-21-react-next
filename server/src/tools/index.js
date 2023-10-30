@@ -38,3 +38,17 @@ export function verifyToken(token) {
   const verify = jwt.verify(token, secret);
   return verify;
 }
+
+export function getTodayDate(){
+
+  const meses = [
+    "enero", "febrero", "marzo", "abril", "mayo", "junio",
+    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+  ];
+
+  const today = new Date();
+  const dia = today.getDate();
+  const mes = meses[today.getMonth()];
+  const anio = today.getFullYear();
+  return `${dia} de ${mes}, ${anio}`;
+}

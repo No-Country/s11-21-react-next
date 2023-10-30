@@ -1,15 +1,5 @@
 import { firestoreDB } from "@/lib/firebaseConnection";
 export class UserModel {
-<<<<<<< HEAD
-  constructor(email, name, phone) {
-    this.email = email;
-    this.name = name;
-    this.phone = phone;
-  }
-  //Metodo que nos va a permitir en el futuro crear un auth en la base de datoss
-  static async createUser(email, name, phone) {
-    const newUser = new UserModel(email, name, phone);
-=======
   constructor(email, name, phone, lastname) {
     this.email = email;
     this.name = name;
@@ -19,7 +9,6 @@ export class UserModel {
   //Metodo que nos va a permitir en el futuro crear un auth en la base de datoss
   static async createUser(email, name, phone, lastname) {
     const newUser = new UserModel(email, name, phone, lastname);
->>>>>>> d60e8ecbcc5fee3b3df9fd0259ad5e7333f14fe8
 
     try {
       // la referencia a la coleccion que queremos modificar
@@ -27,22 +16,15 @@ export class UserModel {
         email: newUser.email,
         name: newUser.name,
         phone: newUser.phone,
-<<<<<<< HEAD
-=======
         lastname: newUser.lastname,
->>>>>>> d60e8ecbcc5fee3b3df9fd0259ad5e7333f14fe8
       });
 
       const userId = docRef.id;
       const userCreated = new UserModel(
         newUser.email,
         newUser.name,
-<<<<<<< HEAD
-        newUser.phone
-=======
         newUser.phone,
         newUser.lastname
->>>>>>> d60e8ecbcc5fee3b3df9fd0259ad5e7333f14fe8
       );
 
       const response = {
@@ -108,8 +90,6 @@ export class UserModel {
       throw error;
     }
   }
-<<<<<<< HEAD
-=======
 
   static async getUserMe(id) {
     try {
@@ -125,5 +105,4 @@ export class UserModel {
       throw error;
     }
   }
->>>>>>> d60e8ecbcc5fee3b3df9fd0259ad5e7333f14fe8
 }

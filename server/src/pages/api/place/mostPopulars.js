@@ -4,44 +4,34 @@ import { firestoreDB } from "@/lib/firebaseConnection";
 export default async function handler(req, res) {
   try {
     await NextCors(req, res, {
-      methods: ["GET"],
-      origin: "*",
+      methods: ["GET"], // Cambiado a GET, ya que no requiere datos de entrada
+      origin: "*", // Asegúrate de configurar esto adecuadamente para tu aplicación en producción
       optionsSuccessStatus: 200,
     });
 
     if (req.method !== "GET") {
-      return res.status(405).json({
-        error: "Método incorrecto",
-      });
+      return res.status(400).json({ error: "Método HTTP incorrecto" });
     }
 
-    const results = [];
+    // Obtener los 10 lugares con más vistas
+    const topPlacesSnapshot = await firestoreDB
+      .collection("places")
+      .orderBy("views", "desc")
+      .limit(10)
+      .get();
 
-    const placesSnapshot = await firestoreDB.collection("places").get();
-
-    placesSnapshot.forEach((doc) => {
-      // Agrega los datos de cada lugar a la matriz 'results'
-      results.push({ placeId: doc.id, data: doc.data() });
+    const topPlaces = [];
+    topPlacesSnapshot.forEach((doc) => {
+      const placeData = doc.data();
+      topPlaces.push({
+        id: doc.id,
+        ...placeData,
+      });
     });
 
-    // Obtenemos 5 resultados aleatorios
-    const randomResults = getRandomResults(results, 5);
-
-    return res.status(200).json({ results: randomResults });
+    return res.status(200).json({ topPlaces });
   } catch (error) {
     console.error("Error en el manejador:", error);
-    return res.status(500).json({
-      error: "Ocurrió un error en el servidor.",
-      details: error.message,
-    });
+    return res.status(500).json({ error: "Ocurrió un error en el servidor." });
   }
-}
-
-function getRandomResults(results, count) {
-  if (count >= results.length) {
-    return results;
-  }
-
-  const shuffled = results.sort(() => 0.5 - Math.random()); // Mezcla aleatoriamente el arreglo
-  return shuffled.slice(0, count); // Devuelve los primeros 'count' elementos
 }

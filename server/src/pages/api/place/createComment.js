@@ -1,6 +1,7 @@
 import NextCors from "nextjs-cors";
 import { firestoreDB } from "@/lib/firebaseConnection";
 import { algoliaDB } from "@/lib/algoliaConnection";
+import { getTodayDate } from "@/tools";
 
 export default async function handler(req, res) {
   try {
@@ -17,11 +18,14 @@ export default async function handler(req, res) {
 
     const { comment } = req.body; // Obtener los datos de "req" desde el cuerpo de la solicitud
     const { placeId, userId } = req.query;
+    let starAverage = 0;
+    let divider = 0;
     const idComment = generarNumeroAleatorio();
 
     // Obteniendo la referencia del lugar
     const refPlace = firestoreDB.collection("places").doc(placeId);
     const placeDoc = await refPlace.get();
+    const placeData = placeDoc.data();
 
     // Obtener la referencia del usuario
     const refUser = firestoreDB.collection("users").doc(userId);
@@ -29,7 +33,7 @@ export default async function handler(req, res) {
     const userData = userDoc.data();
 
     if (placeDoc.exists) {
-      const placeData = placeDoc.data();
+      // const placeData = placeDoc.data();
       const algoliaPlaceData = await algoliaDB.getObject(placeId);
 
       const algoliaPlaceComments = algoliaPlaceData.comments;
@@ -43,11 +47,12 @@ export default async function handler(req, res) {
         ...comment,
         id: idComment,
         name: userData.name,
+        date: getTodayDate()
       };
 
       placeData.comments.push(newComment);
       algoliaPlaceData.comments.push(newComment);
-      console.log("se agrega el nuevo comentario ", algoliaPlaceComments);
+      //console.log("se agrega el nuevo comentario ", algoliaPlaceComments);
       // Actualizar el lugar con el nuevo comentario
       await refPlace.update(placeData);
       await algoliaDB.partialUpdateObject({
@@ -67,6 +72,7 @@ export default async function handler(req, res) {
         ...comment,
         id: idComment,
         idPlace: placeId,
+        date: getTodayDate()
       };
 
       userData.comments.push(newComment);
@@ -75,6 +81,15 @@ export default async function handler(req, res) {
       await refUser.update(userData);
     } else {
       console.log("El documento de usuario no existe.");
+    }
+    if (placeData.comments.length != 0) {
+      placeData.comments.forEach(element => {
+        starAverage += element.stars;
+        divider++;
+      });
+  
+      placeData.stars = Math.floor( starAverage/divider ) ;
+      await refPlace.update(placeData);
     }
 
     return res.json({

@@ -14,17 +14,10 @@ export default async function handler(req, res) {
       return res.status(405).end();
     }
 
-<<<<<<< HEAD
-    const { name, email, phone, password } = req.body; //? Obtener el nombre, email de "req" con el body
-
-    //? Para poder crear un usuario, el nombre y el email, son obligatorios asi que se verifican primero
-    if (!name || !email || !password || !phone) {
-=======
     const { name, lastname, email, phone, password } = req.body; //? Obtener el nombre, email de "req" con el body
 
     //? Para poder crear un usuario, el nombre y el email, son obligatorios asi que se verifican primero
     if (!name || !lastname || !email || !password || !phone) {
->>>>>>> d60e8ecbcc5fee3b3df9fd0259ad5e7333f14fe8
       return res.status(400).json({ error: "Faltan datos obligatorios." });
     }
 
@@ -33,15 +26,10 @@ export default async function handler(req, res) {
       email,
       name,
       phone,
-<<<<<<< HEAD
-      password
-    );
-=======
       lastname,
       password
     );
 
->>>>>>> d60e8ecbcc5fee3b3df9fd0259ad5e7333f14fe8
     if (userCreated) {
       return res.status(200).json({ userCreated });
     } else {

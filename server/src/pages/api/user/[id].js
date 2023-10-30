@@ -5,11 +5,7 @@ import NextCors from "nextjs-cors";
 export default async function handler(req, res) {
   try {
     await NextCors(req, res, {
-<<<<<<< HEAD
-      methods: ["PUT", "DELETE"],
-=======
       methods: ["GET", "PUT", "DELETE"],
->>>>>>> d60e8ecbcc5fee3b3df9fd0259ad5e7333f14fe8
       origin: "*", // Asegúrate de configurar esto adecuadamente para tu aplicación en producción
       optionsSuccessStatus: 200,
     });
@@ -22,8 +18,6 @@ export default async function handler(req, res) {
     }
 
     switch (req.method) {
-<<<<<<< HEAD
-=======
       case "GET":
         //? Lógica para actualizar con el parametro id
         const getUserData = await UserModel.getUserMe(id);
@@ -32,7 +26,6 @@ export default async function handler(req, res) {
         }
 
         return res.status(200).json({ userData: getUserData });
->>>>>>> d60e8ecbcc5fee3b3df9fd0259ad5e7333f14fe8
       case "PUT":
         //? Lógica para actualizar con el parametro id
         const updateUser = await UserModel.updateUser(id, updateData);
