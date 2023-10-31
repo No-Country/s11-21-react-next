@@ -146,7 +146,7 @@ const TouristPlaceCard = () => {
         </div>
       </div>
 
-      <div className="w-full justify-self-center relative grid xl:flex px-6">
+      <div className="w-full justify-self-center relative grid 2xl:flex justify-center px-6 md:px-0">
         {renderImage()}
 
         <div className="absolute bg-[#FD7B03] rounded-lg bottom-3 left-10 z-10 flex items-center gap-1 px-2 py-1">
