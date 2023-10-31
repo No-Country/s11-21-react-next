@@ -5,6 +5,7 @@ export interface User {
   email: string;
   phone: string;
   password: string;
+  lastname: string;
   repeatPassword?: string;
 }
 export interface UserLogin {
@@ -18,6 +19,7 @@ export async function createUser(data: User): Promise<User | string> {
       "https://nearby-back.vercel.app/api/user/createUser",
       {
         name: data.name,
+        lastname: data.lastname,
         email: data.email,
         phone: data.phone,
         password: data.password,
@@ -37,7 +39,9 @@ export async function createUser(data: User): Promise<User | string> {
   return response.data;
 }
 
-export async function login(data: UserLogin): Promise<User | string> {
+export async function login(
+  data: UserLogin
+): Promise<{ userId: string; userLoged: boolean } | { error: string }> {
   const response = await axios
     .post("https://nearby-back.vercel.app/api/auth", {
       email: data.email,
@@ -47,11 +51,15 @@ export async function login(data: UserLogin): Promise<User | string> {
       if (response.status === 200) {
         return response.data;
       }
-    })
-    .catch((error) => {
-      if (error.response.status === 400) {
-        console.log("error");
-      }
     });
   return response;
+}
+
+export async function getUser(userId: string) {
+  if (!userId || userId === "") return null;
+
+  const response = await axios.get(
+    `https://nearby-back.vercel.app/api/user/${userId}`
+  );
+  return response.data;
 }

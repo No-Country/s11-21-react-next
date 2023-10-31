@@ -1,9 +1,8 @@
 "use client";
-import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faImage } from '@fortawesome/free-solid-svg-icons';
-import AddressModal from './AddressModal';
-
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
+import AddressModal from "./AddressModal";
 
 const AttractionsForm = () => {
   const [formData, setFormData] = useState({
@@ -53,14 +52,24 @@ const AttractionsForm = () => {
             <label className="text-primary mb-2 text-sm" htmlFor="name">
               Nombre y apellido
             </label>
-            <input type="text" id="name" name="name" className="p-2 border rounded-lg" />
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="p-2 border rounded-lg"
+            />
           </div>
 
           <div className="flex flex-col w-64">
             <label className="text-primary mb-2 text-sm" htmlFor="email">
               E-mail
             </label>
-            <input type="email" id="email" name="email" className="p-2 border border-FD7B03 rounded-lg" />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="p-2 border border-FD7B03 rounded-lg"
+            />
           </div>
         </div>
 
@@ -72,64 +81,101 @@ const AttractionsForm = () => {
             </h3>
 
             {/* Título/Nombre */}
-            <label className="block text-primary mb-2 text-sm" htmlFor="attractionName">
+            <label
+              className="block text-primary mb-2 text-sm"
+              htmlFor="attractionName"
+            >
               Título/Nombre
             </label>
-            <input type="text" id="attractionName" name="attractionName" className="w-64 p-2 border border-FD7B03 rounded-lg mb-4" />
+            <input
+              type="text"
+              id="attractionName"
+              name="attractionName"
+              className="w-64 p-2 border border-FD7B03 rounded-lg mb-4"
+            />
           </div>
+        </div>
+        {/* TODO: Implementar lógica para el popup de dirección del sitio y mapa */}
 
-          {/* TODO: Implementar lógica para el popup de dirección del sitio y mapa */}
+        {/* Horario */}
+        <div className="flex flex-col w-64 mb-4">
+          <label className="block text-primary mb-2 text-sm" htmlFor="hours">
+            Dirección del sitio
+          </label>
+          <button
+            type="button"
+            className="w-64 p-2 border border-primary rounded-lg mb-4  bg-secondary text-primary text-left text-sm"
+            onClick={toggleAddressPopup}
+          >
+            Ingresa una dirección
+          </button>
 
-          {/* Horario */}
-          <div className="flex flex-col w-64 mb-4">
-            <label className="block text-primary mb-2 text-sm" htmlFor="hours">
-              Dirección del sitio
-            </label>
-            <button
-              type="button"
-              className="w-64 p-2 border border-primary rounded-lg mb-4 bg-secondary text-primary text-left text-sm"
-              onClick={toggleAddressPopup}
-            >
-              Ingresa una dirección
-            </button>
+          {/* Descripción */}
+          <label
+            className="block text-primary mb-2 text-sm"
+            htmlFor="description"
+          >
+            Descripción
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            className="w-64 p-2 border border-FD7B03 rounded-lg mb-4 h-24"
+          ></textarea>
 
-            {/* Descripción */}
-            <label className="block text-primary mb-2 text-sm" htmlFor="description">
-              Descripción
-            </label>
-            <textarea id="description" name="description" className="w-64 p-2 border border-FD7B03 rounded-lg mb-4 h-24"></textarea>
-
-            <label className="block text-primary mb-2 text-sm" htmlFor="category">
-              Categoría (opcional)
-            </label>
-            <select
-              id="category"
-              name="category"
-              className="w-64 p-2 border border-primary text-primary bg-secondary rounded-lg text-sm mb-4"
-              onChange={handleChange}
-              value={formData.category}
-              style={{
-                backgroundColor: "secondary",
-              }}
-            >
-              <option value="" className="bg-secondary">
-                Seleccionar una categoría
-              </option>
-              <option value="Música" className="bg-secondary">
-                Música
-              </option>
-              <option value="Parques" className="bg-secondary">
-                Parques
-              </option>
-              {/* ... Agrega más opciones aquí ... */}
-            </select>
-          </div>
+          <label className="block text-primary mb-2 text-sm" htmlFor="category">
+            Categoría (opcional)
+          </label>
+          <select
+            id="category"
+            name="category"
+            className="w-64 p-2 border border-primary text-primary bg-secondary rounded-lg text-sm mb-4"
+            onChange={handleChange}
+            value={formData.category}
+            style={{
+              backgroundColor: "secondary",
+            }}
+          >
+            <option value="" className="bg-secondary">
+              Seleccionar una categoría
+            </option>
+            <option value="Música" className="bg-secondary">
+              Música
+            </option>
+            <option value="Parques" className="bg-secondary">
+              Parques
+            </option>
+            <option value="Museos" className="bg-secondary">
+              Museos
+            </option>
+            <option value="Teatro" className="bg-secondary">
+              Teatro
+            </option>
+            <option value="Cine" className="bg-secondary">
+              Cine
+            </option>
+            <option value="Centro Histórico" className="bg-secondary">
+              Centro Histórico
+            </option>
+            <option value="Iglesias" className="bg-secondary">
+              Iglesias
+            </option>
+            <option value="Deportes" className="bg-secondary">
+              Deportes
+            </option>
+          </select>
 
           <label className="block text-primary mb-2 text-sm" htmlFor="website">
             Página web (opcional)
           </label>
-          <input type="url" id="website" name="website" className="w-full p-2 border border-primary rounded-lg mb-4" value={formData.website} onChange={handleChange} />
-
+          <input
+            type="url" // Para validar que sea una URL
+            id="website"
+            name="website"
+            className="w-full p-2 border border-primary rounded-lg mb-4"
+            value={formData.website}
+            onChange={handleChange}
+          />
           <p></p>
 
           <div className="flex flex-col items-center">
@@ -143,10 +189,15 @@ const AttractionsForm = () => {
                 accept="image/*"
                 multiple
               />
-              <FontAwesomeIcon icon={faImage} className="mt-2 text-primary text-2xl" />
+              <FontAwesomeIcon
+                icon={faImage}
+                className="mt-2 text-primary text-2xl"
+              />
               <p className="mt-2 text-sm">Agrega las fotos de la atracción</p>
             </div>
           </div>
+
+          {/* TODO: Implementar los demás campos según tus especificaciones */}
         </div>
 
         {/* Redes sociales de la atracción */}
@@ -212,6 +263,10 @@ const AttractionsForm = () => {
           >
             Continuar
           </button>
+          <AddressModal
+            isOpen={showAddressPopup}
+            onClose={toggleAddressPopup}
+          />
         </div>
       </form>
     </div>

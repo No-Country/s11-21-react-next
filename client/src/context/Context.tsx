@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { createContext, useState, ReactNode } from "react";
 
 interface ContextProps {
@@ -13,14 +13,14 @@ interface ContextProps {
 }
 
 export const Context = createContext<ContextProps>({
-    showIconEdit: "hidden",
-    setShowIconEdit: () => {},
-    showInformation: "block",
-    setShowInformation: () => {},
-    textButton: "Editar perfil",
-    setTextButton: () => {},
-    userId: "",
-    setUserId: () => {},
+  showIconEdit: "hidden",
+  setShowIconEdit: () => {},
+  showInformation: "block",
+  setShowInformation: () => {},
+  textButton: "Editar perfil",
+  setTextButton: () => {},
+  userId: "",
+  setUserId: () => {},
 });
 
 export default function ContextProvider({ children }: { children: ReactNode }) {
@@ -30,7 +30,18 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
   const [userId, setUserId] = useState<string>("");
 
   return (
-    <Context.Provider value={{ showIconEdit, setShowIconEdit, showInformation, setShowInformation, textButton, setTextButton, userId, setUserId}}>
+    <Context.Provider
+      value={{
+        showIconEdit,
+        setShowIconEdit,
+        showInformation,
+        setShowInformation,
+        textButton,
+        setTextButton,
+        userId,
+        setUserId,
+      }}
+    >
       {children}
     </Context.Provider>
   );

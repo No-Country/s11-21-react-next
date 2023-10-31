@@ -3,16 +3,18 @@ import Image from "next/image";
 import { RiRoadMapLine, RiStarSFill } from "react-icons/ri";
 import Link from 'next/link';
 
-type CarouselPlace = {
-  id: number;
+type Place = {
   placeName: string;
   imageUrl: string[];
   zone: string;
   stars: number;
-  placeId: string; // Cambiar userId a placeId
 };
 
-const CarouselCard = ({ places }: { places: CarouselPlace[] }) => {
+type CarouselCardProps = {
+  data: Place[] | undefined; 
+};
+
+const CarouselCard: React.FC<CarouselCardProps> = ({ data }) => {
   const renderStars = (rating: number) => {
     const maxRating = 5;
     const stars = [];
@@ -28,28 +30,22 @@ const CarouselCard = ({ places }: { places: CarouselPlace[] }) => {
   return (
     <div className="carousel my-4 mx-auto px-8 flex">
       <div className="carousel-container relative flex gap-2 scroll-smooth snap-x snap-mandatory touch-pan-x z-0">
-        {places &&
-          places.map((place, index) => (
-            <Link href={`/place/${place.placeId}`} key={index}> 
-              <div className="carousel-item text-start relative snap-start w-36 h-56 z-10">
+      {data ? (
+        data.map((place, index) => (
+          <div key={index} className="carousel-item text-start relative snap-start w-36 h-56 z-10">
+            <Link href="/place">
+              <div>
                 <div className="relative h-56">
-                  {Array.isArray(place.imageUrl) && place.imageUrl.length > 0 && (
+                  {place.imageUrl && place.imageUrl.length > 0 ? ( 
                     <Image
-                      src={place.imageUrl[0]}
+                      src={place.imageUrl[0]} 
                       alt="place"
                       className="rounded-xl -z-10 object-cover"
                       fill
                       sizes="144px"
                     />
-                  )}
-                  {!Array.isArray(place.imageUrl) && place.imageUrl && (
-                    <Image
-                      src={place.imageUrl}
-                      alt="place"
-                      className="rounded-xl -z-10 object-cover"
-                      fill
-                      sizes="144px"
-                    />
+                  ) : (
+                    <p>No image available</p>
                   )}
                   <div
                     className="absolute top-0 left-0 w-full h-full rounded-xl"
@@ -58,7 +54,7 @@ const CarouselCard = ({ places }: { places: CarouselPlace[] }) => {
                     }}
                   ></div>
                 </div>
-                <div className="absolute bottom-2 left-2">
+                <div className="absolute bottom-2 left-2 ">
                   <h3 className="text-white z-40 text-sm font-normal">
                     {place.placeName}
                   </h3>
@@ -70,7 +66,11 @@ const CarouselCard = ({ places }: { places: CarouselPlace[] }) => {
                 </div>
               </div>
             </Link>
-          ))}
+          </div>
+        ))
+      ) : (
+        <p>No data available</p>
+      )}
       </div>
     </div>
   );
