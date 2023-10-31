@@ -13,6 +13,11 @@ export interface UserLogin {
   password: string;
 }
 
+export interface Comment{
+  comment: string;
+  stars: number;
+}
+
 export async function createUser(data: User): Promise<User | string> {
   const response = await axios
     .post(
@@ -62,4 +67,29 @@ export async function getUser(userId: string) {
     `https://nearby-back.vercel.app/api/user/${userId}`
   );
   return response.data;
+}
+
+export async function createComment(comment:Comment){
+  const response = await axios.post(`
+  https://nearby-back.vercel.app/api/place/createComment?placeId=2zVsO4DtqQpmcxcY50Kx&userId=nK1gbnULs9xcbLE6BTmz`,
+  {
+    "comment":{
+      comment:comment.comment,
+      stars: comment.stars
+    }
+  },
+  {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .catch((error) => {
+    return error.response.data.error;
+      });
+    if (typeof response === "string") {
+      return response;
+    }
+    return response.data;
+
+  // `https://nearby-back.vercel.app/api/place/createComment?placeId=${placeId}&userId=${userId}`
 }
