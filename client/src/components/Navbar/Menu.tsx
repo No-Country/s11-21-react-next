@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { getUser } from "@/services/apiCall";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -23,15 +23,15 @@ const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
     if (user !== null) {
       getUser(user).then((response) => setUsuario(response));
     } else {
-      localStorage.removeItem("userId");
+      setUsuario({
+        userData: { id: "", name: "", email: "" },
+      });
     }
   }, [user]);
 
-
-  
   const handleRedirectionOnClick = () => {
-      redirect("/user")
-  }
+    redirect("/user");
+  };
   return (
     <div className={open ? activo : inactivo}>
       <ul className="flex flex-col mb-2 text-[14px] font-medium">
@@ -67,11 +67,9 @@ const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
                 <AiOutlineBell size={30} />
               </div>
             </li>
-              <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
-               
-                  Tu Perfil
-               
-              </li>
+            <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
+              Tu Perfil
+            </li>
             <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
               Configuración
             </li>

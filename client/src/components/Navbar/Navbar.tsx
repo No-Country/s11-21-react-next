@@ -14,9 +14,11 @@ const Navbar = () => {
   const [userLoged, setUserLoged] = useState<string | null>("");
   const contexto = useContext(Context);
   const [open, setOpen] = useState(false);
+  const user = localStorage.getItem("userId");
+
   useEffect(() => {
-    setUserLoged(contexto?.userId);
-  }, [contexto.userId]);
+    setUserLoged(user);
+  }, [user]);
 
   const openMenu = () => {
     setOpen(!open);
