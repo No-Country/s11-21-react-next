@@ -1,66 +1,42 @@
-import React from "react";
+"use client";
+import { CommentUser } from "@/services/apiCall";
+import React, { useState } from "react";
 import { RiStarSFill } from "react-icons/ri";
 
-type Opinion = {
-  id: number;
-  name: string;
-  date: string;
-  rating: number;
-  explanation: string;
-};
-
-const opinions: Opinion[] = [
-  {
-    id: 1,
-    name: "Sara Ulloa",
-    date: "02 de Septiembre, 2023",
-    rating: 5,
-    explanation:
-      "Visitar el jardín Japonés en Buenos Aires fue una experiencia verdaderamente encantadora.",
-  },
-  {
-    id: 2,
-    name: "Luis Ossandón",
-    date: "27 de Julio, 2023",
-    rating: 5,
-    explanation:
-      "La tranquilidad que se siente al caminar por los senderos junto a los estantes llenos de peces koi es incomparable. A cierta hora se llena el lugar.",
-  },
-  {
-    id: 3,
-    name: "Úrsula Vial",
-    date: "8 de Junio, 2023",
-    rating: 5,
-    explanation:
-      "Los jardines cuidadosamente diseñados, repletos de vegetación exuberante y elegantes elementos arquitectónicos, transportan a los visitantes a un rincón de Japón en plena Argentina.",
-  },
-];
-
-const OpinionCard = () => {
+const OpinionCard = ({ comment }: { comment: CommentUser[] }) => {
+  const [visibleOpinions, setVisibleOpinions] = useState(3);
+  const [showAllOpinions, setShowAllOpinions] = useState(false);
   const renderStars = (rating: number) => {
     const maxRating = 5;
     const stars = [];
-
     for (let i = 1; i <= maxRating; i++) {
       const starClass = rating >= i ? "text-[#FD7B03]" : "text-[#FFCF91]";
       stars.push(<RiStarSFill className={starClass} key={i} />);
     }
-
     return stars;
   };
 
   const renderAvatar = (name: string) => {
     const firstLetter = name.charAt(0).toUpperCase();
-
     return (
       <div className="rounded-full bg-[#FD7B03] text-white w-8 h-8 flex text-center items-center justify-center text-base font-normal">
         {firstLetter}
       </div>
     );
   };
+
+  const toggleOpinions = () => {
+    if (showAllOpinions) {
+      setVisibleOpinions(3);
+    } else {
+      setVisibleOpinions(comment.length);
+    }
+    setShowAllOpinions(!showAllOpinions);
+  };
+
   return (
-    <div className="w-4/5 my-8">
-      {opinions.map((opinion, index) => (
+    <div className="w-11/12 2xl:w-[60vw] my-8 px-8 md:px-10">
+      {comment && comment.slice(0, visibleOpinions).map((opinion, index) => (
         <div
           key={index}
           className="my-4 flex flex-col border-t-2 pt-4 border-[#FFF4E0]"
@@ -75,15 +51,30 @@ const OpinionCard = () => {
             </div>
           </div>
           <div className="flex flex-row mb-3">
-            {renderStars(opinion.rating)}
+            {renderStars(opinion.stars)}
           </div>
           <div>
             <h4 className="text-xs text-justify leading-5 tracking-wide">
-              {opinion.explanation}
+              {opinion.comment}
             </h4>
           </div>
         </div>
       ))}
+      <div className="flex justify-center">
+        {comment.length > 3 && (
+          <button
+            className="text-[#FD7B03] mt-4 text-sm md:text-base"
+            onClick={toggleOpinions}
+          >
+            {showAllOpinions
+              ? "Ver menos"
+              : `Más opiniones (${comment.length - visibleOpinions})`}
+          </button>
+        )}
+        {comment.length == 0 && (
+          <p className="text-sm text-center">No hay comentarios, sé el primero en ingresar un comentario</p>
+        )}
+      </div>
     </div>
   );
 };

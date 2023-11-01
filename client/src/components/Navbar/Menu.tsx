@@ -1,31 +1,50 @@
+"use client";
+import { getUser } from "@/services/apiCall";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineBell } from "react-icons/ai";
+import { redirect } from "next/navigation";
 
 interface MenuProps {
   open: boolean;
-  user: boolean;
-  setUser: (user: boolean) => void;
+  user: string | null;
+  setUser: () => void;
 }
 
 const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
+  const [usuario, setUsuario] = useState({
+    userData: { id: "", name: "", email: "" },
+  });
   const activo =
     "absolute top-14 w-full left-0 py-2 bg-[#FD7B03] z-10 transition-opacity duration-200";
   const inactivo =
     "absolute top-14 w-full left-0  py-2 bg-[#FD7B03] opacity-0 transition-opacity duration-200 -z-50";
+  useEffect(() => {
+    if (user !== null) {
+      getUser(user).then((response) => setUsuario(response));
+    } else {
+      setUsuario({
+        userData: { id: "", name: "", email: "" },
+      });
+    }
+  }, [user]);
+
+  const handleRedirectionOnClick = () => {
+    redirect("/user");
+  };
   return (
     <div className={open ? activo : inactivo}>
       <ul className="flex flex-col mb-2 text-[14px] font-medium">
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] py-2 px-8">
-          Inicio
+          <Link href={"/"}>Inicio</Link>
         </li>
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
-          Búsqueda
+          <Link href={"/searchresult"}>Búsqueda</Link>
         </li>
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
-          Favoritos
+          <Link href={"/favorites"}>Favoritos</Link>
         </li>
-        {user ? (
+        {user === null ? (
           <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
             <Link href={"/login"}>Iniciar sesión</Link>
           </li>
@@ -38,38 +57,33 @@ const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
               </p>
               <span className="text-sm pl-2">
                 <p className="text-white text-sm font-medium">
-                  Angelica Martinez
+                  {usuario?.userData.name}
                 </p>
                 <p className="text-white text-xs font-normal">
-                  angeMar@gmail.com
+                  {usuario?.userData.email}
                 </p>
               </span>
               <div className="absolute right-6">
                 <AiOutlineBell size={30} />
               </div>
             </li>
-            <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
-              Tu Perfil
-            </li>
+            <Link href={"/user"}>
+              <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
+                Tu Perfil
+              </li>
+            </Link>
+
             <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
               Configuración
             </li>
             <li
               className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2"
-              onClick={() => setUser(user)}
+              onClick={setUser}
             >
               Cerrar sesión
             </li>
           </>
         )}
-      </ul>
-      <hr className="w-[90%] mx-auto" />
-      <ul className="flex flex-col text-[14px] font-medium">
-        <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
-          <select className="bg-[#FD7B03] py-2 w-full rounded-md text-white">
-            <option>Español</option>
-          </select>
-        </li>
       </ul>
     </div>
   );

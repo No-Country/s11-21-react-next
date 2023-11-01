@@ -17,7 +17,7 @@ export default function Footer() {
       <Link href="#">
         <FaChevronUp className=" absolute -top-5 md:right-32 right-5 cursor-pointer hover:scale-110 transition-all duration-300 text-[#FD7B03] shadow-lg shadow-zinc-700/50 w-12 h-12 rounded-full p-2 bg-[#FFCF91]"></FaChevronUp>
       </Link>
-      <div className="md:grid md:grid-cols-3 md:gap-20 md:my-5 md:mx-auto md:w-[80%]">
+      <div className="md:grid md:grid-cols-3  md:gap-20 md:my-5 md:mx-auto md:w-[80%] justify-around items-start ">
         <div className=" leading-7">
           <h1 className="text-[#fff] text-lg font-semibold">NearByTour</h1>
           <p className="text-[#fff] text-justify text-sm">
@@ -26,7 +26,7 @@ export default function Footer() {
             experiencias de viaje.
           </p>
         </div>
-        <div className="my-4">
+        <div className="my-0 max-md:my-4">
           <h2 className="text-[#fff] text-lg leading-7">Contáctanos</h2>
           <p className="text-[#fff] flex items-center text-sm">
             <AiOutlineMail className=" text-2xl mr-2"></AiOutlineMail>Escríbenos
@@ -46,7 +46,7 @@ export default function Footer() {
         </div>
       </div>
       <hr />
-      <div className="flex mt-2 justify-center items-center cursor-pointer  transition-all duration-300 hover:scale-110">
+      <div className="flex mt-2 justify-center items-center cursor-pointer  transition-all duration-300 hover:scale-105">
         <Image src="/LOGO_NT-01 1.png" alt="logo" width={50} height={50} />
         <h1
           className={`${krona.className} text-[#fff]  text-xl font-extralight `}
