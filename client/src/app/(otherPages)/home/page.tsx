@@ -16,7 +16,7 @@ export default function Home() {
     axios
       .get("https://nearby-back.vercel.app/api/place/mostPopulars")
       .then((response) => {
-        console.log("API Response populars:", response.data);
+       
         if (response.data.topPlaces && Array.isArray(response.data.topPlaces)) {
           setPopularPlaces(response.data.topPlaces.slice(0, 5)); 
         } else {
@@ -30,7 +30,7 @@ export default function Home() {
     axios
       .get("https://nearby-back.vercel.app/api/place/mostRated")
       .then((response) => {
-        console.log("API Response rated:", response.data);
+        
         if (response.data.results && Array.isArray(response.data.results)) {
           setRatedPlaces(response.data.results.slice(0, 5)); 
         } else {

@@ -6,7 +6,7 @@ import Link from 'next/link';
 type Place = {
   id: string;
   placeName: string;
-  imageUrl: string[];
+  imagesUrl: string[];
   zone: string;
   stars: number;
 };
@@ -37,9 +37,9 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ data }) => {
            <Link href={`/place/${place.id}`} passHref>
               <div>
                 <div className="relative h-56">
-                  {place.imageUrl && place.imageUrl.length > 0 ? ( 
+                  {place.imagesUrl && place.imagesUrl.length > 0 ? ( 
                     <Image
-                      src={place.imageUrl[0]} 
+                      src={place.imagesUrl[0]} 
                       alt="place"
                       className="rounded-xl -z-10 object-cover"
                       fill
