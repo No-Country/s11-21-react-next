@@ -1,101 +1,96 @@
 "use client";
 import AlFormulario from "@/components/AlFormulario/AlFormulario";
 import CardFavorite from "@/components/CardFavorite/CardFavorite";
-import { useState } from "react";
-
-type Favorite = {
-  id: number; //tocará cambiar por el uuid
-  imagesUrl: string;
-  placeName: string;
-  zone: string;
-  stars: number;
-};
-
-const favoriteData: Favorite[] = [
-  {
-    id: 1,
-    zone: "Magdalena, Colombia",
-    placeName: "Parque nacional Tayrona",
-    stars: 4,
-    imagesUrl: "/españa.jpg",
-  },
-  {
-    id: 2,
-    placeName: "Borde Costero",
-    imagesUrl: "/chile.jpg",
-    zone: "Viña del Mar, Chile",
-    stars: 5,
-  },
-  {
-    id: 3,
-    placeName: "Calle Carabobo",
-    imagesUrl: "/venezuela.jpg",
-    zone: "Venezuela",
-    stars: 3,
-  },
-  {
-    id: 4,
-    placeName: "Cabo San Lucas",
-    imagesUrl: "/mexico.jpg",
-    zone: "CDM, México",
-    stars: 5,
-  },
-  {
-    id: 5,
-    placeName: "Catedral Cuzco",
-    imagesUrl: "/peru.jpg",
-    zone: "Cuzco, Perú",
-    stars: 3,
-  },
-  {
-    id: 6,
-    placeName: "Calle Carabobo",
-    imagesUrl: "/venezuela.jpg",
-    zone: "Venezuela",
-    stars: 4,
-  },
-  {
-    id: 7,
-    placeName: "Cabo San Lucas",
-    imagesUrl: "/mexico.jpg",
-    zone: "CDM, México",
-    stars: 5,
-  },
-  {
-    id: 8,
-    placeName: "Catedral Cuzco",
-    imagesUrl: "/peru.jpg",
-    zone: "Cuzco, Perú",
-    stars: 3,
-  },
-];
+import { useContext, useEffect, useState } from "react";
+import { Context } from "@/context/Context";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import {
+  Favorite,
+  addFavorite,
+  getFavorites,
+  removeFavorite,
+} from "@/services/apiCall";
 
 export default function Page() {
-  const [favorite, setFavorite] = useState<Favorite[]>(favoriteData);
+  const { userId, setUserId } = useContext(Context);
+  // console.log(userId);
 
-  const handleRemoveFavorite = (cardId: number) => {
-    const updatedFavorites = favorite.filter((item: any) => item.id !== cardId);
-    setFavorite(updatedFavorites);
+  const [favorite, setFavorite] = useState<Favorite[]>([]);
+
+  useEffect(() => {
+    const storeUserId = localStorage.getItem("userId");
+
+    if (storeUserId) {
+      setUserId(storeUserId);
+    }
+  }, [setUserId]);
+
+  useEffect(() => {
+    if (userId) {
+      getFavorites(userId)
+        .then((response) => {
+          // console.log("Respuesta de getFavorites:", response);
+          setFavorite(response);
+        })
+        .catch((error) => {
+          console.error(error, "error obteniendo favoritos");
+        });
+    }
+  }, [userId]);
+
+  const handleRemoveFavorite = async (cardId: string) => {
+    if (userId) {
+      const isFavorite = favorite.some((item) => item.placeId === cardId);
+
+      if (isFavorite) {
+        try {
+          await removeFavorite(userId, cardId);
+        } catch (error) {
+          console.error(error, "error dando dislike");
+        }
+      }
+    }
   };
+
+  async function handleAddFavorite(cardId: string) {
+    if (userId) {
+      try {
+        await addFavorite(userId, cardId);
+      } catch (error) {
+        console.error(error, "error al agregar a favoritos");
+      }
+    }
+  }
 
   return (
     <div className="h-auto">
       <div className="px-8 my-4 flex flex-col min-h-[70vh] w-full md:grid md:my-6 md:items-center md:m-auto md:w-11/12 xl:w-4/5">
+        <div className="ml-1 mb-3 text-start text-sm font-bold text-black">
+          Favoritos ({favorite.length})
+        </div>
         {favorite.length === 0 ? (
-          <div className="w-11/12 h-[70vh] justify-center items-center text-center">
-            <div>No hay favoritos. Puedes agregar algunos.</div>
+          <div className="w-full h-[70vh] flex flex-col justify-center gap-5 items-center text-center text-[#FFCF91]">
+            <div>
+              <FaMapMarkerAlt className="w-52 h-24 md:w-72 md:h-40 xl:w-96 xl:h-56" />
+            </div>
+            <div className="text-center mt-4 md:mt-8 leading-5">
+              <h1 className="font-medium text-2xl md:text-4xl xl:text-6xl">
+                ¡Todavía no tienes <br /> ningún sitio en favoritos!
+              </h1>
+              <p className="text-base md:text-2xl xl:text-4xl mt-5">
+                Cuando lo agregues se verá en <br /> esta página
+              </p>
+            </div>
           </div>
         ) : (
           <div className="">
-            <div className="ml-1 mb-3 text-start text-sm font-bold text-black">
-              Favoritos ({favorite.length})
-            </div>
             <div className="flex flex-wrap justify-center md:grid md:grid-cols-2 md:gap-8 xl:grid xl:grid-cols-3 xl:gap-10">
               {favorite.map((item) => (
                 <CardFavorite
-                  key={item.id}
-                  favoriteData={item}
-                  onRemove={() => handleRemoveFavorite(item.id)}
+                  key={item.placeId}
+                  item={item}
+                  onRemove={() => handleRemoveFavorite(item.placeId)}
+                  onAdd={() => handleAddFavorite(item.placeId)}
                 />
               ))}
             </div>

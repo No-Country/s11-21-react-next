@@ -3,27 +3,26 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { MdFavorite } from "react-icons/md";
 import { RiStarSFill, RiRoadMapLine } from "react-icons/ri";
-
-type Favorite = {
-  id: number; //tocará cambiar por el uuid
-  imagesUrl: string;
-  placeName: string;
-  zone: string;
-  stars: number;
-};
+import { Favorite } from "@/services/apiCall";
 
 export default function CardFavorite({
-  favoriteData,
+  item,
   onRemove,
+  onAdd,
 }: {
-  favoriteData: Favorite;
+  item: Favorite;
   onRemove: () => void;
+  onAdd: () => void;
 }) {
   const [isFavorite, setFavorite] = useState(true);
 
   const toggleFavorite = () => {
     setFavorite(!isFavorite);
-    onRemove();
+    if (isFavorite) {
+      onRemove();
+    } else {
+      onAdd();
+    }
   };
 
   const renderStars = (stars: number) => {
@@ -42,7 +41,7 @@ export default function CardFavorite({
     <div className="flex my-4 justify-center w-full">
       <div className="w-full h-auto relative shadow-md">
         <Image
-          src={favoriteData.imagesUrl}
+          src={item.imagesUrl[0]}
           alt="Card image 1"
           priority
           width={280}
@@ -67,15 +66,15 @@ export default function CardFavorite({
         </div>
         <div className="absolute bottom-0 left-0 p-4 text-white">
           <div className="text-sm font-medium leading-6">
-            <span>{favoriteData.placeName}</span>
+            <span>{item.placeName}</span>
             <br />
             <p className="flex flex-row text-xs align-baseline justify-start items-baseline font-light">
               <RiRoadMapLine className="text-white mr-1" />
-              <span className="text-white z-40">{favoriteData.zone}</span>
+              <span className="text-white z-40">{item.zone}</span>
             </p>
           </div>
           <div className="flex gap-0.5 items-center h-5">
-            {renderStars(favoriteData.stars)}
+            {renderStars(item.stars)}
           </div>
         </div>
       </div>
