@@ -32,7 +32,7 @@ const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
           <Link href={"/searchresult"}>Búsqueda</Link>
         </li>
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
-          Favoritos
+          <Link href={"/favorites"}>Favoritos</Link>
         </li>
         {user === null ? (
           <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
