@@ -1,6 +1,7 @@
 import React from "react";
 import { FiMapPin } from "react-icons/fi";
 import { AiOutlineGlobal } from "react-icons/ai";
+import Link from "next/link";
 
 interface DescriptionProps {
   description: string;
@@ -33,12 +34,17 @@ const Description: React.FC<DescriptionProps> = ({ description, zone, socialNetw
           <br />
 
           <p className="text-xs lg:text-sm flex items-center">
-            <span className="mr-2 text-[#FD7B03]">
-            <AiOutlineGlobal className="font-medium text-base lg-text-lg" />
-            </span>
-            <span className="text-[#FD7B03] font-medium">Sitio web:</span>{" "}
-            <span className="text-black ml-2">{socialNetworks} </span>
-          </p>
+  <span className="mr-2 text-[#FD7B03]">
+    <AiOutlineGlobal className="font-medium text-base lg-text-lg" />
+  </span>
+  <span className="text-[#FD7B03] font-medium">Sitio web:</span>{" "}
+  <span className="text-black ml-2">
+    <a href={socialNetworks} target="_blank" rel="noopener noreferrer">
+      {socialNetworks}
+    </a>
+  </span>
+</p>
+
         </div>
       </div>
     </div>
