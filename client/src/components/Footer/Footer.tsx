@@ -17,7 +17,7 @@ export default function Footer() {
       <Link href="#">
         <FaChevronUp className=" absolute -top-5 md:right-32 right-5 cursor-pointer hover:scale-110 transition-all duration-300 text-[#FD7B03] shadow-lg shadow-zinc-700/50 w-12 h-12 rounded-full p-2 bg-[#FFCF91]"></FaChevronUp>
       </Link>
-      <div className="md:grid md:grid-cols-3 md:gap-20 md:my-5 md:mx-auto md:w-[80%] justify-around items-start ">
+      <div className="md:grid md:grid-cols-3  md:gap-20 md:my-5 md:mx-auto md:w-[80%] justify-around items-start ">
         <div className=" leading-7">
           <h1 className="text-[#fff] text-lg font-semibold">NearByTour</h1>
           <p className="text-[#fff] text-justify text-sm">

@@ -6,33 +6,18 @@ import Description from "@/components/Description/Description";
 import Review from "@/components/FormReview/Review";
 import OpinionsResume from "@/components/Opinions/OpinionsResume";
 import OpinionCard from "@/components/OpinionCard/OpinionCard";
-import { useParams } from "next/navigation";
 import axios from "axios";
+import { PlaceData } from "@/services/apiCall";
 
-interface PlaceData {
-  description: string;
-  zone: string;
-  placeName: string;
-  socialNetworks: string;
-  latitude:number;
-  longitude:number;
-  imagesUrl: string[];
-  stars: number;
-  category:string;
-  
-}
-
-const Place = () => {
-  const params = useParams();
+const Place = ({ params }: { params: { id: string } }) => {
   const { id } = params;
-  const [placeData, setPlaceData] = useState<PlaceData | null>(null);
+  const [placeData, setPlaceData] = useState<PlaceData>();
 
   useEffect(() => {
-    if (id) {
+    if (id !== "") {
       axios
         .get(`https://nearby-back.vercel.app/api/place/getPlace?placeId=${id}`)
         .then((response) => {
-         
           setPlaceData(response.data.placeData);
         })
         .catch((error) => {
@@ -52,12 +37,14 @@ const Place = () => {
          zone={placeData.zone}
          socialNetworks={placeData.socialNetworks}
        />
-       <Review  />
-       <OpinionsResume  />
-       <OpinionCard  />
+        <Review idPlace={id}/>       
+        <OpinionsResume dataPlace={placeData}/>
+        <OpinionCard comment={placeData.comments}></OpinionCard>
      </>
       ) : (
-        <p>Cargando datos del lugar...</p>
+        <div className=" h-[35rem]">
+          <p>Cargando datos del lugar...</p>
+        </div>
       )}
     </div>
   );
