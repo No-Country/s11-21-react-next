@@ -1,19 +1,34 @@
 "use client";
+import { Context } from "@/context/Context";
 import { Comment, createComment } from "@/services/apiCall";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { RiStarSFill } from "react-icons/ri";
+import { toast } from "sonner";
 
-export default function Review() {
+export default function Review({idPlace}:{ idPlace: string }) {
+  const {userId, setUserId} = useContext(Context)
+  useEffect(()=>{
+    const storedUserId = localStorage.getItem("userId")
+    if(storedUserId){
+      setUserId(storedUserId)
+    }
+  },[userId])
+
   const [formComment, setFormComment] = useState<Comment>({
     comment: "",
     stars:1
   })
-
   const registerComment  =  async (e:React.FormEvent) =>{
     e.preventDefault() 
-    const response = await createComment(formComment)
-    console.log(formComment)
-    console.log(response)
+    if(userId == ""){
+      toast.warning('El usuario debe iniciar sesión.')
+    }else{
+      toast.success("El comentario fue registrado")
+      setFormComment({ ...formComment, comment: "" })
+      const response = await createComment(formComment, idPlace, userId)
+      console.log(response)
+      console.log(userId)
+    }
   }
 
   const updateComment = (e:React.ChangeEvent<HTMLTextAreaElement>) =>{
@@ -52,7 +67,7 @@ export default function Review() {
           ))}
         </span>
         <p className="font-semibold text-xs lg:text-base">Escribe tu opinión</p>
-        <textarea required minLength={20} className=" border-2 border-[#777] p-2 w-full h-32 rounded-lg mt-2  max-h-60" onChange={updateComment}></textarea>
+        <textarea required value={formComment.comment} minLength={20} className=" border-2 border-[#777] p-2 w-full h-32 rounded-lg mt-2  max-h-60" onChange={updateComment}></textarea>
         <div className="flex justify-center items-center">
           <button className="bg-[#FD7B03] w-full lg:w-2/4   h-12 mt-2 rounded-lg text-[#fff] text-sm lg:text-base font-semibold">
             Enviar opinión

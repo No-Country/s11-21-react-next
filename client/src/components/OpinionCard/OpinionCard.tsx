@@ -1,4 +1,5 @@
 "use client";
+import { PlaceData } from "@/app/(otherPages)/place/[id]/page";
 import React, { useState } from "react";
 import { RiStarSFill } from "react-icons/ri";
 
@@ -93,10 +94,9 @@ const opinions: Opinion[] = [
   },
 ];
 
-const OpinionCard = () => {
+const OpinionCard = ({ comment }: { comment: PlaceData }) => {
   const [visibleOpinions, setVisibleOpinions] = useState(3);
   const [showAllOpinions, setShowAllOpinions] = useState(false);
-
   const renderStars = (rating: number) => {
     const maxRating = 5;
     const stars = [];
@@ -130,7 +130,7 @@ const OpinionCard = () => {
 
   return (
     <div className="w-11/12 2xl:w-[60vw] my-8 px-8 md:px-10">
-      {opinions.slice(0, visibleOpinions).map((opinion, index) => (
+      {comment && comment.comments && comment.comments.slice(0, visibleOpinions).map((opinion, index) => (
         <div
           key={index}
           className="my-4 flex flex-col border-t-2 pt-4 border-[#FFF4E0]"
@@ -145,26 +145,31 @@ const OpinionCard = () => {
             </div>
           </div>
           <div className="flex flex-row mb-3">
-            {renderStars(opinion.rating)}
+            {renderStars(opinion.stars)}
           </div>
           <div>
             <h4 className="text-xs text-justify leading-5 tracking-wide">
-              {opinion.explanation}
+              {opinion.comment}
             </h4>
           </div>
         </div>
       ))}
       <div className="flex justify-center">
-        {opinions.length > 3 && (
+        {comment.comments.length > 3 && (
           <button
             className="text-[#FD7B03] mt-4 text-sm md:text-base"
             onClick={toggleOpinions}
           >
             {showAllOpinions
               ? "Ver menos"
-              : `Más opiniones (${opinions.length - visibleOpinions})`}
+              : `Más opiniones (${comment.comments.length - visibleOpinions})`}
           </button>
         )}
+        {comment.comments.length == 0 && (
+          <p className="text-sm text-center">No hay comentarios, sé el primero en ingresar un comentario</p>
+        )
+
+        }
       </div>
     </div>
   );

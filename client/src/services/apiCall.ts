@@ -69,9 +69,9 @@ export async function getUser(userId: string) {
   return response.data;
 }
 
-export async function createComment(comment:Comment){
-  const response = await axios.post(`
-  https://nearby-back.vercel.app/api/place/createComment?placeId=2zVsO4DtqQpmcxcY50Kx&userId=nK1gbnULs9xcbLE6BTmz`,
+export async function createComment(comment:Comment, idPlace:string, userId: string){
+  const response = await axios.post(
+    `https://nearby-back.vercel.app/api/place/createComment?placeId=${idPlace}&userId=${userId}`,
   {
     "comment":{
       comment:comment.comment,
