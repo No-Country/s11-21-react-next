@@ -21,7 +21,18 @@ const LoginForm = () => {
       if ("error" in response) {
         setError(response.error);
       } else {
+        if (response.userLoged) {
+          // Almacena el estado de inicio de sesión en localStorage
+          localStorage.setItem("userLoged", "true");
+          localStorage.setItem("userId", response.userId);
+        } else {
+          // Si el usuario no está logueado, puedes eliminar los datos del almacenamiento local
+          localStorage.removeItem("userLoged");
+          localStorage.removeItem("userId");
+        }
         contexto.setUserId(response.userId);
+        
+
         navigation.push("/home");
       }
     });

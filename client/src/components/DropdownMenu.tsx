@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
@@ -47,7 +48,9 @@ const DropDown: React.FC<DropdownMenuProps> = ({ children, user, setUser }) => {
       {showMenu ? (
         <ul className="menu absolute top-12 w-full bg-[#FD7B03] p-4 flex flex-col cursor-pointer">
           <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-4 py-2">
-            Tu Perfil
+            <Link href={"/user"}>
+              Tu Perfil
+            </Link>
           </li>
           <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-4 py-2">
             Configuración
