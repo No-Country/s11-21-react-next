@@ -53,7 +53,6 @@ const TouristPlaceCard: React.FC<TouristPlaceCardProps> = ({
     }
     return starElements;
   };
-  
 
   return (
     <div className="w-11/12 xl:w-auto flex flex-col my-3 justify-center">
