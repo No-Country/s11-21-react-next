@@ -7,35 +7,11 @@ import Review from "@/components/FormReview/Review";
 import OpinionsResume from "@/components/Opinions/OpinionsResume";
 import OpinionCard from "@/components/OpinionCard/OpinionCard";
 import axios from "axios";
-
-export interface PlaceData {
-  imagesUrl: string[]
-  website: string
-  latitude: string
-  description: string
-  createdBy: string
-  zone: string
-  socialNetworks: string;
-  category: string
-  placeName: string
-  longitude: string
-  comments: Comment[]
-  stars: number
-  views: number
-}
-
-export interface Comment {
-  date?: string
-  name: string
-  comment: string
-  id: string
-  stars: number
-}
-
+import { PlaceData } from "@/services/apiCall";
 
 const Place = ({ params }: { params: { id: string } }) => {
   const { id } = params;
-  const [placeData, setPlaceData] = useState<PlaceData | null>(null);
+  const [placeData, setPlaceData] = useState<PlaceData>();
 
   useEffect(() => {
     if (id !== "") {
@@ -60,9 +36,9 @@ const Place = ({ params }: { params: { id: string } }) => {
          zone={placeData.zone}
          socialNetworks={placeData.socialNetworks}
        />
-      <Review idPlace={id}/>       
-      <OpinionsResume dataPlace={placeData}/>
-      <OpinionCard comment={placeData}></OpinionCard>
+        <Review idPlace={id}/>       
+        <OpinionsResume dataPlace={placeData}/>
+        <OpinionCard comment={placeData.comments}></OpinionCard>
      </>
       ) : (
         <div className=" h-[35rem]">

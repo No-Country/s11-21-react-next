@@ -59,7 +59,7 @@ const SelectUserProfile = () => {
         </div>
 
         <div className={`w-screen pr-8 ${showLine1}`}>
-          <OpinionCard />{" "}
+          {/* <OpinionCard /> */}
           {/* Muestro esto hasta que este conectado al Backend  */}
         </div>
 

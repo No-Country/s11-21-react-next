@@ -1,11 +1,9 @@
 "use client";
-import { PlaceData } from "@/app/(otherPages)/place/[id]/page";
+import { CommentUser } from "@/services/apiCall";
 import React, { useState } from "react";
 import { RiStarSFill } from "react-icons/ri";
 
-
-
-const OpinionCard = ({ comment }: { comment: PlaceData }) => {
+const OpinionCard = ({ comment }: { comment: CommentUser[] }) => {
   const [visibleOpinions, setVisibleOpinions] = useState(3);
   const [showAllOpinions, setShowAllOpinions] = useState(false);
   const renderStars = (rating: number) => {
@@ -31,14 +29,14 @@ const OpinionCard = ({ comment }: { comment: PlaceData }) => {
     if (showAllOpinions) {
       setVisibleOpinions(3);
     } else {
-      setVisibleOpinions(comment.comments.length);
+      setVisibleOpinions(comment.length);
     }
     setShowAllOpinions(!showAllOpinions);
   };
 
   return (
     <div className="w-11/12 2xl:w-[60vw] my-8 px-8 md:px-10">
-      {comment.comments && comment.comments.slice(0, visibleOpinions).map((opinion, index) => (
+      {comment && comment.slice(0, visibleOpinions).map((opinion, index) => (
         <div
           key={index}
           className="my-4 flex flex-col border-t-2 pt-4 border-[#FFF4E0]"
@@ -63,21 +61,19 @@ const OpinionCard = ({ comment }: { comment: PlaceData }) => {
         </div>
       ))}
       <div className="flex justify-center">
-        {comment.comments.length > 3 && (
+        {comment.length > 3 && (
           <button
             className="text-[#FD7B03] mt-4 text-sm md:text-base"
             onClick={toggleOpinions}
           >
             {showAllOpinions
               ? "Ver menos"
-              : `Más opiniones (${comment.comments.length - visibleOpinions})`}
+              : `Más opiniones (${comment.length - visibleOpinions})`}
           </button>
         )}
-        {comment.comments.length == 0 && (
+        {comment.length == 0 && (
           <p className="text-sm text-center">No hay comentarios, sé el primero en ingresar un comentario</p>
-        )
-
-        }
+        )}
       </div>
     </div>
   );
