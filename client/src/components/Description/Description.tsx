@@ -1,14 +1,14 @@
 import React from "react";
 import { FiMapPin } from "react-icons/fi";
-import { LuClock3 } from "react-icons/lu";
+import { AiOutlineGlobal } from "react-icons/ai";
 
 interface DescriptionProps {
   description: string;
   zone: string;
-  
+  socialNetworks: string;
 }
 
-const Description: React.FC<DescriptionProps> = ({ description, zone }) => {
+const Description: React.FC<DescriptionProps> = ({ description, zone, socialNetworks }) => {
   return (
     <div className="w-11/12 2xl-w-1/2 text-[#000] justify-center">
       <div className="w-full justify-self-center flex justify-between px-6 mb-3">
@@ -34,10 +34,10 @@ const Description: React.FC<DescriptionProps> = ({ description, zone }) => {
 
           <p className="text-xs lg:text-sm flex items-center">
             <span className="mr-2 text-[#FD7B03]">
-              <LuClock3 className="font-medium text-base lg-text-lg" />
+            <AiOutlineGlobal className="font-medium text-base lg-text-lg" />
             </span>
-            <span className="text-[#FD7B03] font-medium">Horario:</span>{" "}
-            <span className="text-black ml-2">horario</span>
+            <span className="text-[#FD7B03] font-medium">Sitio web:</span>{" "}
+            <span className="text-black ml-2">{socialNetworks} </span>
           </p>
         </div>
       </div>

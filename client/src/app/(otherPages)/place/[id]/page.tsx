@@ -8,10 +8,12 @@ import OpinionsResume from "@/components/Opinions/OpinionsResume";
 import OpinionCard from "@/components/OpinionCard/OpinionCard";
 import { useParams } from "next/navigation";
 import axios from "axios";
+
 interface PlaceData {
   description: string;
   zone: string;
-  openingHours: string;
+  placeName: string;
+  socialNetworks: string;
 }
 
 const Place = () => {
@@ -24,7 +26,7 @@ const Place = () => {
       axios
         .get(`https://nearby-back.vercel.app/api/place/getPlace?placeId=${id}`)
         .then((response) => {
-          console.log('Respuesta de la solicitud:', response.data);
+         
           setPlaceData(response.data.placeData);
         })
         .catch((error) => {
@@ -37,10 +39,11 @@ const Place = () => {
     <div className="flex flex-col items-center h-auto w-full">
       {placeData ? (
        <>
-       <TouristPlaceCard  />
+       <TouristPlaceCard placeName={placeData.placeName}  zone={placeData.zone} />
        <Description
          description={placeData.description}
          zone={placeData.zone}
+         socialNetworks={placeData.socialNetworks}
        />
        <Review  />
        <OpinionsResume  />
