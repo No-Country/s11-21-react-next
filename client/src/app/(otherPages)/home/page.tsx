@@ -45,7 +45,7 @@ export default function Home() {
   return (
     <main className="flex flex-col h-auto">
       <Portada />
-      <Populars popularPlaces={popularPlaces} /> {/* Pasa popularPlaces al componente Populars */}
+      <Populars popularPlaces={popularPlaces} />
       <div className="flex overflow-x-auto overflow-hidden">
         <CarouselCard data={popularPlaces} />
       </div>
