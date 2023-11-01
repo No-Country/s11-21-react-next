@@ -1,7 +1,8 @@
 import React from "react";
-import SearchInput from "../Searcher/searchInput";
+import { SearchInput } from "../Searcher/searchInput";
 import Image from "next/image";
 import { Krona_One } from "next/font/google";
+import Link from "next/link";
 
 const krona = Krona_One({ weight: "400", subsets: ["latin"] });
 
@@ -27,7 +28,13 @@ export default function Portada() {
           </p>
         </span>
       </div>
-      <SearchInput></SearchInput>
+      <div className="relative flex justify-center items-center  m-auto -mt-6 w-3/5 max-md:w-80">
+        <div className="flex shadow-lg shadow-zinc-300/50 outline-none px-4 w-full h-10 text-xs rounded-lg bg-[#FFF4E0] items-center my-auto">
+          <Link className="items-center" href="/searchresult">
+            Buscar atracción...
+          </Link>
+        </div>
+      </div>
     </>
   );
 }

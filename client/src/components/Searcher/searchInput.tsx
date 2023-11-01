@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FaSearchLocation } from "react-icons/fa";
 
 interface SearchInputProps {
-  searchTerm: React.Dispatch<React.SetStateAction<string>>;
+  searchTerm?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const SearchInput: React.FC<SearchInputProps> = ({ searchTerm }) => {
@@ -21,10 +21,12 @@ export const SearchInput: React.FC<SearchInputProps> = ({ searchTerm }) => {
         placeholder="Buscar atracción..."
         onChange={handleChange}
       />
-      <FaSearchLocation
-        className="absolute right-5 cursor-pointer opacity-90"
-        onClick={searchTerm(term)}
-      ></FaSearchLocation>
+      {searchTerm && (
+        <FaSearchLocation
+          className="absolute right-5 cursor-pointer opacity-90"
+          onClick={searchTerm(term)}
+        ></FaSearchLocation>
+      )}
     </div>
   );
 };

@@ -38,7 +38,7 @@ function SearchresultPage() {
   return (
     <div className="flex flex-col h-auto justify-center items-center mt-12">
       <SearchButtons searchTerm={setSearchTerm} />
-      <SearchInput searchTerm={setSearchTerm} />
+      <SearchInput />
       <div className="w-[90%] mx-auto my-10">
         <Map lugar={selected} />
         {selected && (
