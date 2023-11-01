@@ -119,3 +119,14 @@ export async function addFavorite(
 
   return response.data;
 }
+
+export async function getPopulars() {
+  return await axios
+    .get("https://nearby-back.vercel.app/api/place/mostPopulars")
+    .then((response) => response.data);
+}
+export async function getBests() {
+  return await axios
+    .get("https://nearby-back.vercel.app/api/place/mostRated")
+    .then((response) => response.data);
+}

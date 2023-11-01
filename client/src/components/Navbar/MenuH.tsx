@@ -35,7 +35,7 @@ const MenuH: React.FC<MenuHProps> = ({ user, setUser }) => {
         <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
           <Link href={"/favorites"}>Favoritos</Link>
         </li>
-        {usuario === null ? (
+        {user === null ? (
           <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
             <Link href={"/login"}>Iniciar sesión</Link>
           </li>
@@ -44,11 +44,11 @@ const MenuH: React.FC<MenuHProps> = ({ user, setUser }) => {
             <DropDown user={user} setUser={setUser}>
               <>
                 <p className="bg-[#FFCF91] w-8 h-8 flex items-center justify-center rounded-full text-[#fff]">
-                  {usuario.userData.name.slice(0, 1)}
+                  {usuario?.userData.name.slice(0, 1)}
                 </p>
                 <span className="text-sm pl-2 hover:bg-[#FFCF91] group-hover:text-[#FD7B03]">
                   <p className="text-white text-sm font-medium hover:bg-[#FFCF91] group-hover:text-[#FD7B03]">
-                    {usuario.userData.name}
+                    {usuario?.userData.name}
                   </p>
                 </span>
               </>
