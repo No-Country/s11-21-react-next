@@ -30,7 +30,8 @@ const Place = ({ params }: { params: { id: string } }) => {
     <div className="flex flex-col items-center h-auto w-full">
       {placeData ? (
        <>
-       <TouristPlaceCard placeName={placeData.placeName}  zone={placeData.zone} />
+      <TouristPlaceCard placeName={placeData.placeName} zone={placeData.zone} latitude={placeData.latitude} longitude={placeData.longitude} imagesUrl={placeData.imagesUrl} stars={placeData.stars} category={placeData.category} />
+
        <Description
          description={placeData.description}
          zone={placeData.zone}

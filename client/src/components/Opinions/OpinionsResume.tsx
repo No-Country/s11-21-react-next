@@ -1,4 +1,4 @@
-import { PlaceData } from "@/app/(otherPages)/place/[id]/page";
+import { PlaceData } from "@/services/apiCall";
 import Image from "next/image";
 import React, { useState } from "react";
 

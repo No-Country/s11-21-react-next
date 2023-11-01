@@ -39,14 +39,14 @@ export interface SetFavoriteResponse {
 export interface PlaceData {
   imagesUrl: string[]
   website: string
-  latitude: string
   description: string
   createdBy: string
   zone: string
   socialNetworks: string;
   category: string
   placeName: string
-  longitude: string
+  latitude:number;
+  longitude:number;
   comments: CommentUser[]
   stars: number
   views: number
