@@ -64,10 +64,10 @@ const SelectUserProfile = () => {
         </div>
 
         <div className={`${showLine2} mt-7 flex justify-center`}>
-          <TouristPlaceCard
+          {/* <TouristPlaceCard
             placeName="Terminal de Omnibus"
             zone="Cordoba, Argentina"
-          />{" "}
+          />{" "} */}
           {/* Muestro esto hasta que este conectado al Backend  */}
         </div>
       </div>
