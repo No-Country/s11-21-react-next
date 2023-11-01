@@ -1,10 +1,12 @@
+import useWindowSize from "@/app/hooks/useWindowSize";
+
 const TitleSection = () => {
-    const titleStyle = {
-      width: '290px',
-      // Otros estilos aquí
-    };
+    
+    const { width } = useWindowSize();
+    const containerWidth = width > 768 ? 'w-[784px]' : 'w-290px';
+    
     return (
-    <div style={titleStyle}>
+    <div className={containerWidth}>
       <h1 className="text-black text-2xl font-semibold mb-4 text-center" >¡Ayúdanos a encontrar joyas ocultas alrededor del mundo!</h1>
       <p className="text-justify text-black text-sm">Completa el siguiente formulario con tus datos y breve información del tesoro a descubrir. ¡Sólo tomará unos minutos! Serás redireccionado a la sección de solicitudes.</p>
     </div>

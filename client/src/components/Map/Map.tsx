@@ -1,24 +1,16 @@
-// components/Maps.tsx
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import 'leaflet/dist/leaflet.css';
+import { MapContainer, TileLayer } from 'react-leaflet';
 
-// Aquí puedes reemplazar con cualquier imagen de mapa que tengas
-import MockupMapImage from "../../../public/random-map.png";
-
-const Map = () => {
+function Map() {
   return (
-    <div className="flex my-5 justify-center">
-      <div className="w-4/5 h-auto md:w-[80vw] md:h-auto lg:w-[75vw] xl:w-[60vw] rounded-lg overflow-hidden shadow-md">
-        <Image
-          src={MockupMapImage}
-          alt="Mockup Map"
-          width={0}
-          height={0}
-          className="w-full h-auto"
-        />
-      </div>
-    </div>
+    <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '400px', width: '100%' }}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+    </MapContainer>
   );
-};
+}
 
 export default Map;
