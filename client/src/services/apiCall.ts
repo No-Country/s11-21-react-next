@@ -13,6 +13,24 @@ export interface UserLogin {
   password: string;
 }
 
+export interface Favorite {
+  placeId: string;
+  imagesUrl: string;
+  placeName: string;
+  zone: string;
+  stars: number;
+}
+
+export interface RemoveFavoriteResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface SetFavoriteResponse {
+  success: boolean;
+  message: string;
+}
+
 export async function createUser(data: User): Promise<User | string> {
   const response = await axios
     .post(
@@ -61,5 +79,43 @@ export async function getUser(userId: string) {
   const response = await axios.get(
     `https://nearby-back.vercel.app/api/user/${userId}`
   );
+  return response.data;
+}
+
+/* Trae los favoritos según el ID de usuario */
+export async function getFavorites(userId: string): Promise<Favorite[]> {
+  try {
+    const response = await axios.get(
+      `https://nearby-back.vercel.app/api/user/getFavorites?userId=${userId}`
+    );
+    return response.data.userFavorites;
+  } catch (error) {
+    throw error;
+  }
+}
+
+/* Dado el placeId se elimina del array de favoritos del user */
+export async function removeFavorite(
+  userId: string,
+  placeId: string
+): Promise<RemoveFavoriteResponse> {
+  const response = await axios.put(
+    `https://nearby-back.vercel.app/api/place/dislikeFavorite`,
+    { userId, placeId }
+  );
+
+  return response.data;
+}
+
+/* Dado el placeId se agrega al array de favoritos del user */
+export async function addFavorite(
+  userId: string,
+  placeId: string
+): Promise<SetFavoriteResponse> {
+  const response = await axios.put(
+    `https://nearby-back.vercel.app/api/place/setFavorite`,
+    { userId, placeId }
+  );
+
   return response.data;
 }
