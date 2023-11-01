@@ -13,7 +13,7 @@ import Link from "next/link";
 import { HiOutlineChevronLeft } from "react-icons/hi2";
 import { GrMapLocation } from "react-icons/gr";
 
-const TouristPlaceCard = () => {
+const TouristPlaceCard = ({ placeName, zone }: { placeName: string; zone: string }) => {
   const [bgColor1, setBgColor1] = useState("bg-[#FD7B03]");
   const [bgColor2, setBgColor2] = useState("bg-white");
   const [bgColor3, setBgColor3] = useState("bg-white");
@@ -94,14 +94,14 @@ const TouristPlaceCard = () => {
       <div className="flex flex-row mb-3 px-6 justify-between">
         <div className="text-left font-bold flex flex-col gap-2">
           <div className="w-full">
-            <p className="text-base lg:text-lg">Jardín Japonés</p>
+          <p className="text-base lg:text-lg">{placeName}</p>
           </div>
 
           <div className="flex gap-2 items-center">
             <GrMapLocation className="text-base xl:text-lg" />
             <Link href="https://www.google.com/maps/place/Jard%C3%ADn+Japon%C3%A9s+de+Escobar,+B1625+Bel%C3%A9n+de+Escobar,+Provincia+de+Buenos+Aires/@-34.3524909,-58.79789,16z/data=!4m6!3m5!1s0x95bb61b90c949f8d:0x957ce105f51ea2dd!8m2!3d-34.3524909!4d-58.79789!16s%2Fg%2F1hc8ms9lw">
               <p className="text-black text-xs lg:text-sm font-medium hover:text-blue-500">
-                Buenos Aires, Argentina
+                {zone}
               </p>
             </Link>
           </div>

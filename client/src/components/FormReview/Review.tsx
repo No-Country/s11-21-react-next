@@ -37,29 +37,20 @@ export default function Review({idPlace}:{ idPlace: string }) {
 
   const [hoveredStars, setHoveredStars] = useState(Array(5).fill(false));
   const handleHover = (index: number) => {
-    const newHoveredStars = [...hoveredStars];
-    for (let i = 0; i < newHoveredStars.length; i++) {
-      newHoveredStars[i] = i <= index;
-    }
+    const newHoveredStars = new Array(5).fill(false).map((_, i) => i <= index);
     setHoveredStars(newHoveredStars);
-    setFormComment({...formComment, stars: index+1})
+    setFormComment({ ...formComment, stars: index + 1 });
   };
-
+  
   return (
-    <div className="w-11/12 2xl:w-[60vw] h-auto px-6 text-[#000]  justify-center">
+    <div className="w-11/12 2xl:w-[60vw] h-auto px-6 text-[#000] justify-center">
       <form className="w-full px-2 border-t-2 border-[#FFCF91] py-8" onSubmit={registerComment}>
-        <h1 className="font-semibold text-sm lg:text-base">
-          ¿Te gustaría dar tu opinión del lugar?
-        </h1>
-        <h2 className=" font-medium text-xs lg:text-base">
-          ¿Cómo fue tu experiencia?
-        </h2>
-        <span className="flex ">
-          {hoveredStars.map((isHovered, index) => (
-            <RiStarSFill 
-              className={`text-${
-                isHovered ? "[#FD7B03]" : "[#FFCF91]"
-              } hover:text-[#FD7B03] text-lg`}
+        <h1 className="font-semibold text-sm lg:text-base">¿Te gustaría dar tu opinión del lugar?</h1>
+        <h2 className=" font-medium text-xs lg:text-base">¿Cómo fue tu experiencia?</h2>
+        <span className="flex">
+          {new Array(5).fill(0).map((_, index) => (
+            <RiStarSFill
+              className={`text-${hoveredStars[index] ? "[#FD7B03]" : "[#FFCF91]"} hover:text-[#FD7B03] text-lg`}
               key={index}
               onMouseEnter={() => handleHover(index)}
               onClick={() => handleHover(index)}

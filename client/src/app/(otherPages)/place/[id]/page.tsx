@@ -1,16 +1,12 @@
-'use client'
-import Description from '@/components/Description/Description'
-import Review from '@/components/FormReview/Review'
-import OpinionCard from '@/components/OpinionCard/OpinionCard'
-import OpinionsResume from '@/components/Opinions/OpinionsResume'
-import TouristPlaceCard from '@/components/TouristPlaceCard/TouristPlaceCard'
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { Toaster } from 'sonner'
+"use client"
 
-export interface Root {
-  placeData: PlaceData
-}
+import React, { useEffect, useState } from "react";
+import TouristPlaceCard from "@/components/TouristPlaceCard/TouristPlaceCard";
+import Description from "@/components/Description/Description";
+import Review from "@/components/FormReview/Review";
+import OpinionsResume from "@/components/Opinions/OpinionsResume";
+import OpinionCard from "@/components/OpinionCard/OpinionCard";
+import axios from "axios";
 
 export interface PlaceData {
   imagesUrl: string[]
@@ -19,12 +15,12 @@ export interface PlaceData {
   description: string
   createdBy: string
   zone: string
-  socialNetworks: any[]
+  socialNetworks: string;
   category: string
   placeName: string
   longitude: string
-  stars: number
   comments: Comment[]
+  stars: number
   views: number
 }
 
@@ -37,31 +33,47 @@ export interface Comment {
 }
 
 
-export default function Page({ params }: { params: { id: string } }) {
-  const [dataPlace, setDataPlace] = useState<PlaceData>()
-  const {id} = params
-  
+const Place = ({ params }: { params: { id: string } }) => {
+  const { id } = params;
+  const [placeData, setPlaceData] = useState<PlaceData | null>(null);
+
   useEffect(() => {
-    axios
-      .get(`https://nearby-back.vercel.app/api/place/getPlace?placeId=${id}`)
-      .then((response) => {
-        console.log("DATA PLACE", response.data);
-        setDataPlace(response.data.placeData); 
-      })
-      .catch((error) => {
-        console.error("Error al cargar los lugares populares", error);
-      });
+    if (id !== "") {
+      axios
+        .get(`https://nearby-back.vercel.app/api/place/getPlace?placeId=${id}`)
+        .then((response) => {
+          setPlaceData(response.data.placeData);
+        })
+        .catch((error) => {
+          console.error('Error al cargar datos del lugar', error);
+        });
+    }
   }, [id]);
 
   return (
-    
-    <main className="flex flex-col items-center h-auto w-full">
-      <Toaster richColors/>
-      <TouristPlaceCard />
-      <Description />
-      <Review idPlace={id}/>
-      <OpinionsResume />
-      {dataPlace && <OpinionCard comment={dataPlace}/>}
-    </main>
-  )
-}
+    <div className="flex flex-col items-center h-auto w-full">
+      {placeData ? (
+       <>
+       <TouristPlaceCard placeName={placeData.placeName}  zone={placeData.zone} />
+       <Description
+         description={placeData.description}
+         zone={placeData.zone}
+         socialNetworks={placeData.socialNetworks}
+       />
+      <Review idPlace={id}/>       
+      <OpinionsResume dataPlace={placeData}/>
+      <OpinionCard comment={placeData}></OpinionCard>
+     </>
+      ) : (
+        <div className=" h-[35rem]">
+          <p>Cargando datos del lugar...</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Place;
+
+
+ 

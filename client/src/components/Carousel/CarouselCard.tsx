@@ -4,7 +4,7 @@ import { RiRoadMapLine, RiStarSFill } from "react-icons/ri";
 import Link from 'next/link';
 
 type Place = {
-  id: string
+  id: string;
   placeName: string;
   imagesUrl: string[];
   zone: string;
@@ -34,7 +34,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ data }) => {
       {data ? (
         data.map((place, index) => (
           <div key={index} className="carousel-item text-start relative snap-start w-36 h-56 z-10">
-            <Link href={`/place/${place.id}`}>
+           <Link href={`/place/${place.id}`} passHref>
               <div>
                 <div className="relative h-56">
                   {place.imagesUrl && place.imagesUrl.length > 0 ? ( 
