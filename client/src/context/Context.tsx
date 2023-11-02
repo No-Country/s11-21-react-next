@@ -12,6 +12,10 @@ interface ContextProps {
   setUserId: React.Dispatch<React.SetStateAction<string>>;
   showErrorMessage: string;
   setShowErrorMessage: React.Dispatch<React.SetStateAction<string>>;
+  addPlacesNumber: number;
+  setAddPlacesNumber: React.Dispatch<React.SetStateAction<number>>;
+  addCommentsNumber: number;
+  setAddCommentsNumber: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const Context = createContext<ContextProps>({
@@ -25,6 +29,10 @@ export const Context = createContext<ContextProps>({
   setUserId: () => {},
   showErrorMessage: "",
   setShowErrorMessage: () => {},
+  addPlacesNumber: 0,
+  setAddPlacesNumber: () => {},
+  addCommentsNumber: 0,
+  setAddCommentsNumber: () => {},
 });
 
 export default function ContextProvider({ children }: { children: ReactNode }) {
@@ -33,6 +41,8 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
   const [textButton, setTextButton] = useState<string>("Editar perfil");
   const [userId, setUserId] = useState<string>("");
   const [showErrorMessage, setShowErrorMessage] = useState<string>("");
+  const [addPlacesNumber, setAddPlacesNumber] = useState<number>(0);
+  const [addCommentsNumber, setAddCommentsNumber] = useState<number>(0);
 
   return (
     <Context.Provider
@@ -47,6 +57,10 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
         setUserId,
         showErrorMessage,
         setShowErrorMessage,
+        addPlacesNumber,
+        setAddPlacesNumber,
+        addCommentsNumber,
+        setAddCommentsNumber,
       }}
     >
       {children}
