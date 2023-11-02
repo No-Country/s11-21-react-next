@@ -17,24 +17,78 @@ const AttractionsForm = () => {
     facebook: "",
     instagram: "",
     otherSocial: "",
+    photos: []
   });
 
   const [showAddressPopup, setShowAddressPopup] = useState(false);
 
-  const handleChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
+    if (name === "photos") {
+      const files = Array.from(e.target.files);
+      const photosPromises = files.map((file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            resolve(reader.result);
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      });
+      Promise.all(photosPromises).then((photosBase64) => {
+        setFormData((prevState) => ({ ...prevState, photos: photosBase64 }));
+      });
+    } else {
+      setFormData((prevState) => ({ ...prevState, [name]: value }));
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Aquí puedes enviar formData a una API o hacer lo que necesites con los datos.
-    console.log(formData);
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  
+  const postData = {
+    ...formData,
+    category: "p",
+    createdBy: "camilo@gmail.com",
+    description: "En el museo del oro encontraras piezas e increible historia de nuestros antepasados de Colombia",
+    imagesUrl: formData.photos,
+    latitude: "4.6020241",
+    longitude: "-74.0733601",
+    placeName: formData.attractionName,
+    socialNetworks: [formData.facebook, formData.instagram, formData.otherSocial].filter(Boolean), // Filtramos las entradas vacías
+    zone: "Bogotá, Colombia",
+    website: formData.website
   };
+
+  try {
+    const response = await fetch('https://nearby-back.vercel.app/api/place/createPlace', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(postData)
+    });
+
+    const responseData = await response.json();
+
+    if (response.ok) {
+      
+      console.log('Place created successfully:', responseData);
+      
+    } else {
+      
+      console.error('Server responded with an error:', responseData);
+      
+    }
+  } catch (error) {
+    
+    console.error('Failed to connect to the API:', error);
+    
+  }
+};
+
 
   const toggleAddressPopup = () => {
     setShowAddressPopup(!showAddressPopup);
@@ -94,11 +148,7 @@ const AttractionsForm = () => {
               className="w-64 p-2 border border-FD7B03 rounded-lg mb-4"
             />
           </div>
-        </div>
-        {/* TODO: Implementar lógica para el popup de dirección del sitio y mapa */}
-
-        {/* Horario */}
-        <div className="flex flex-col w-64 mb-4">
+          <div className="flex flex-col w-64 mb-4">
           <label className="block text-primary mb-2 text-sm" htmlFor="hours">
             Dirección del sitio
           </label>
@@ -199,6 +249,11 @@ const AttractionsForm = () => {
 
           {/* TODO: Implementar los demás campos según tus especificaciones */}
         </div>
+        </div>
+        {/* TODO: Implementar lógica para el popup de dirección del sitio y mapa */}
+
+        {/* Horario */}
+        
 
         {/* Redes sociales de la atracción */}
         <div className="flex flex-col items-center mb-6 bg-secondary w-full p-5 rounded-lg">
