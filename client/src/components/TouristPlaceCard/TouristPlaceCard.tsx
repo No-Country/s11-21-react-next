@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { LiaCameraSolid } from "react-icons/lia";
-import { SiMacys } from "react-icons/si";
-import { AiOutlineHeart } from "react-icons/ai";
-import { TiTree } from "react-icons/ti";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Link from "next/link";
 import { HiOutlineChevronLeft } from "react-icons/hi2";
 import { GrMapLocation } from "react-icons/gr";
@@ -16,6 +13,8 @@ interface TouristPlaceCardProps {
   imagesUrl: string[];
   stars: number;
   category: string;
+  isLiked: boolean;
+  onLikeClick: () => void;
 }
 
 const TouristPlaceCard: React.FC<TouristPlaceCardProps> = ({
@@ -26,26 +25,20 @@ const TouristPlaceCard: React.FC<TouristPlaceCardProps> = ({
   imagesUrl,
   stars,
   category,
+  isLiked,
+  onLikeClick,
 }) => {
-  const [isLiked, setIsLiked] = useState(false);
-
-  const handleLikeClick = () => {
-    setIsLiked(!isLiked);
-  };
-
   const renderStars = () => {
     const maxStars = 5;
     const starElements = [];
-    const selectedColor = "text-[#FD7B03]"
+    const selectedColor = "text-[#FD7B03]";
     const unselectedColor = "text-[#FFCF91]";
-  
+
     for (let i = 1; i <= maxStars; i++) {
       starElements.push(
         <span
           key={i}
-          className={`text-xl ${
-            i <= stars ? selectedColor : unselectedColor
-          }`}
+          className={`text-xl ${i <= stars ? selectedColor : unselectedColor}`}
         >
           &#9733;
         </span>
@@ -55,7 +48,7 @@ const TouristPlaceCard: React.FC<TouristPlaceCardProps> = ({
   };
 
   return (
-    <div className="w-11/12 xl:w-auto flex flex-col my-3 justify-center">
+    <div className="w-11/12 2xl:w-[60vw] flex flex-col my-3 justify-center">
       <div className="w-full justify-self-center flex justify-start mt-4 mb-6 px-6">
         <Link
           href={"/searchresult"}
@@ -67,20 +60,7 @@ const TouristPlaceCard: React.FC<TouristPlaceCardProps> = ({
       </div>
       <div className="flex flex-row mb-3 px-6 justify-between">
         <div className="text-left font-bold flex flex-col gap-2">
-          <div className="w-full flex items-center">
-            <p className="text-base lg:text-lg">
-              {placeName}
-              <AiOutlineHeart
-                className={`text-xl cursor-pointer ${
-                  isLiked ? "text-red-500" : "text-gray-400"
-                }`}
-                onClick={handleLikeClick}
-              />
-              <span className="text-right text-xs lg:text-sm ml-auto">
-      {category.charAt(0).toUpperCase() + category.slice(1).toLowerCase()}
-    </span>
-            </p>
-          </div>
+          {placeName}
           <div className="flex gap-2 items-center">
             <GrMapLocation className="text-base xl:text-lg" />
             <Link
@@ -93,27 +73,41 @@ const TouristPlaceCard: React.FC<TouristPlaceCardProps> = ({
               </p>
             </Link>
           </div>
-          <div className="flex gap-1 items-center h-[21px] text-xs lg:text-sm">
-            {renderStars()}
-            <span>({stars})</span>
+          <div className="flex flex-row gap-1 justify-start items-center h-[21px] font-normal">
+            <div>{renderStars()}</div>
+            <div className="text-sm lg:text-base text-[#FFCF91]">({stars})</div>
+          </div>
+        </div>
+        <div className="text-right flex flex-col gap-10">
+          <div className="text-base lg:text-lg">
+            {isLiked ? (
+              <AiFillHeart
+                onClick={onLikeClick}
+                className="text-xl text-red-500"
+              />
+            ) : (
+              <AiOutlineHeart
+                onClick={onLikeClick}
+                className="text-xl text-gray-400"
+              />
+            )}
+          </div>
+          <div className="font-semibold text-xs lg:text-sm">
+            {category.charAt(0).toUpperCase() + category.slice(1).toLowerCase()}
           </div>
         </div>
       </div>
-      <div className="w-full justify-self-center relative grid 2xl:flex justify-center px-6 md:px-0">
+      <div className="w-full justify-self-center relative flex justify-center">
         <Image
           src={imagesUrl[0]}
           alt="Card image"
-          layout="responsive"
           width={1080}
           height={720}
-          priority
-          className="h-[216px] sm:h-full rounded-lg"
+          className="w-11/12 2xl:w-[60vw] rounded-lg"
           style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.25)" }}
         />
       </div>
-      <div className="flex gap-1 items-center h-[21px] text-xs lg:text-sm">
-       
-      </div>
+      <div className="flex gap-1 items-center h-[21px] text-xs lg:text-sm"></div>
     </div>
   );
 };
