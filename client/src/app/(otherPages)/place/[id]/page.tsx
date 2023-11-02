@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
 import TouristPlaceCard from "@/components/TouristPlaceCard/TouristPlaceCard";
 import Description from "@/components/Description/Description";
@@ -13,7 +12,7 @@ import {
   getFavorites,
   removeFavorite,
 } from "@/services/apiCall";
-import Logo from "../../../../../public/logoLoader.png";
+
 import { Context } from "@/context/Context";
 import { toast } from "sonner";
 import { ClimbingBoxLoader } from "react-spinners";
