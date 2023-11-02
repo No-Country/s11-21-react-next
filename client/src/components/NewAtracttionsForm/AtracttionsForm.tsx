@@ -1,26 +1,78 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import AddressModal from "./AddressModal";
+import { APICreatePlace, CreatePlaceData } from "@/services/apiCall";
+import { useDropzone } from "react-dropzone";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+
+interface FormEventTarget extends EventTarget {
+  email: { value: string };
+  category: { value: string };
+  description: { value: string };
+  latitude: { value: string };
+  longitude: { value: string };
+  placeName: { value: string };
+  socialNetworks: { value: [] };
+  zone: { value: string };
+}
+
+interface FileUploaderProps {
+  setImagesUrl: (imageUrl: string) => void;
+}
+
+const FileUploader: React.FC<FileUploaderProps> = ({ setImagesUrl }) => {
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      const file = acceptedFiles[0];
+
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        if (
+          typeof event?.target?.result === "string" &&
+          event.target !== null
+        ) {
+          setImagesUrl(event.target.result);
+        }
+      };
+
+      reader.readAsDataURL(file);
+    },
+    [setImagesUrl]
+  );
+
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+
+  return (
+    <div>
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        <p>Drag and drop files here, or click to select files</p>
+      </div>
+    </div>
+  );
+};
 
 const AttractionsForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    attractionName: "",
-    address: "",
-    schedule: "",
+  const [imagesUrl, setImagesUrl] = useState("");
+  const [formData, setFormData] = useState<CreatePlaceData>({
+    placeName: "",
+    latitude: "",
+    longitude: "",
     description: "",
     category: "",
     website: "",
-    facebook: "",
-    instagram: "",
-    otherSocial: "",
+    socialNetworks: [],
+    zone: "",
+    createdBy: "",
+    imagesUrl: "",
   });
 
   const [showAddressPopup, setShowAddressPopup] = useState(false);
-
+  const navigation = useRouter();
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -40,10 +92,43 @@ const AttractionsForm = () => {
     setShowAddressPopup(!showAddressPopup);
   };
 
+  const handleCreatePlace = async (
+    e: React.SyntheticEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+    const target = e.target as FormEventTarget;
+    const {
+      email,
+      category,
+      description,
+      latitude,
+      longitude,
+      placeName,
+      socialNetworks,
+      zone,
+    } = target;
+
+    const newPlace = {
+      createdBy: email.value,
+      category: category.value,
+      description: description.value,
+      latitude: "-34.6079801",
+      longitude: "-58.3677361",
+      placeName: placeName.value,
+      socialNetworks: socialNetworks.value,
+      zone: "Capital Federal, Argentina",
+      imagesUrl: imagesUrl,
+      website: "",
+    };
+    await APICreatePlace(newPlace);
+    toast("Lugar creado con Exito");
+    navigation.push("/home");
+  };
+
   return (
     <div className="flex flex-col items-center px-4 py-6">
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleCreatePlace}
         className="w-290px md:w-full p-4 rounded-md"
       >
         {/* Datos personales */}
@@ -96,7 +181,7 @@ const AttractionsForm = () => {
               <input
                 type="text"
                 id="attractionName"
-                name="attractionName"
+                name="placeName"
                 className="w-full p-2 border border-FD7B03 rounded-lg mb-4"
               />
             </div>
@@ -229,7 +314,8 @@ const AttractionsForm = () => {
           <div>
             <div className="flex flex-col items-center lg:justify-center">
               <div className="relative border border-primary rounded-lg border-dashed w-full mb-4 p-4 text-primary text-center lg:h-[140px] lg:my-auto">
-                <input
+                <FileUploader setImagesUrl={setImagesUrl} />
+                {/* <input
                   type="file"
                   id="photos"
                   name="photos"
@@ -237,7 +323,7 @@ const AttractionsForm = () => {
                   onChange={handleChange}
                   accept="image/*"
                   multiple
-                />
+                /> */}
                 <FontAwesomeIcon
                   icon={faImage}
                   className="mt-2 text-primary text-2xl"
@@ -266,7 +352,7 @@ const AttractionsForm = () => {
               <input
                 type="text"
                 id="facebook"
-                name="facebook"
+                name="socialNetworks"
                 className="w-64 md:w-full p-2 border border-FD7B03 rounded-lg mb-4"
               />
             </div>
@@ -282,7 +368,7 @@ const AttractionsForm = () => {
               <input
                 type="text"
                 id="instagram"
-                name="instagram"
+                name="socialNetworks"
                 className="w-64 p-2 md:w-full border border-FD7B03 rounded-lg mb-4"
               />
             </div>
@@ -298,7 +384,7 @@ const AttractionsForm = () => {
               <input
                 type="text"
                 id="otherSocial"
-                name="otherSocial"
+                name="socialNetworks"
                 className="w-64 p-2 border md:w-full border-FD7B03 rounded-lg mb-4"
               />
             </div>
