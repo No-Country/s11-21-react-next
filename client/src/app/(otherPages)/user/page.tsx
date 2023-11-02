@@ -51,8 +51,6 @@ const UserProfile = (): JSX.Element => {
   const [editing, setEditing] = useState<boolean>(false);
   const [placesArray, setPlacesArray] = useState<number>();
 
-  //const [numberFavorites, setNumberFavorites] = useState<number>();
-
   const navigate = useRouter();
 
   //const [password, setPassword] = useState<string>("");
@@ -69,7 +67,7 @@ const UserProfile = (): JSX.Element => {
     }
   }, [setUserId]);
 
-  console.log(userId);
+  //console.log(userId);
 
   const handleButtonOnClick = async (
     e: React.MouseEvent<HTMLButtonElement>
@@ -216,7 +214,7 @@ const UserProfile = (): JSX.Element => {
         console.error("Error al actualizar el usuario:", error);
       }
     }
-    console.log("aka");
+    
     setTextButton("Editar");
     setShowIconEdit("hidden");
     setShowInformation("block");
@@ -225,7 +223,6 @@ const UserProfile = (): JSX.Element => {
 
   const firstLetter = userData.userData.name.charAt(0).toUpperCase();
 
-  //console.log(numberFavorites);
   useEffect(() => {
     if (userId) {
       const fetchUserData = async () => {
@@ -364,37 +361,37 @@ const UserProfile = (): JSX.Element => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 mt-4">
+                {/* <div className="flex items-center gap-2 mt-4">
                   <span className="text-[#FD7B03] text-xl">
                     <RiLockPasswordLine />
                   </span>
                   <div className="w-full flex items-center justify-between">
                     <p className={`${showInformation} text-xs`}>12345678</p>
 
-                    {/* <input
+                    <input
                         type="text"
                         name="password"
                         className={`${showIconEdit} w-[260px] h-8 border-[#FD7B03] font-bold text-base`}
                         placeholder="12345678"
                         value={password} // Usa el valor para mostrar el estado actual
                         onChange={handleInputChange} 
-                      /> */}
+                      />
                     <span className={`${showIconEdit} text-[#FD7B03]`}>
                       <AiOutlineEdit />
                     </span>
                   </div>
-                </div>
+                </div> 
 
                 <div className={`${showErrorMessage}`}>
                   <div className="">
                     <div
                       className={`${showIconEdit} ml-[28px] bg-[#FFCF91] h-[1px] mt-1`}
                     ></div>
-                  </div>
-                </div>
+                  </div> 
+                </div> */}
               </div>
             </div>
-          </div>
+          </div> 
 
           <div className="w-screen px-8 mb-5">
             <div className="w-full flex justify-center">

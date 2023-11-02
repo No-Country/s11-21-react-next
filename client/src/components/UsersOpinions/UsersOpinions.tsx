@@ -95,10 +95,10 @@ export default function UsersOpinions() {
               <div className="rounded-full bg-[#FD7B03] text-white w-[35px] h-[35px] flex text-center items-center justify-center text-xl semibold">
                 {firstLetter}
               </div>
-              <p className="text-lg">{userData.userData.name}</p>
+              <p className="text-sm font-semibold">{userData.userData.name}</p>
             </div>
             <p className="text-xs mb-2">{comment.date}</p>
-            <p>{comment.comment}</p>
+            <p className="text-sm">{comment.comment}</p>
           </div>
         ))}
     </div>
