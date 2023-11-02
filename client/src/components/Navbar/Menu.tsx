@@ -16,7 +16,7 @@ const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
     userData: { id: "", name: "", email: "" },
   });
   const activo =
-    "absolute top-14 w-full left-0 py-2 bg-[#FD7B03] z-10 transition-opacity duration-200";
+    "absolute top-14 w-full left-0 py-2 bg-[#FD7B03] z-50 transition-opacity duration-200";
   const inactivo =
     "absolute top-14 w-full left-0  py-2 bg-[#FD7B03] opacity-0 transition-opacity duration-200 -z-50";
   useEffect(() => {
@@ -53,7 +53,7 @@ const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
             <hr className="w-[90%] mx-auto" />
             <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2 flex relative items-center">
               <p className="bg-[#FFCF91] w-8 h-8 flex items-center justify-center rounded-full text-[#fff]">
-                A
+                {usuario?.userData.name.slice(0, 1)}
               </p>
               <span className="text-sm pl-2">
                 <p className="text-white text-sm font-medium">

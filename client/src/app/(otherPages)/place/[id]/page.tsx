@@ -67,7 +67,7 @@ const Place = ({ params }: { params: { id: string } }) => {
   };
 
   return (
-    <div className="flex flex-col items-center h-auto w-full">
+    <div className="flex flex-col items-center h-auto w-4/5 m-auto max-md:w-full">
       {placeData ? (
         <>
           <TouristPlaceCard

@@ -8,6 +8,19 @@ export interface User {
   lastname: string;
   repeatPassword?: string;
 }
+export interface Lugares {
+  latitude: string;
+  description: string;
+  createdBy: string;
+  zone: string;
+  socialNetworks: [string];
+  placeName: string;
+  longitude: string;
+  category: string;
+  imagesUrl: [string];
+  stars: number;
+  objectID: string;
+}
 export interface UserLogin {
   email: string;
   password: string;
@@ -86,6 +99,12 @@ export async function createUser(data: User): Promise<User | string> {
   return response.data;
 }
 
+export async function search(busqueda: string): Promise<Lugares[]> {
+  const respuesta = await axios.get(
+    `https://nearby-back.vercel.app/api/place/search?place=${busqueda}`
+  );
+  return respuesta.data.results;
+}
 export async function login(
   data: UserLogin
 ): Promise<{ userId: string; userLoged: boolean } | { error: string }> {
@@ -169,4 +188,15 @@ export async function addFavorite(
   );
 
   return response.data;
+}
+
+export async function getPopulars() {
+  return await axios
+    .get("https://nearby-back.vercel.app/api/place/mostPopulars")
+    .then((response) => response.data);
+}
+export async function getBests() {
+  return await axios
+    .get("https://nearby-back.vercel.app/api/place/mostRated")
+    .then((response) => response.data);
 }
