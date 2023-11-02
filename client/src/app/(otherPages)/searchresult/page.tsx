@@ -42,7 +42,7 @@ function SearchresultPage() {
   return (
     <div className="flex flex-col h-auto justify-center items-center mt-12">
       <SearchButtons searchTerm={setSearchTerm} />
-      <SearchInput />
+      <SearchInput searchTerm={setSearchTerm} />
       <div className="w-[90%] mx-auto my-10">
         <MapWithNoSSR lugar={selected} />
         {selected && (
