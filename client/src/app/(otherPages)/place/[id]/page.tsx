@@ -8,6 +8,7 @@ import OpinionsResume from "@/components/Opinions/OpinionsResume";
 import OpinionCard from "@/components/OpinionCard/OpinionCard";
 import axios from "axios";
 import { PlaceData } from "@/services/apiCall";
+import { ClimbingBoxLoader } from "react-spinners";
 
 const Place = ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -27,7 +28,7 @@ const Place = ({ params }: { params: { id: string } }) => {
   }, [id]);
 
   return (
-    <div className="flex flex-col items-center h-auto w-full">
+    <div className="flex flex-col items-center h-auto w-4/5 m-auto max-md:w-full">
       {placeData ? (
        <>
       <TouristPlaceCard placeName={placeData.placeName} zone={placeData.zone} latitude={placeData.latitude} longitude={placeData.longitude} imagesUrl={placeData.imagesUrl} stars={placeData.stars} category={placeData.category} />
@@ -38,13 +39,18 @@ const Place = ({ params }: { params: { id: string } }) => {
          socialNetworks={placeData.socialNetworks}
        />
         <Review idPlace={id}/>       
-        <OpinionsResume dataPlace={placeData}/>
+        <OpinionsResume dataPlace={placeData.comments}/>
         <OpinionCard comment={placeData.comments}></OpinionCard>
      </>
       ) : (
-        <div className=" h-[35rem]">
-          <p>Cargando datos del lugar...</p>
-        </div>
+        <div className=" h-[35rem] flex justify-center items-center">
+      <ClimbingBoxLoader
+        color={"#FD7B03"}
+        loading={true}
+        size={25}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      /></div>
       )}
     </div>
   );
