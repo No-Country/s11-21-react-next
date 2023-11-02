@@ -6,27 +6,19 @@ import Description from "@/components/Description/Description";
 import Review from "@/components/FormReview/Review";
 import OpinionsResume from "@/components/Opinions/OpinionsResume";
 import OpinionCard from "@/components/OpinionCard/OpinionCard";
-import { useParams } from "next/navigation";
 import axios from "axios";
+import { PlaceData } from "@/services/apiCall";
+import { ClimbingBoxLoader } from "react-spinners";
 
-interface PlaceData {
-  description: string;
-  zone: string;
-  placeName: string;
-  socialNetworks: string;
-}
-
-const Place = () => {
-  const params = useParams();
+const Place = ({ params }: { params: { id: string } }) => {
   const { id } = params;
-  const [placeData, setPlaceData] = useState<PlaceData | null>(null);
+  const [placeData, setPlaceData] = useState<PlaceData>();
 
   useEffect(() => {
-    if (id) {
+    if (id !== "") {
       axios
         .get(`https://nearby-back.vercel.app/api/place/getPlace?placeId=${id}`)
         .then((response) => {
-         
           setPlaceData(response.data.placeData);
         })
         .catch((error) => {
@@ -36,21 +28,29 @@ const Place = () => {
   }, [id]);
 
   return (
-    <div className="flex flex-col items-center h-auto w-full">
+    <div className="flex flex-col items-center h-auto w-4/5 m-auto max-md:w-full">
       {placeData ? (
        <>
-       <TouristPlaceCard placeName={placeData.placeName}  zone={placeData.zone} />
+      <TouristPlaceCard placeName={placeData.placeName} zone={placeData.zone} latitude={placeData.latitude} longitude={placeData.longitude} imagesUrl={placeData.imagesUrl} stars={placeData.stars} category={placeData.category} />
+
        <Description
          description={placeData.description}
          zone={placeData.zone}
          socialNetworks={placeData.socialNetworks}
        />
-       <Review  />
-       <OpinionsResume  />
-       <OpinionCard  />
+        <Review idPlace={id}/>       
+        <OpinionsResume dataPlace={placeData.comments}/>
+        <OpinionCard comment={placeData.comments}></OpinionCard>
      </>
       ) : (
-        <p>Cargando datos del lugar...</p>
+        <div className=" h-[35rem] flex justify-center items-center">
+      <ClimbingBoxLoader
+        color={"#FD7B03"}
+        loading={true}
+        size={25}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      /></div>
       )}
     </div>
   );

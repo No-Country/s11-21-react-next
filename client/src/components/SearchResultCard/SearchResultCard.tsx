@@ -4,10 +4,17 @@ import Image from "next/image";
 import CardImage from "../../../public/foto_iglesia-Los-Capuchinos.jpg";
 import MapIconImage from "../../../public/map-icon.png";
 import HeartImage from "../../../public/heart-image.png";
-import { SiMacys } from "react-icons/si";
-import Link from "next/link";
 
-const SearchResultCard = () => {
+import Link from "next/link";
+import { Lugares } from "@/services/apiCall";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+
+interface Props {
+  lugar: Lugares;
+  setSelected: (lugar: Lugares) => void;
+}
+
+const SearchResultCard: React.FC<Props> = ({ lugar, setSelected }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleHover = () => {
@@ -17,28 +24,31 @@ const SearchResultCard = () => {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+  const handleSelect = () => {
+    setSelected(lugar);
+  };
 
   return (
-    <div className="grid my-5">
+    <div className="grid my-3" onClick={handleSelect}>
       <div className="relative w-[348px] h-[96px] bg-[#FFF4E0] justify-self-center rounded-lg box-border flex gap-[5px]">
         <div className="w-[136px] h-[84px] mt-[6px] ml-[6px] mb-[6px]">
-          <Image
-            src={CardImage}
-            alt="Card image"
-            priority
-            className="w-[136px] h-[84px] rounded-md items-center"
-          />
+          {lugar.imagesUrl && (
+            <Image
+              src={lugar.imagesUrl[0]}
+              width={100}
+              height={100}
+              alt="Card image"
+              priority
+              className="w-[136px] h-[84px] rounded-md items-center"
+            />
+          )}
         </div>
 
         <div className="w-[162px] m-auto text-[14px] relative">
           <div className="text-left flex flex-col gap-2">
             <div className="relative">
-              <p
-                className={`truncate ${isHovered ? "" : "truncate"}`}
-                onMouseEnter={handleHover}
-                onMouseLeave={handleMouseLeave}
-              >
-                Iglesia Jesuitica Los Capuchinos. Ciudad de Córdoba. Argentina.
+              <p className={`truncate ${isHovered ? "" : "truncate"}`}>
+                {lugar.placeName} - {lugar.zone}
               </p>
             </div>
 
@@ -48,29 +58,23 @@ const SearchResultCard = () => {
                 alt="Map-icon image"
                 className="h-[12px]"
               />
-              <Link href="https://www.google.com/maps/place/Iglesia+del+Sagrado+Coraz%C3%B3n+de+Jes%C3%BAs+(Iglesia+de+los+Capuchinos)/@-31.4245554,-64.188475,17z/data=!3m1!4b1!4m6!3m5!1s0x9432a28f9b82eb4f:0x5fa116c0073e51e2!8m2!3d-31.42456!4d-64.1859001!16s%2Fg%2F1225dx4w?entry=ttu">
-                <p className="text-blue-500 hover:font-semibold">Como llegar</p>
-              </Link>
+
+              <p className="text-blue-500 hover:font-semibold">Como llegar</p>
             </div>
 
             <div className="flex gap-1 items-center h-[21px]">
-              <span className="text-[#FFCF91]">
-                <SiMacys />
-              </span>
-              <span className="text-[#FFCF91]">
-                <SiMacys />
-              </span>
-              <span className="text-[#FFCF91]">
-                <SiMacys />
-              </span>
-              <span className="text-[#FFCF91]">
-                <SiMacys />
-              </span>
-              <span className="text-[#FFCF91]">
-                <SiMacys />
-              </span>
+              {Array.from({ length: lugar.stars }, (_, i) => (
+                <span key={i} className="text-[#FFCF91]">
+                  <AiFillStar />
+                </span>
+              ))}
+              {Array.from({ length: 5 - lugar.stars }, (_, i) => (
+                <span key={i} className="text-[#FFCF91]">
+                  <AiOutlineStar />
+                </span>
+              ))}
               <div>
-                <p className="text-[#FFCF91]">(10)</p>
+                <p className="text-[#FFCF91]">{`(10)`}</p>
               </div>
             </div>
           </div>

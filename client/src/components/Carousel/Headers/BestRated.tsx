@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const BestRated = () => {
@@ -11,7 +12,12 @@ const BestRated = () => {
           Mejor evaluados
         </h3>
       </div>
-      <button className="text-[#FD7B03] text-[12px] flex pr-6">Ver más</button>
+      <Link
+        href="/bestRanqued"
+        className="text-[#FD7B03] text-[12px] flex pr-6"
+      >
+        Ver más
+      </Link>
     </div>
   );
 };

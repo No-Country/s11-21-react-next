@@ -8,9 +8,27 @@ export interface User {
   lastname: string;
   repeatPassword?: string;
 }
+export interface Lugares {
+  latitude: string;
+  description: string;
+  createdBy: string;
+  zone: string;
+  socialNetworks: [string];
+  placeName: string;
+  longitude: string;
+  category: string;
+  imagesUrl: [string];
+  stars: number;
+  objectID: string;
+}
 export interface UserLogin {
   email: string;
   password: string;
+}
+
+export interface Comment{
+  comment: string;
+  stars: number;
 }
 
 export interface Favorite {
@@ -29,6 +47,30 @@ export interface RemoveFavoriteResponse {
 export interface SetFavoriteResponse {
   success: boolean;
   message: string;
+}
+
+export interface PlaceData {
+  imagesUrl: string[]
+  website: string
+  description: string
+  createdBy: string
+  zone: string
+  socialNetworks: string;
+  category: string
+  placeName: string
+  latitude:number;
+  longitude:number;
+  comments: CommentUser[]
+  stars: number
+  views: number
+}
+
+export interface CommentUser {
+  date?: string
+  name: string
+  comment: string
+  id: string
+  stars: number
 }
 
 export async function createUser(data: User): Promise<User | string> {
@@ -57,6 +99,12 @@ export async function createUser(data: User): Promise<User | string> {
   return response.data;
 }
 
+export async function search(busqueda: string): Promise<Lugares[]> {
+  const respuesta = await axios.get(
+    `https://nearby-back.vercel.app/api/place/search?place=${busqueda}`
+  );
+  return respuesta.data.results;
+}
 export async function login(
   data: UserLogin
 ): Promise<{ userId: string; userLoged: boolean } | { error: string }> {
@@ -81,7 +129,29 @@ export async function getUser(userId: string) {
   );
   return response.data;
 }
-
+/* CREACION DE COMENTARIO OBTENIENDO EL COMENTARIO INGRESADOS POR EL USUARIO EL ID Y EL ID DE LUGAR DEL COMENTARIO INGRESADO*/
+export async function createComment(comment:Comment, idPlace:string, userId: string){
+  const response = await axios.post(
+    `https://nearby-back.vercel.app/api/place/createComment?placeId=${idPlace}&userId=${userId}`,
+  {
+    "comment":{
+      comment:comment.comment,
+      stars: comment.stars
+    }
+  },
+  {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .catch((error) => {
+    return error.response.data.error;
+      });
+    if (typeof response === "string") {
+      return response;
+    }
+    return response.data;
+}
 /* Trae los favoritos según el ID de usuario */
 export async function getFavorites(userId: string): Promise<Favorite[]> {
   try {
@@ -118,4 +188,15 @@ export async function addFavorite(
   );
 
   return response.data;
+}
+
+export async function getPopulars() {
+  return await axios
+    .get("https://nearby-back.vercel.app/api/place/mostPopulars")
+    .then((response) => response.data);
+}
+export async function getBests() {
+  return await axios
+    .get("https://nearby-back.vercel.app/api/place/mostRated")
+    .then((response) => response.data);
 }

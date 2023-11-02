@@ -14,16 +14,18 @@ const Navbar = () => {
   const [userLoged, setUserLoged] = useState<string | null>("");
   const contexto = useContext(Context);
   const [open, setOpen] = useState(false);
+
   useEffect(() => {
-    setUserLoged(contexto?.userId);
-  }, [contexto.userId]);
+    const user = localStorage.getItem("userId");
+    setUserLoged(user);
+  }, []);
 
   const openMenu = () => {
     setOpen(!open);
   };
   const toggleUser = () => {
     setUserLoged(null);
-    contexto.setUserId("");
+    localStorage.removeItem("userId");
     setOpen(false);
   };
   return (

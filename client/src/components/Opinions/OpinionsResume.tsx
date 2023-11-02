@@ -1,42 +1,58 @@
+import { CommentUser } from "@/services/apiCall";
 import Image from "next/image";
-import React from "react";
+import { useEffect, useState } from "react";
+import { StarRating } from "./StarRating";
+import { RiStarSFill } from "react-icons/ri";
 
-const OpinionsResume = () => {
-  return (
-    <div className="w-11/12 2xl:w-[60vw]">
-      <div className="px-8 lg:px-10">
-        <h3 className="my-5 font-semibold text-sm md:text-base lg:text-lg">
-          Opiniones
-        </h3>
-        <div className="grid grid-cols-10 md:grid-cols-12 gap-x-0 md:gap-y-2">
-          <div className="col-span-1 grid grid-rows-5 items-center text-xs font-medium text-center">
-            <div className="row-span-1 text-xs">5</div>
-            <div className="row-span-1 text-xs">4</div>
-            <div className="row-span-1 text-xs">3</div>
-            <div className="row-span-1 text-xs">2</div>
-            <div className="row-span-1 text-xs">1</div>
-          </div>
+const OpinionsResume = ({ dataPlace }: { dataPlace: CommentUser[] }) => {
+  const [starsComment, setStarsComment] = useState<number[]>([])
+  useEffect(()=>{
+    const startCant = () => {
+      const starsCount: number[] = [0, 0, 0, 0, 0];
+      dataPlace.forEach((value) => {
+        const stars = value.stars;
+        if (stars >= 1 && stars <= 5) {
+          starsCount[stars - 1]++;
+        }
+      });
+      setStarsComment(starsCount);
+    };
 
-          <div className="col-span-5 md:col-span-8 grid grid-rows-5 items-center gap-y-1 md:gap-y-2">
-            <div className="row-span-1 w-32 h-3 bg-[#FFF4E0] rounded-lg md:w-full md:h-4"></div>
-            <div className="row-span-1 w-32 h-3 bg-[#FD7B03] rounded-lg md:w-full md:h-4"></div>
-            <div className="row-span-1 w-32 h-3 bg-[#FFF4E0] rounded-lg md:w-full md:h-4"></div>
-            <div className="row-span-1 w-32 h-3 bg-[#FFF4E0] rounded-lg md:w-full md:h-4"></div>
-            <div className="row-span-1 w-32 h-3 bg-[#FFF4E0] rounded-lg md:w-full md:h-4"></div>
-          </div>
+    startCant()
+  },[dataPlace])
 
-          <div className="col-span-4 md:col-span-3 md:row-span-5 md:col-start-10 grid grid-rows-3 items-center justify-center">
-            <div className="row-span-2 text-4xl font-bold m-auto">
-              <p>4.0</p>
-              <Image src="/Frame.png" alt="estrellas" width={60} height={100} />
-            </div>
-            <div className="row-span-2 mx-auto text-xs text-[#FFCF91] self-start font-medium">
-              (10 comentarios)
-            </div>
+  const renderStars = (rating: number) => {
+    const maxRating = 5;
+    const stars = [];
+
+    for (let i = 1; i <= maxRating; i++) {
+      const starClass = rating >= i ? "text-[#FD7B03]" : "text-[#FFCF91]";
+      stars.push(<RiStarSFill className={starClass} key={i} />);
+    }
+
+
+    return stars;
+  };
+
+  const totalStars: number = dataPlace.reduce((acc, cur) => acc + cur.stars, 0)
+
+
+   return (
+    <section className="w-11/12 2xl:w-[60vw] ">
+      <div className="px-8 lg:px-10 flex flex-col ">
+        <p className=" font-semibold">Opiniones</p>
+        <div className="flex gap-x-10 justify-center items-center">
+          <StarRating ratings={starsComment} />
+          <div className="flex flex-col justify-center items-center w-2/12 max-md:w-5/12">
+              <p className="text-[3rem] row-span-2 text-4xl font-bold m-auto flex flex-col justify-center items-center">{dataPlace.length === 0 ?"0.0" :(totalStars / dataPlace.length).toFixed(1)}</p>
+              <div className="flex">{renderStars(Number(totalStars/dataPlace.length))}</div>
+              <p className="row-span-2 mx-auto text-xs text-[#FFCF91] self-start font-medium">
+              ({dataPlace.length} comentarios)
+              </p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
