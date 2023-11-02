@@ -19,7 +19,6 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ data }) => {
   const renderStars = (rating: number) => {
     const maxRating = 5;
     const stars = [];
-
     for (let i = 1; i <= maxRating; i++) {
       const starClass = rating >= i ? "text-[#FD7B03]" : "text-[#FFCF91]";
       stars.push(<RiStarSFill className={starClass} key={i} />);

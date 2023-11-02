@@ -7,6 +7,7 @@ import BestRated from "@/components/Carousel/Headers/BestRated";
 import Recently from "@/components/Carousel/Headers/Recently";
 import Formulario from "@/components/AlFormulario/AlFormulario";
 import axios from "axios";
+import SkelettonCard from "@/components/Carousel/SkelettonCard";
 
 export default function Home() {
   const [popularPlaces, setPopularPlaces] = useState([]);
@@ -16,7 +17,6 @@ export default function Home() {
     axios
       .get("https://nearby-back.vercel.app/api/place/mostPopulars")
       .then((response) => {
-       
         if (response.data.topPlaces && Array.isArray(response.data.topPlaces)) {
           setPopularPlaces(response.data.topPlaces.slice(0, 5)); 
         } else {
@@ -47,15 +47,21 @@ export default function Home() {
       <Portada />
       <Populars popularPlaces={popularPlaces} />
       <div className="flex overflow-x-auto overflow-hidden">
-        <CarouselCard data={popularPlaces} />
+        {popularPlaces.length == 0 ?
+        <SkelettonCard/>
+        :<CarouselCard data={popularPlaces} />}
       </div>
       <BestRated />
       <div className="flex overflow-x-auto overflow-hidden">
-        <CarouselCard data={ratedPlaces} />
+        {popularPlaces.length == 0 ?
+          <SkelettonCard/>
+          :<CarouselCard data={ratedPlaces} />}
       </div>
       <Recently />
       <div className="flex overflow-x-auto overflow-hidden">
-        <CarouselCard data={ratedPlaces} />
+        {popularPlaces.length == 0 ?
+          <SkelettonCard/>
+          :<CarouselCard data={ratedPlaces} />}
       </div>
       <Formulario />
     </main>

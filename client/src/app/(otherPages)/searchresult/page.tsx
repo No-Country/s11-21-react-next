@@ -6,6 +6,10 @@ import SearchResultCard from "@/components/SearchResultCard/SearchResultCard";
 import { search } from "@/services/apiCall";
 import React, { useState, useEffect } from "react";
 import { Lugares } from "@/services/apiCall";
+import dynamic from "next/dynamic";
+const MapWithNoSSR = dynamic(() => import("@/components/Map/Map"), {
+  ssr: false,
+});
 
 function SearchresultPage() {
   const [searchResults, setSearchResults] = useState<Lugares[]>([]);
@@ -40,7 +44,7 @@ function SearchresultPage() {
       <SearchButtons searchTerm={setSearchTerm} />
       <SearchInput />
       <div className="w-[90%] mx-auto my-10">
-        <Map lugar={selected} />
+        <MapWithNoSSR lugar={selected} />
         {selected && (
           <div className="bg-[#FFF4E0] px-3 py-2 shadow-md rounded-b-lg">
             {selected?.placeName} - {selected?.zone}
