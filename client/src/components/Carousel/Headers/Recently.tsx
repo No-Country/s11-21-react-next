@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Recently = () => {
@@ -11,7 +12,12 @@ const Recently = () => {
           Vistos recientemente
         </h3>
       </div>
-      <button className="text-[#FD7B03] text-[12px] flex pr-6">Ver más</button>
+      <Link
+        href="/recentViewed"
+        className="text-[#FD7B03] text-[12px] flex pr-6"
+      >
+        Ver más
+      </Link>
     </div>
   );
 };
