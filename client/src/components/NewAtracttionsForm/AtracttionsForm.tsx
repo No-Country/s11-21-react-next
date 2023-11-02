@@ -2,7 +2,6 @@
 import { useCallback, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
-import AddressModal from "./AddressModal";
 import { APICreatePlace, CreatePlaceData } from "@/services/apiCall";
 import { useDropzone } from "react-dropzone";
 import { toast } from "sonner";
@@ -403,10 +402,6 @@ const AttractionsForm = () => {
           >
             Continuar
           </button>
-          <AddressModal
-            isOpen={showAddressPopup}
-            onClose={toggleAddressPopup}
-          />
         </div>
       </form>
     </div>
