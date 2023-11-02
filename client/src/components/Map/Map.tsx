@@ -1,23 +1,51 @@
-// components/Maps.tsx
-import React from "react";
-import Image from "next/image";
+"use client";
+import React, { useEffect } from "react";
+import "leaflet/dist/leaflet.css";
+import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
+import { Lugares } from "@/services/apiCall";
 
-// Aquí puedes reemplazar con cualquier imagen de mapa que tengas
-import MockupMapImage from "../../../public/random-map.png";
+interface MapProps {
+  lugar: Lugares | undefined;
+}
+interface UpdateMapCentreProps {
+  mapCentre: { lat: number; lng: number };
+}
 
-const Map = () => {
+const Map: React.FC<MapProps> = ({ lugar }) => {
+  let ubicacion = { lat: -27.451053, lng: -58.986198 };
+  if (lugar) {
+    ubicacion = {
+      lat: parseFloat(lugar?.latitude),
+      lng: parseFloat(lugar?.longitude),
+    };
+  }
+
+  const UpdateMapCentre: React.FC<UpdateMapCentreProps> = ({ mapCentre }) => {
+    const map = useMap(); // Obtén una referencia al mapa
+
+    useEffect(() => {
+      if (map) {
+        map.panTo(mapCentre); // Actualiza la posición del mapa al montar este componente
+      }
+    }, [map, mapCentre]);
+
+    return null; // No se renderiza nada
+  };
+
   return (
-    <div className="flex my-5 justify-center">
-      <div className="w-4/5 h-auto md:w-[80vw] md:h-auto lg:w-[75vw] xl:w-[60vw] rounded-lg overflow-hidden shadow-md">
-        <Image
-          src={MockupMapImage}
-          alt="Mockup Map"
-          width={0}
-          height={0}
-          className="w-full h-auto"
-        />
-      </div>
-    </div>
+    <MapContainer
+      center={ubicacion}
+      zoom={13}
+      style={{ height: "400px", width: "100%", zIndex: "1" }}
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Marker position={ubicacion} />
+      <UpdateMapCentre mapCentre={ubicacion} />
+      {/* Componente que actualiza la posición */}
+    </MapContainer>
   );
 };
 
