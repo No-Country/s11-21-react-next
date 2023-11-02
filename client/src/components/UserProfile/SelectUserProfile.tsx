@@ -1,14 +1,32 @@
-"use client";
+"use client"
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OpinionCard from "../OpinionCard/OpinionCard";
 import TouristPlaceCard from "../TouristPlaceCard/TouristPlaceCard";
+import { Context } from "./../../context/Context";
+import { useContext } from "react";
+import UserAddPlaces from "@/app/(otherPages)/userAddPlaces/page";
+import OpinionsResume from "../Opinions/OpinionsResume";
+import UsersOpinions from "../UsersOpinions/UsersOpinions";
 
 const SelectUserProfile = () => {
   const [showLine1, setShowLine1] = useState<string>("hidden");
   const [textColor1, setTextColor1] = useState<string>("black");
   const [showLine2, setShowLine2] = useState<string>("hidden");
   const [textColor2, setTextColor2] = useState<string>("black");
+
+  const { userId, setUserId, addPlacesNumber, addCommentsNumber } =
+    useContext(Context);
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
+  }, [setUserId]);
+
+  console.log(userId);
 
   const handleSelectOnClick1 = () => {
     setTextColor1("#FD7B03");
@@ -33,7 +51,7 @@ const SelectUserProfile = () => {
                 className={`text-xs text-[${textColor1}] mb-2`}
                 onClick={handleSelectOnClick1}
               >
-                Tus opiniones (1)
+                Tus opiniones ({addCommentsNumber})
               </p>
             </Link>
 
@@ -48,7 +66,7 @@ const SelectUserProfile = () => {
                 className={`text-xs text-[${textColor2}] mb-2`}
                 onClick={handleSelectOnClick2}
               >
-                Tus lugares añadidos (1)
+                Tus lugares añadidos ({addPlacesNumber})
               </p>
             </Link>
 
@@ -59,16 +77,11 @@ const SelectUserProfile = () => {
         </div>
 
         <div className={`w-screen pr-8 ${showLine1}`}>
-          {/* <OpinionCard /> */}
-          {/* Muestro esto hasta que este conectado al Backend  */}
+          <UsersOpinions />
         </div>
 
         <div className={`${showLine2} mt-7 flex justify-center`}>
-          {/* <TouristPlaceCard
-            placeName="Terminal de Omnibus"
-            zone="Cordoba, Argentina"
-          />{" "} */}
-          {/* Muestro esto hasta que este conectado al Backend  */}
+          <UserAddPlaces />
         </div>
       </div>
     </>
