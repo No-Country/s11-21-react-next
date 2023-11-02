@@ -25,7 +25,7 @@ const Navbar = () => {
   };
   const toggleUser = () => {
     setUserLoged(null);
-    contexto.setUserId("");
+    localStorage.removeItem("userId");
     setOpen(false);
   };
   return (
