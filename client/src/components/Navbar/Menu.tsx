@@ -69,7 +69,9 @@ const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
             </li>
             <Link href={"/user"}>
               <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
-                Tu Perfil
+                <Link href={"/user"}>
+                  Tu Perfil
+                </Link>          
               </li>
             </Link>
 
