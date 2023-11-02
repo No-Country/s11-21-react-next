@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { createContext, useState, ReactNode } from "react";
 
 interface ContextProps {
@@ -15,16 +15,16 @@ interface ContextProps {
 }
 
 export const Context = createContext<ContextProps>({
-    showIconEdit: "hidden",
-    setShowIconEdit: () => {},
-    showInformation: "block",
-    setShowInformation: () => {},
-    textButton: "Editar perfil",
-    setTextButton: () => {},
-    userId: "",
-    setUserId: () => {},
-    showErrorMessage: "",
-    setShowErrorMessage: () => {},
+  showIconEdit: "hidden",
+  setShowIconEdit: () => {},
+  showInformation: "block",
+  setShowInformation: () => {},
+  textButton: "Editar perfil",
+  setTextButton: () => {},
+  userId: "",
+  setUserId: () => {},
+  showErrorMessage: "",
+  setShowErrorMessage: () => {},
 });
 
 export default function ContextProvider({ children }: { children: ReactNode }) {
@@ -35,7 +35,20 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
   const [showErrorMessage, setShowErrorMessage] = useState<string>("");
 
   return (
-    <Context.Provider value={{ showIconEdit, setShowIconEdit, showInformation, setShowInformation, textButton, setTextButton, userId, setUserId, showErrorMessage, setShowErrorMessage}}>
+    <Context.Provider
+      value={{
+        showIconEdit,
+        setShowIconEdit,
+        showInformation,
+        setShowInformation,
+        textButton,
+        setTextButton,
+        userId,
+        setUserId,
+        showErrorMessage,
+        setShowErrorMessage,
+      }}
+    >
       {children}
     </Context.Provider>
   );
