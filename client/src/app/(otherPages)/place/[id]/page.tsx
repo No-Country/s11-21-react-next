@@ -28,7 +28,7 @@ const Place = ({ params }: { params: { id: string } }) => {
   }, [id]);
 
   return (
-    <div className="flex flex-col items-center h-auto w-4/5 m-auto max-md:full">
+    <div className="flex flex-col items-center h-auto w-4/5 m-auto max-md:w-full">
       {placeData ? (
        <>
       <TouristPlaceCard placeName={placeData.placeName} zone={placeData.zone} latitude={placeData.latitude} longitude={placeData.longitude} imagesUrl={placeData.imagesUrl} stars={placeData.stars} category={placeData.category} />
