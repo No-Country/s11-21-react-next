@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
 import TouristPlaceCard from "@/components/TouristPlaceCard/TouristPlaceCard";
 import Description from "@/components/Description/Description";
@@ -13,9 +12,10 @@ import {
   getFavorites,
   removeFavorite,
 } from "@/services/apiCall";
-import Logo from "../../../../../public/logoLoader.png";
+
 import { Context } from "@/context/Context";
 import { toast } from "sonner";
+import { ClimbingBoxLoader } from "react-spinners";
 
 const Place = ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -94,14 +94,14 @@ const Place = ({ params }: { params: { id: string } }) => {
       ) : (
         <div className="h-[70vh] flex justify-center items-center">
           <div className="flex justify-center items-center flex-col">
-            <Image
-              src={Logo}
-              alt="logo"
-              width={0}
-              height={0}
-              className="w-1/4 h-1/4 mb-5 xl:mb-8 "
+            <ClimbingBoxLoader
+              color={"#FD7B03"}
+              loading={true}
+              size={25}
+              aria-label="Loading Spinner"
+              data-testid="loader"
             />
-            <p className="text-[#FD7B03] text-base md:text-4xl xl:text-6xl font-medium">
+            <p className="text-[#FD7B03] text-base md:text-4xl font-medium mt-16">
               Aguarde mientras carga el sitio
             </p>
           </div>
