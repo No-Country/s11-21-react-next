@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { createContext, useState, ReactNode } from "react";
 
 interface ContextProps {
@@ -12,19 +12,27 @@ interface ContextProps {
   setUserId: React.Dispatch<React.SetStateAction<string>>;
   showErrorMessage: string;
   setShowErrorMessage: React.Dispatch<React.SetStateAction<string>>;
+  addPlacesNumber: number;
+  setAddPlacesNumber: React.Dispatch<React.SetStateAction<number>>;
+  addCommentsNumber: number;
+  setAddCommentsNumber: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const Context = createContext<ContextProps>({
-    showIconEdit: "hidden",
-    setShowIconEdit: () => {},
-    showInformation: "block",
-    setShowInformation: () => {},
-    textButton: "Editar perfil",
-    setTextButton: () => {},
-    userId: "",
-    setUserId: () => {},
-    showErrorMessage: "",
-    setShowErrorMessage: () => {},
+  showIconEdit: "hidden",
+  setShowIconEdit: () => {},
+  showInformation: "block",
+  setShowInformation: () => {},
+  textButton: "Editar perfil",
+  setTextButton: () => {},
+  userId: "",
+  setUserId: () => {},
+  showErrorMessage: "",
+  setShowErrorMessage: () => {},
+  addPlacesNumber: 0,
+  setAddPlacesNumber: () => {},
+  addCommentsNumber: 0,
+  setAddCommentsNumber: () => {},
 });
 
 export default function ContextProvider({ children }: { children: ReactNode }) {
@@ -33,9 +41,28 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
   const [textButton, setTextButton] = useState<string>("Editar perfil");
   const [userId, setUserId] = useState<string>("");
   const [showErrorMessage, setShowErrorMessage] = useState<string>("");
+  const [addPlacesNumber, setAddPlacesNumber] = useState<number>(0);
+  const [addCommentsNumber, setAddCommentsNumber] = useState<number>(0);
 
   return (
-    <Context.Provider value={{ showIconEdit, setShowIconEdit, showInformation, setShowInformation, textButton, setTextButton, userId, setUserId, showErrorMessage, setShowErrorMessage}}>
+    <Context.Provider
+      value={{
+        showIconEdit,
+        setShowIconEdit,
+        showInformation,
+        setShowInformation,
+        textButton,
+        setTextButton,
+        userId,
+        setUserId,
+        showErrorMessage,
+        setShowErrorMessage,
+        addPlacesNumber,
+        setAddPlacesNumber,
+        addCommentsNumber,
+        setAddCommentsNumber,
+      }}
+    >
       {children}
     </Context.Provider>
   );

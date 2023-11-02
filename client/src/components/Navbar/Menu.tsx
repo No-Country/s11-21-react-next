@@ -68,9 +68,9 @@ const Menu: React.FC<MenuProps> = ({ open, user, setUser }) => {
               </div>
             </li>
               <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
-               
+                <Link href={"/user"}>
                   Tu Perfil
-               
+                </Link>          
               </li>
             <li className="hover:bg-[#FFCF91] hover:text-[#FD7B03] px-8 py-2">
               Configuración
