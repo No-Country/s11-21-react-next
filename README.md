@@ -9,13 +9,14 @@ https://nearbytour.vercel.app/
 ```
 ## Diseño Figma 🎨
 ```bash
-https://n9.cl/wzqml
+<a href"https://n9.cl/wzqml">https://n9.cl/wzqml</a>
 ```
 ## Stacks 🛠️
 ```bash
+• Back - End:
 • Next.js | Firebase | Cloudinary | Postman | Algolia | JavaScript
-• Next
-• HTML5 | CSS3 | TypeScript | Tailwind CSS
+• Front - End:
+• HTML5 | CSS3 | TypeScript | Tailwind CSS | Next Js
 ```
 ## Autores ✒️
 Equipo Back - End:
