@@ -1,4 +1,4 @@
-![Logo NearByTour](https://n9.cl/zvmmc)
+![Logo NearByTour]
 
 # NearByTour 
 NearByTour es tu puerta de entrada a las joyas ocultas del mundo, esos lugares secretos que solo los lugareños conocen. Descubre tesoros inexplorados, aventuras únicas y la auténtica cultura local con NearByTour.
