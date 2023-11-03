@@ -9,7 +9,7 @@ https://nearbytour.vercel.app/
 ```
 ## Diseño Figma 🎨
 ```bash
-<a href"https://n9.cl/wzqml">https://n9.cl/wzqml</a>
+https://n9.cl/wzqml">https://n9.cl/wzqml
 ```
 ## Stacks 🛠️
 ```bash
