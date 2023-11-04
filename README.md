@@ -1,4 +1,5 @@
-![Logo NearByTour]
+<p align="center"><img width="100vw" src="https://nearbytour.vercel.app/_next/image?url=%2FLogoLarge.png&w=128&q=75"/>
+</p>
 
 # NearByTour 
 NearByTour es tu puerta de entrada a las joyas ocultas del mundo, esos lugares secretos que solo los lugareños conocen. Descubre tesoros inexplorados, aventuras únicas y la auténtica cultura local con NearByTour.
