@@ -5,14 +5,12 @@ import Link from "next/link";
 import { BiCake } from "react-icons/bi";
 import { TbMathGreater } from "react-icons/tb";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { AiOutlinePushpin, AiOutlineEdit } from "react-icons/ai";
+import {AiOutlineEdit } from "react-icons/ai";
 import { BsTelephone } from "react-icons/bs";
-import Image from "next/image";
 import SelectUserProfile from "./../../../components/UserProfile/SelectUserProfile";
 import { Context } from "./../../../context/Context";
 import { useContext } from "react";
 import axios from "axios";
-
 import { useRouter } from "next/navigation";
 
 interface UserData {
@@ -41,7 +39,6 @@ const UserProfile = (): JSX.Element => {
     setUserId,
   } = useContext(Context);
 
-  //const [userId, setUserId] = useState<string>("");
   const [oldName, setOldName] = useState<string>("");
   const [oldLastname, setOldLastname] = useState<string>("");
   const [oldPhone, setOldPhone] = useState<string>("");
@@ -56,7 +53,7 @@ const UserProfile = (): JSX.Element => {
   const navigate = useRouter();
 
   //const [password, setPassword] = useState<string>("");
-
+  
   useEffect(() => {
     //console.log(userId);
   }, [userId]);
