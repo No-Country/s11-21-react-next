@@ -29,7 +29,7 @@ const Navbar = () => {
     setOpen(false);
   };
   return (
-    <nav className="bg-[#FD7B03] w-full text-neutral-200 h-14 flex items-center justify-between p-6">
+    <nav className="bg-[#FD7B03] w-full h-14 flex text-white items-center justify-between p-6">
       <h1 className={`${krona.className} text-[18px] text-white`}>
         <Link href={"/home"}>NearByTour</Link>
       </h1>

@@ -1,17 +1,14 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import OpinionCard from "../OpinionCard/OpinionCard";
-import TouristPlaceCard from "../TouristPlaceCard/TouristPlaceCard";
 import { Context } from "./../../context/Context";
 import { useContext } from "react";
-import UserAddPlaces from "@/app/(otherPages)/userAddPlaces/page";
-import OpinionsResume from "../Opinions/OpinionsResume";
 import UsersOpinions from "../UsersOpinions/UsersOpinions";
+import UserAddPlaces from "../UserAddPlaces/UserAddPlaces";
 
 const SelectUserProfile = () => {
-  const [showLine1, setShowLine1] = useState<string>("hidden");
-  const [textColor1, setTextColor1] = useState<string>("black");
+  const [showLine1, setShowLine1] = useState<string>("block");
+  const [textColor1, setTextColor1] = useState<string>("#FD7B03");
   const [showLine2, setShowLine2] = useState<string>("hidden");
   const [textColor2, setTextColor2] = useState<string>("black");
 
@@ -25,8 +22,6 @@ const SelectUserProfile = () => {
       setUserId(storedUserId);
     }
   }, [setUserId]);
-
-  console.log(userId);
 
   const handleSelectOnClick1 = () => {
     setTextColor1("#FD7B03");
@@ -43,7 +38,7 @@ const SelectUserProfile = () => {
   };
   return (
     <>
-      <div className="w-screen">
+      <div className="w-full">
         <div className="w-full flex justify-between px-8">
           <div className="w-1/2 text-center">
             <Link href={"#"}>
@@ -51,7 +46,7 @@ const SelectUserProfile = () => {
                 className={`text-xs text-[${textColor1}] mb-2`}
                 onClick={handleSelectOnClick1}
               >
-                Tus opiniones ({addCommentsNumber})
+                Tus opiniones <b>({addCommentsNumber})</b>
               </p>
             </Link>
 
@@ -66,7 +61,7 @@ const SelectUserProfile = () => {
                 className={`text-xs text-[${textColor2}] mb-2`}
                 onClick={handleSelectOnClick2}
               >
-                Tus lugares añadidos ({addPlacesNumber})
+                Tus lugares añadidos <b>({addPlacesNumber})</b>
               </p>
             </Link>
 
@@ -76,7 +71,7 @@ const SelectUserProfile = () => {
           </div>
         </div>
 
-        <div className={`w-screen pr-8 ${showLine1}`}>
+        <div className={`w-full pr-8 ${showLine1}`}>
           <UsersOpinions />
         </div>
 
