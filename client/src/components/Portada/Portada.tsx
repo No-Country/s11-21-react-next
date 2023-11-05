@@ -29,11 +29,12 @@ export default function Portada() {
         </span>
       </div>
       <div className="relative flex justify-center items-center  m-auto -mt-6 w-3/5 max-md:w-80">
-        <div className="flex shadow-lg shadow-zinc-300/50 outline-none px-4 w-full h-10 text-xs rounded-lg bg-[#FFF4E0] items-center my-auto">
-          <Link className="items-center" href="/searchresult">
-            Buscar atracción...
-          </Link>
-        </div>
+        <Link
+          className="flex shadow-lg shadow-zinc-300/50 outline-none px-4 w-full h-10 text-xs rounded-lg bg-[#FFF4E0] items-center my-auto hover:shadow-lg"
+          href="/searchresult"
+        >
+          <div>Buscar atracción...</div>
+        </Link>
       </div>
     </>
   );
