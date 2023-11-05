@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { Context } from "./../../../context/Context";
+import { Context } from "../../context/Context";
 import { useContext } from "react";
 import axios from "axios";
 
@@ -55,7 +55,7 @@ export default function UserAddPlaces() {
             }
           );
           setUserData(response.data);
-          console.log(response.data);
+          // console.log(response.data);
         } catch (error) {
           console.error("Error al obtener los datos del usuario:", error);
         }
@@ -66,34 +66,40 @@ export default function UserAddPlaces() {
   }, [userId]);
 
   useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-
-  useEffect(() => {
     if (userData.userData.myPlaces) {
       setAddPlacesNumber(userData.userData.myPlaces.length);
     }
   }, [userData]);
 
   return (
-    <div className="flex flex-wrap justify-center w-full px-8">
+    <div className="grid grid-cols-1 sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 justify-center w-full gap-3">
       {userData.userData.myPlaces.map((place, index) => (
-        <div key={index} className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
+        <div key={index} className=" p-4">
           <div className="relative">
             {place.imagesUrl[0] && (
-              <Image
-                src={place.imagesUrl[0].replace(/ /g, "%20")}
-                alt={`Card image 0`}
-                width={280}
-                height={280}
-                className="w-full h-full -z-10 rounded-lg mb-6"
-              />
+              <div className="aspect-square relative">
+                <Image
+                  src={place.imagesUrl[0].replace(/ /g, "%20")}
+                  alt={`Card image 0`}
+                  width={1080}
+                  height={760}
+                  className="w-full h-full -z-10 rounded-lg"
+                />
+                <div
+                  className="absolute top-0 left-0 z-0 w-full h-full rounded-lg"
+                  style={{
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.0), rgba(0,0,0,0.8))`,
+                  }}
+                ></div>
+              </div>
             )}
-            <div className="absolute bottom-0 left-0 text-white pb-8 pl-4">
-              <p className="text-sm font-medium leading-6">{place.placeName}</p>
-            </div>
-            <div className="absolute bottom-0 left-0 text-white pb-2 pl-4">
-              <p className="text-xs font-medium leading-6">{place.zone}</p>
+            <div className="absolute bottom-0 left-0 text-white pl-2 pb-2">
+              <div className="flex flex-col">
+                <p className="text-sm font-medium leading-2">
+                  {place.placeName}
+                </p>
+                <p className="text-xs font-medium leading-1">{place.zone}</p>
+              </div>
             </div>
           </div>
         </div>

@@ -82,7 +82,7 @@ export default function RedenderFavorites() {
         </div>
       ) : (
         <div className="">
-          <div className="flex flex-wrap justify-center md:grid md:grid-cols-2 md:gap-8 xl:grid xl:grid-cols-3 xl:gap-10">
+          <div className="grid grid-cols-1 sm:grid sm:grid-cols-2 sm:gap-4 md:grid md:grid-cols-3 xl:grid xl:grid-cols-4 xl:gap-10">
             {favorite.map((item) => (
               <CardFavorite
                 key={item.placeId}

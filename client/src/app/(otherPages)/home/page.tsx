@@ -18,9 +18,11 @@ export default function Home() {
       .get("https://nearby-back.vercel.app/api/place/mostPopulars")
       .then((response) => {
         if (response.data.topPlaces && Array.isArray(response.data.topPlaces)) {
-          setPopularPlaces(response.data.topPlaces.slice(0, 5)); 
+          setPopularPlaces(response.data.topPlaces.slice(0, 5));
         } else {
-          console.error("No se encontraron resultados en la respuesta de lugares más populares");
+          console.error(
+            "No se encontraron resultados en la respuesta de lugares más populares"
+          );
         }
       })
       .catch((error) => {
@@ -30,11 +32,12 @@ export default function Home() {
     axios
       .get("https://nearby-back.vercel.app/api/place/mostRated")
       .then((response) => {
-        
         if (response.data.results && Array.isArray(response.data.results)) {
-          setRatedPlaces(response.data.results.slice(0, 5)); 
+          setRatedPlaces(response.data.results.slice(0, 5));
         } else {
-          console.error("No se encontraron resultados en la respuesta de lugares mejor evaluados");
+          console.error(
+            "No se encontraron resultados en la respuesta de lugares mejor evaluados"
+          );
         }
       })
       .catch((error) => {
@@ -47,21 +50,27 @@ export default function Home() {
       <Portada />
       <Populars popularPlaces={popularPlaces} />
       <div className="flex overflow-x-auto overflow-hidden">
-        {popularPlaces.length == 0 ?
-        <SkelettonCard/>
-        :<CarouselCard data={popularPlaces} />}
+        {popularPlaces.length == 0 ? (
+          <SkelettonCard />
+        ) : (
+          <CarouselCard data={popularPlaces} />
+        )}
       </div>
       <BestRated />
       <div className="flex overflow-x-auto overflow-hidden">
-        {popularPlaces.length == 0 ?
-          <SkelettonCard/>
-          :<CarouselCard data={ratedPlaces} />}
+        {popularPlaces.length == 0 ? (
+          <SkelettonCard />
+        ) : (
+          <CarouselCard data={ratedPlaces} />
+        )}
       </div>
       <Recently />
       <div className="flex overflow-x-auto overflow-hidden">
-        {popularPlaces.length == 0 ?
-          <SkelettonCard/>
-          :<CarouselCard data={ratedPlaces} />}
+        {popularPlaces.length == 0 ? (
+          <SkelettonCard />
+        ) : (
+          <CarouselCard data={ratedPlaces} />
+        )}
       </div>
       <Formulario />
     </main>

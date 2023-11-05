@@ -39,7 +39,7 @@ export default function CardFavorite({
 
   return (
     <div className="flex my-4 justify-center w-full">
-      <div className="w-full h-auto relative shadow-md">
+      <div className="aspect-square relative shadow-md">
         <Image
           src={item.imagesUrl[0]}
           alt="Card image 1"

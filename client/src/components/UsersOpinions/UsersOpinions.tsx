@@ -1,6 +1,5 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { Context } from "../../context/Context";
 import { useContext } from "react";
 import axios from "axios";
@@ -60,8 +59,6 @@ export default function UsersOpinions() {
             }
           );
           setUserData(response.data);
-          console.log(response.data);
-
           if (response.data.userData.comments) {
             setAddPlacesNumber(response.data.userData.comments.length);
           }
@@ -74,10 +71,6 @@ export default function UsersOpinions() {
     }
   }, [userId]);
 
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-
   const firstLetter = userData.userData.name.charAt(0).toUpperCase();
 
   useEffect(() => {
@@ -87,7 +80,7 @@ export default function UsersOpinions() {
   }, [userData]);
 
   return (
-    <div className="w-screen flex flex-wrap justify-left px-8 mt-8">
+    <div className="w-full flex flex-wrap justify-left px-8 mt-8">
       {userData.userData.comments &&
         userData.userData.comments.map((comment, index) => (
           <div key={index} className="w-full mb-8">
@@ -95,10 +88,12 @@ export default function UsersOpinions() {
               <div className="rounded-full bg-[#FD7B03] text-white w-[35px] h-[35px] flex text-center items-center justify-center text-xl semibold">
                 {firstLetter}
               </div>
-              <p className="text-lg">{userData.userData.name}</p>
+              <p className="text-sm md:text-base lg:text-lg font-medium">
+                {userData.userData.name}
+              </p>
             </div>
-            <p className="text-xs mb-2">{comment.date}</p>
-            <p>{comment.comment}</p>
+            <p className="text-xs text-[#FD7B03] mb-2 ml-1">{comment.date}</p>
+            <p className="ml-1 text-sm md:text-base">{comment.comment}</p>
           </div>
         ))}
     </div>

@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Link from "next/link";
 import { BiCake } from "react-icons/bi";
 import { TbMathGreater } from "react-icons/tb";
 import { RiLockPasswordLine } from "react-icons/ri";
-import {AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineEdit } from "react-icons/ai";
 import { BsTelephone } from "react-icons/bs";
 import SelectUserProfile from "./../../../components/UserProfile/SelectUserProfile";
 import { Context } from "./../../../context/Context";
@@ -52,12 +52,6 @@ const UserProfile = (): JSX.Element => {
 
   const navigate = useRouter();
 
-  //const [password, setPassword] = useState<string>("");
-  
-  useEffect(() => {
-    //console.log(userId);
-  }, [userId]);
-
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
 
@@ -65,8 +59,6 @@ const UserProfile = (): JSX.Element => {
       setUserId(storedUserId);
     }
   }, [setUserId]);
-
-  console.log(userId);
 
   const handleButtonOnClick = async (
     e: React.MouseEvent<HTMLButtonElement>
@@ -128,8 +120,6 @@ const UserProfile = (): JSX.Element => {
   });
 
   useEffect(() => {
-    //console.log(editing);
-
     if (userId && !editing) {
       const fetchUserData = async () => {
         try {
@@ -143,8 +133,6 @@ const UserProfile = (): JSX.Element => {
             }
           );
           setUserData(response.data);
-
-          console.log(response.data);
 
           //setNumberFavorites(userData.userData.favorites.length - 1);
 
@@ -205,15 +193,13 @@ const UserProfile = (): JSX.Element => {
             }
           )
           .then((response) => {
-            console.log("Respuesta del backend:", response.data);
-
+            response.data;
             navigate.push("/user");
           });
       } catch (error) {
         console.error("Error al actualizar el usuario:", error);
       }
     }
-    console.log("aka");
     setTextButton("Editar");
     setShowIconEdit("hidden");
     setShowInformation("block");
@@ -222,7 +208,6 @@ const UserProfile = (): JSX.Element => {
 
   const firstLetter = userData.userData.name.charAt(0).toUpperCase();
 
-  //console.log(numberFavorites);
   useEffect(() => {
     if (userId) {
       const fetchUserData = async () => {
@@ -236,10 +221,8 @@ const UserProfile = (): JSX.Element => {
               },
             }
           );
-          console.log(response.data);
 
           setPlacesArray(response.data.userFavorites.length);
-          //console.log(placesArray);
         } catch (error) {
           console.error("Error al obtener los datos del usuario:", error);
         }
@@ -249,16 +232,12 @@ const UserProfile = (): JSX.Element => {
     }
   }, [userId]);
 
-  useEffect(() => {
-    console.log(placesArray);
-  }, [placesArray]);
-
   return (
-    <div className="w-full min-h-[58vh] md:min-h-[66vh] my-5">
+    <div className="flex justify-center items-center m-auto w-11/12 md:w-4/5 min-h-[75vh] my-5">
       <form onSubmit={updateUserProfile}>
         <div className="md:pt-2">
           <div className="md:flex justify-evenly">
-            <div className="w-screen md:w-1/2 flex md:items-start md:ml-[5%] gap-6 px-8">
+            <div className="w-full md:w-1/2 flex md:items-start md:ml-[5%] gap-6 px-8">
               <div className="">
                 {" "}
                 {/* relative */}
@@ -329,7 +308,7 @@ const UserProfile = (): JSX.Element => {
               </div>
             </div>
 
-            <div className="w-screen  md:w-1/2 text-left md:flex md:justify-end md:items-start md:mr-[5%] items-center mt-4      md:mt-0 px-8">
+            <div className="w-full  md:w-1/2 text-left md:flex md:justify-end md:items-start md:mr-[5%] items-center mt-4      md:mt-0 px-8">
               <div className="md:mr-[5%]">
                 <div className="flex items-center gap-2">
                   <span className="text-[#FD7B03] text-xl">
@@ -366,7 +345,7 @@ const UserProfile = (): JSX.Element => {
                     <RiLockPasswordLine />
                   </span>
                   <div className="w-full flex items-center justify-between">
-                    <p className={`${showInformation} text-xs`}>12345678</p>
+                    <p className={`${showInformation} text-xs`}>••••••••</p>
 
                     {/* <input
                         type="text"
@@ -393,7 +372,7 @@ const UserProfile = (): JSX.Element => {
             </div>
           </div>
 
-          <div className="w-screen px-8 mb-5">
+          <div className="w-full px-8 mb-5">
             <div className="w-full flex justify-center">
               <button
                 className="w-full md:w-[380px] h-[40px] bg-[#FD7B03]  text-white font-medium mt-5 rounded-md text-sm"
@@ -406,7 +385,7 @@ const UserProfile = (): JSX.Element => {
             </div>
           </div>
 
-          <div className={`${showIconEdit} w-screen px-8 mb-5 flex`}>
+          <div className={`${showIconEdit} w-full px-8 mb-5 flex`}>
             <div className="w-full flex justify-center">
               <button
                 onClick={handleButtonCancelOnClick}
@@ -417,7 +396,7 @@ const UserProfile = (): JSX.Element => {
               </button>
             </div>
           </div>
-          <div className="w-screen px-8 mb-5">
+          <div className="w-full px-8 mb-5">
             <div className="w-full h-[50px] bg-[#FFF4E0] rounded-lg flex items-center justify-evenly md:justify-start md-gap2">
               <span className="text-[#FD7B03] text-xl md:pl-[2%] md:pr-2">
                 <BiCake />
@@ -425,13 +404,16 @@ const UserProfile = (): JSX.Element => {
               <p className="text-xs">Te uniste el 03 de octubre, 2023</p>
             </div>
           </div>
-          <div className="w-screen mb-5 px-8">
+          <div className="w-full mb-5 px-8">
             <div className="w-full bg-[#FFCF91] h-[1px]"></div>
           </div>
-          <div className="w-screen px-8">
+          <div className="w-full px-8">
             <div className="h-[20px] flex justify-between items-center mb-5">
               <Link href={"/favorites"}>
-                <p className="text-xs">Tus favoritos ({placesArray})</p>
+                <p className="text-xs">
+                  Tus favoritos{" "}
+                  <b className="text-[#FD7B03]">({placesArray})</b>
+                </p>
               </Link>
               <Link href={"/favorites"}>
                 <span className="text-[#FD7B03] text-xl">
