@@ -21,23 +21,25 @@ https://n9.cl/wzqml
 ```
 ## Autores ✒️
 Equipo Back - End:
-```bash
-• Laura Bernal
-• Pablo Murillo
-```
+
+- [Laura Bernal](https://www.linkedin.com/in/ingeniera-laura-bernal/)
+- [Pablo Murillo](https://www.linkedin.com/in/pablo-nicolas-murillo/)
+
 Equipo Front - End:
-```bash
-• Rafael Strongoli
-• Oscar Luciani
-• Ayelén Llampa
-• Franco Tejada
-• Marcos Aravena 
-• Mauricio Chambi
-```
+
+
+- [Rafael Strongoli](https://github.com/rafaric)
+- [Oscar Luciani](https://www.linkedin.com/in/oscarluciani)
+- [Ayelén Llampa](https://www.linkedin.com/in/ayelen-llampa1988/)
+- [Franco Tejada](https://ar.linkedin.com/in/franco-tejada-427ab2250)
+- [Marcos Aravena](https://www.linkedin.com/in/marcos-aravena/) 
+- [Mauricio Chambi](https://ar.linkedin.com/in/mauricio-chambi-7a90b724a)
+
+
 Design UX/UI:
-```bash
-• Angiela Moreno
-• Juan Cruz Narocki
-• Macarena Díaz
-```
+
+- [Angiela Moreno](https://www.linkedin.com/in/anmorenoh/)
+- [Juan Cruz Narocki](https://www.linkedin.com/in/juan-cruz-narocki/)
+- [Macarena Díaz](http://www.linkedin.com/in/macadiazcon)
+
 
